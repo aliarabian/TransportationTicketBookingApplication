@@ -3,7 +3,7 @@
 	<xmi:Documentation exporter="Enterprise Architect" exporterVersion="6.5" exporterID="1554"/>
 	<uml:Model xmi:type="uml:Model" name="EA_Model">
 		<packagedElement xmi:type="uml:Package" xmi:id="EAPK_334F391F_4C7A_432e_A6EA_661B283BB078" name="Domain Model">
-			<packagedElement xmi:type="uml:Class" xmi:id="EAID_54B2EB2D_C07D_4592_911E_A42C74471FC7" name="Address">
+			<packagedElement xmi:type="uml:Class" xmi:id="EAID_54B2EB2D_C07D_4592_911E_A42C74471FC7" name="com.transportation.airline.tickets.booking.entity.Address">
 				<ownedAttribute xmi:type="uml:Property" xmi:id="EAID_26919D01_AC29_40ae_BE40_EE62DACFF354" name="city" visibility="private">
 					<lowerValue xmi:type="uml:LiteralInteger" xmi:id="EAID_LI000001_AC29_40ae_BE40_EE62DACFF354" value="1"/>
 					<upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="EAID_LI000002_AC29_40ae_BE40_EE62DACFF354" value="1"/>
@@ -46,7 +46,7 @@
 				<generalization xmi:type="uml:Generalization" xmi:id="EAID_52A61C89_567E_41d7_95B7_EAEE35762BC3" general="EAID_BA1000F6_F7A4_45bc_A338_6B98F9430EB3"/>
 			</packagedElement>
 			<packagedElement xmi:type="uml:Class" xmi:id="EAID_5DAA4C6E_2A39_421f_B287_FD8113B10A84" name="AirlineBookingLoyaltyCalculator"/>
-			<packagedElement xmi:type="uml:Class" xmi:id="EAID_60488F0D_E1E9_4abf_BF88_499DDA0C15FB" name="AirlineTransportation">
+			<packagedElement xmi:type="uml:Class" xmi:id="EAID_60488F0D_E1E9_4abf_BF88_499DDA0C15FB" name="com.transportation.airline.tickets.booking.entity.AirlineTransportation">
 				<ownedAttribute xmi:type="uml:Property" xmi:id="EAID_52FFBBEC_A257_48f3_890C_0376B547FBA1" name="planeSectionClass" visibility="private">
 					<type xmi:idref="EAID_1488CC27_2D20_46e7_B92A_E63B67905522"/>
 					<lowerValue xmi:type="uml:LiteralInteger" xmi:id="EAID_LI000005_A257_48f3_890C_0376B547FBA1" value="1"/>
@@ -79,7 +79,7 @@
 			<packagedElement xmi:type="uml:Class" xmi:id="EAID_9E7FB735_E60F_4568_BADA_446ED18C20D5" name="BusSeat">
 				<generalization xmi:type="uml:Generalization" xmi:id="EAID_01B3BA29_A492_4ecf_AAC2_7FC680A69003" general="EAID_C2A354AF_9AED_40be_AFF9_24BD3301AB39"/>
 			</packagedElement>
-			<packagedElement xmi:type="uml:Class" xmi:id="EAID_1AB790E1_188F_429d_B76A_E110E9932EA8" name="City">
+			<packagedElement xmi:type="uml:Class" xmi:id="EAID_1AB790E1_188F_429d_B76A_E110E9932EA8" name="com.transportation.airline.tickets.booking.entity.City">
 				<ownedAttribute xmi:type="uml:Property" xmi:id="EAID_ADBB0045_C1F5_4937_824D_6CBD8EB1501F" name="country" visibility="private">
 					<type xmi:idref="EAID_EB80C6C9_6615_44ed_B45A_8519EE81E764"/>
 					<lowerValue xmi:type="uml:LiteralInteger" xmi:id="EAID_LI000007_C1F5_4937_824D_6CBD8EB1501F" value="1"/>
@@ -104,7 +104,7 @@
 					<type xmi:idref="EAID_1AB790E1_188F_429d_B76A_E110E9932EA8"/>
 				</ownedEnd>
 			</packagedElement>
-			<packagedElement xmi:type="uml:Class" xmi:id="EAID_EB80C6C9_6615_44ed_B45A_8519EE81E764" name="Country">
+			<packagedElement xmi:type="uml:Class" xmi:id="EAID_EB80C6C9_6615_44ed_B45A_8519EE81E764" name="com.transportation.airline.tickets.booking.entity.Country">
 				<ownedAttribute xmi:type="uml:Property" xmi:id="EAID_F435089E_36C1_4715_BF2A_284AF036E841" name="code" visibility="private">
 					<lowerValue xmi:type="uml:LiteralInteger" xmi:id="EAID_LI000011_36C1_4715_BF2A_284AF036E841" value="1"/>
 					<upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="EAID_LI000012_36C1_4715_BF2A_284AF036E841" value="1"/>
@@ -498,7 +498,7 @@
 			<packagedElement xmi:type="uml:Class" xmi:id="EAID_2D924E4F_078D_4fdd_B665_88C434E787D6" name="Silver">
 				<generalization xmi:type="uml:Generalization" xmi:id="EAID_15C69E2A_B05A_45f3_86EC_647E58797850" general="EAID_13DD78F6_9DFF_4de9_B86A_1F9CEE2B16A3"/>
 			</packagedElement>
-			<packagedElement xmi:type="uml:Class" xmi:id="EAID_69C334E9_C5C3_4296_B56C_E1D563091500" name="Terminal">
+			<packagedElement xmi:type="uml:Class" xmi:id="EAID_69C334E9_C5C3_4296_B56C_E1D563091500" name="com.transportation.airline.tickets.booking.entity.Terminal">
 				<ownedAttribute xmi:type="uml:Property" xmi:id="EAID_B775B715_71DF_42b4_AA71_ED93FEFDEF10" name="name" visibility="private">
 					<lowerValue xmi:type="uml:LiteralInteger" xmi:id="EAID_LI000067_71DF_42b4_AA71_ED93FEFDEF10" value="1"/>
 					<upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="EAID_LI000068_71DF_42b4_AA71_ED93FEFDEF10" value="1"/>
@@ -515,7 +515,7 @@
 					<type xmi:idref="EAID_69C334E9_C5C3_4296_B56C_E1D563091500"/>
 				</ownedEnd>
 			</packagedElement>
-			<packagedElement xmi:type="uml:Class" xmi:id="EAID_5A312FC2_EEBE_412e_AD79_7B276492A860" name="Ticket">
+			<packagedElement xmi:type="uml:Class" xmi:id="EAID_5A312FC2_EEBE_412e_AD79_7B276492A860" name="com.transportation.airline.tickets.booking.entity.Ticket">
 				<ownedAttribute xmi:type="uml:Property" xmi:id="EAID_4E7D313A_0CC8_4353_A355_9717110CADA2" name="id" visibility="private">
 					<lowerValue xmi:type="uml:LiteralInteger" xmi:id="EAID_LI000069_0CC8_4353_A355_9717110CADA2" value="1"/>
 					<upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="EAID_LI000070_0CC8_4353_A355_9717110CADA2" value="1"/>
@@ -542,8 +542,8 @@
 					<type xmi:idref="EAID_5A312FC2_EEBE_412e_AD79_7B276492A860"/>
 				</ownedEnd>
 			</packagedElement>
-			<packagedElement xmi:type="uml:Class" xmi:id="EAID_E46B4A46_1162_4625_9A23_C70D61A0BF40" name="Ticket"/>
-			<packagedElement xmi:type="uml:AssociationClass" xmi:id="EAID_9CE7F3ED_9BCC_4135_84EB_35B7AEE2AA0B" name="Ticket">
+			<packagedElement xmi:type="uml:Class" xmi:id="EAID_E46B4A46_1162_4625_9A23_C70D61A0BF40" name="com.transportation.airline.tickets.booking.entity.Ticket"/>
+			<packagedElement xmi:type="uml:AssociationClass" xmi:id="EAID_9CE7F3ED_9BCC_4135_84EB_35B7AEE2AA0B" name="com.transportation.airline.tickets.booking.entity.Ticket">
 				<memberEnd xmi:idref="EAID_dstA2EFC6_7C6F_4de8_BA81_52984F2FD9BA"/>
 				<ownedEnd xmi:type="uml:Property" xmi:id="EAID_dstA2EFC6_7C6F_4de8_BA81_52984F2FD9BA" association="EAID_9CE7F3ED_9BCC_4135_84EB_35B7AEE2AA0B">
 					<type xmi:idref="EAID_C72A3599_C820_406a_9D45_52C6517E6731"/>
@@ -582,7 +582,7 @@
 			<packagedElement xmi:type="uml:Class" xmi:id="EAID_8095805A_C83B_4d3b_9A29_E6EF895E2E21" name="TrainPassenger">
 				<generalization xmi:type="uml:Generalization" xmi:id="EAID_38EBF190_5E63_4e66_AA9C_E1341289E683" general="EAID_9CAF063F_A9AB_4fe9_82EC_F7C47F3349A7"/>
 			</packagedElement>
-			<packagedElement xmi:type="uml:Class" xmi:id="EAID_C72A3599_C820_406a_9D45_52C6517E6731" name="Transportation">
+			<packagedElement xmi:type="uml:Class" xmi:id="EAID_C72A3599_C820_406a_9D45_52C6517E6731" name="com.transportation.airline.tickets.booking.entity.Transportation">
 				<ownedAttribute xmi:type="uml:Property" xmi:id="EAID_C0DFE1F6_2736_4dd7_9FD6_C700F3ABB166" name="distance" visibility="private">
 					<lowerValue xmi:type="uml:LiteralInteger" xmi:id="EAID_LI000085_2736_4dd7_9FD6_C700F3ABB166" value="1"/>
 					<upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="EAID_LI000086_2736_4dd7_9FD6_C700F3ABB166" value="1"/>
@@ -695,7 +695,7 @@
 		</packagedElement>
 		<umldi:Diagram xmi:type="umldi:UMLClassDiagram" xmi:id="EAID_3C108B05_FF74_4878_9BB8_4FD88E937D1B" isFrame="false" modelElement="EAPK_334F391F_4C7A_432e_A6EA_661B283BB078">
 			<ownedElement xmi:type="umldi:UMLClassifierShape" xmi:id="EAID_3C108B05_FF74_4878_9D45_52C6517E6731" modelElement="EAID_C72A3599_C820_406a_9D45_52C6517E6731">
-				<ownedElement xmi:type="umldi:UMLNameLabel" xmi:id="EAID_NL000000_FF74_4878_9D45_52C6517E6731" text="Transportation"/>
+				<ownedElement xmi:type="umldi:UMLNameLabel" xmi:id="EAID_NL000000_FF74_4878_9D45_52C6517E6731" text="com.transportation.airline.tickets.booking.entity.Transportation"/>
 				<bounds xmi:type="dc:bounds" xmi:id="EAID_DB000000_FF74_4878_9D45_52C6517E6731" x="914" y="177" width="90" height="70"/>
 			</ownedElement>
 			<ownedElement xmi:type="umldi:UMLClassifierShape" xmi:id="EAID_3C108B05_FF74_4878_B958_10A33BA2C8D8" modelElement="EAID_FBEF1B10_063D_4713_B958_10A33BA2C8D8">
@@ -711,7 +711,7 @@
 				<bounds xmi:type="dc:bounds" xmi:id="EAID_DB000000_FF74_4878_95E1_46788DE96023" x="487" y="165" width="147" height="70"/>
 			</ownedElement>
 			<ownedElement xmi:type="umldi:UMLClassifierShape" xmi:id="EAID_3C108B05_FF74_4878_B56C_E1D563091500" modelElement="EAID_69C334E9_C5C3_4296_B56C_E1D563091500">
-				<ownedElement xmi:type="umldi:UMLNameLabel" xmi:id="EAID_NL000000_FF74_4878_B56C_E1D563091500" text="Terminal"/>
+				<ownedElement xmi:type="umldi:UMLNameLabel" xmi:id="EAID_NL000000_FF74_4878_B56C_E1D563091500" text="com.transportation.airline.tickets.booking.entity.Terminal"/>
 				<bounds xmi:type="dc:bounds" xmi:id="EAID_DB000000_FF74_4878_B56C_E1D563091500" x="595" y="418" width="90" height="84"/>
 			</ownedElement>
 			<ownedElement xmi:type="umldi:UMLClassifierShape" xmi:id="EAID_3C108B05_FF74_4878_998D_BF8948C27CE9" modelElement="EAID_CD32DB9D_0028_47e9_998D_BF8948C27CE9">
@@ -727,7 +727,7 @@
 				<bounds xmi:type="dc:bounds" xmi:id="EAID_DB000000_FF74_4878_AFF9_24BD3301AB39" x="1629" y="45" width="103" height="70"/>
 			</ownedElement>
 			<ownedElement xmi:type="umldi:UMLClassifierShape" xmi:id="EAID_3C108B05_FF74_4878_BF88_499DDA0C15FB" modelElement="EAID_60488F0D_E1E9_4abf_BF88_499DDA0C15FB">
-				<ownedElement xmi:type="umldi:UMLNameLabel" xmi:id="EAID_NL000000_FF74_4878_BF88_499DDA0C15FB" text="AirlineTransportation"/>
+				<ownedElement xmi:type="umldi:UMLNameLabel" xmi:id="EAID_NL000000_FF74_4878_BF88_499DDA0C15FB" text="com.transportation.airline.tickets.booking.entity.AirlineTransportation"/>
 				<bounds xmi:type="dc:bounds" xmi:id="EAID_DB000000_FF74_4878_BF88_499DDA0C15FB" x="1245" y="425" width="191" height="70"/>
 			</ownedElement>
 			<ownedElement xmi:type="umldi:UMLClassifierShape" xmi:id="EAID_3C108B05_FF74_4878_BCA1_B8F247FDCAC8" modelElement="EAID_2CC6CCFB_C4B1_4bfd_BCA1_B8F247FDCAC8">
@@ -796,11 +796,11 @@
 				<bounds xmi:type="dc:bounds" xmi:id="EAID_DB000000_FF74_4878_82EC_F7C47F3349A7" x="428" y="285" width="104" height="70"/>
 			</ownedElement>
 			<ownedElement xmi:type="umldi:UMLClassifierShape" xmi:id="EAID_3C108B05_FF74_4878_B76A_E110E9932EA8" modelElement="EAID_1AB790E1_188F_429d_B76A_E110E9932EA8">
-				<ownedElement xmi:type="umldi:UMLNameLabel" xmi:id="EAID_NL000000_FF74_4878_B76A_E110E9932EA8" text="City"/>
+				<ownedElement xmi:type="umldi:UMLNameLabel" xmi:id="EAID_NL000000_FF74_4878_B76A_E110E9932EA8" text="com.transportation.airline.tickets.booking.entity.City"/>
 				<bounds xmi:type="dc:bounds" xmi:id="EAID_DB000000_FF74_4878_B76A_E110E9932EA8" x="579" y="819" width="90" height="70"/>
 			</ownedElement>
 			<ownedElement xmi:type="umldi:UMLClassifierShape" xmi:id="EAID_3C108B05_FF74_4878_911E_A42C74471FC7" modelElement="EAID_54B2EB2D_C07D_4592_911E_A42C74471FC7">
-				<ownedElement xmi:type="umldi:UMLNameLabel" xmi:id="EAID_NL000000_FF74_4878_911E_A42C74471FC7" text="Address"/>
+				<ownedElement xmi:type="umldi:UMLNameLabel" xmi:id="EAID_NL000000_FF74_4878_911E_A42C74471FC7" text="com.transportation.airline.tickets.booking.entity.Address"/>
 				<bounds xmi:type="dc:bounds" xmi:id="EAID_DB000000_FF74_4878_911E_A42C74471FC7" x="575" y="545" width="90" height="70"/>
 			</ownedElement>
 			<ownedElement xmi:type="umldi:UMLClassifierShape" xmi:id="EAID_3C108B05_FF74_4878_A342_0B61F7E4A7C2" modelElement="EAID_2DA5CD1D_F976_450c_A342_0B61F7E4A7C2">
@@ -808,7 +808,7 @@
 				<bounds xmi:type="dc:bounds" xmi:id="EAID_DB000000_FF74_4878_A342_0B61F7E4A7C2" x="375" y="545" width="130" height="70"/>
 			</ownedElement>
 			<ownedElement xmi:type="umldi:UMLClassifierShape" xmi:id="EAID_3C108B05_FF74_4878_B45A_8519EE81E764" modelElement="EAID_EB80C6C9_6615_44ed_B45A_8519EE81E764">
-				<ownedElement xmi:type="umldi:UMLNameLabel" xmi:id="EAID_NL000000_FF74_4878_B45A_8519EE81E764" text="Country"/>
+				<ownedElement xmi:type="umldi:UMLNameLabel" xmi:id="EAID_NL000000_FF74_4878_B45A_8519EE81E764" text="com.transportation.airline.tickets.booking.entity.Country"/>
 				<bounds xmi:type="dc:bounds" xmi:id="EAID_DB000000_FF74_4878_B45A_8519EE81E764" x="455" y="645" width="90" height="70"/>
 			</ownedElement>
 			<ownedElement xmi:type="umldi:UMLClassifierShape" xmi:id="EAID_3C108B05_FF74_4878_8757_B6BDFA73CDB4" modelElement="EAID_35AEE82A_73D3_46bb_8757_B6BDFA73CDB4">
@@ -821,7 +821,7 @@
 				<bounds xmi:type="dc:bounds" xmi:id="EAID_DB000000_FF74_4878_8133_E4911FCEA872" x="673" y="38" width="90" height="98"/>
 			</ownedElement>
 			<ownedElement xmi:type="umldi:UMLClassifierShape" xmi:id="EAID_3C108B05_FF74_4878_84EB_35B7AEE2AA0B" modelElement="EAID_9CE7F3ED_9BCC_4135_84EB_35B7AEE2AA0B">
-				<ownedElement xmi:type="umldi:UMLNameLabel" xmi:id="EAID_NL000000_FF74_4878_84EB_35B7AEE2AA0B" text="Ticket"/>
+				<ownedElement xmi:type="umldi:UMLNameLabel" xmi:id="EAID_NL000000_FF74_4878_84EB_35B7AEE2AA0B" text="com.transportation.airline.tickets.booking.entity.Ticket"/>
 				<bounds xmi:type="dc:bounds" xmi:id="EAID_DB000000_FF74_4878_84EB_35B7AEE2AA0B" x="1483" y="165" width="114" height="70"/>
 			</ownedElement>
 			<ownedElement xmi:type="umldi:UMLClassifierShape" xmi:id="EAID_3C108B05_FF74_4878_8F6B_5E2BE9063F33" modelElement="EAID_E6625BE4_C911_49a7_8F6B_5E2BE9063F33">
@@ -1009,11 +1009,11 @@
 				<times created="2022-04-11 09:33:54" modified="2022-04-11 09:33:54" lastloaddate="2016-07-20 13:14:21" lastsavedate="2016-07-20 13:14:21"/>
 				<flags iscontrolled="FALSE" isprotected="FALSE" batchsave="0" batchload="0" usedtd="FALSE" logxml="FALSE"/>
 			</element>
-			<element xmi:idref="EAID_54B2EB2D_C07D_4592_911E_A42C74471FC7" xmi:type="uml:Class" name="Address" scope="public">
+			<element xmi:idref="EAID_54B2EB2D_C07D_4592_911E_A42C74471FC7" xmi:type="uml:Class" name="com.transportation.airline.tickets.booking.entity.Address" scope="public">
 				<model package="EAPK_334F391F_4C7A_432e_A6EA_661B283BB078" tpos="0" ea_localid="65" ea_eleType="element"/>
 				<properties isSpecification="false" sType="Class" nType="0" scope="public" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
 				<project author="A.Arabian" version="1.0" phase="1.0" created="2022-04-12 11:50:31" modified="2022-04-13 08:11:49" complexity="1" status="Proposed"/>
-				<code gentype="Java" genfile="D:\modeling\Demo\Address.java"/>
+				<code gentype="Java" genfile="D:\modeling\Demo\com.transportation.airline.tickets.booking.entity.Address.java"/>
 				<style appearance="BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
 				<tags/>
 				<xrefs/>
@@ -1079,11 +1079,11 @@
 				<xrefs/>
 				<extendedProperties tagged="0" package_name="Domain Model"/>
 			</element>
-			<element xmi:idref="EAID_60488F0D_E1E9_4abf_BF88_499DDA0C15FB" xmi:type="uml:Class" name="AirlineTransportation" scope="public">
+			<element xmi:idref="EAID_60488F0D_E1E9_4abf_BF88_499DDA0C15FB" xmi:type="uml:Class" name="com.transportation.airline.tickets.booking.entity.AirlineTransportation" scope="public">
 				<model package="EAPK_334F391F_4C7A_432e_A6EA_661B283BB078" tpos="0" ea_localid="27" ea_eleType="element"/>
 				<properties isSpecification="false" sType="Class" nType="0" scope="public" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
 				<project author="A.Arabian" version="1.0" phase="1.0" created="2022-04-11 09:53:49" modified="2022-04-13 08:11:37" complexity="1" status="Proposed"/>
-				<code gentype="Java" genfile="D:\modeling\Demo\AirlineTransportation.java"/>
+				<code gentype="Java" genfile="D:\modeling\Demo\com.transportation.airline.tickets.booking.entity.AirlineTransportation.java"/>
 				<style appearance="BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
 				<tags/>
 				<xrefs/>
@@ -1175,11 +1175,11 @@
 					<Generalization xmi:id="EAID_01B3BA29_A492_4ecf_AAC2_7FC680A69003" start="EAID_9E7FB735_E60F_4568_BADA_446ED18C20D5" end="EAID_C2A354AF_9AED_40be_AFF9_24BD3301AB39"/>
 				</links>
 			</element>
-			<element xmi:idref="EAID_1AB790E1_188F_429d_B76A_E110E9932EA8" xmi:type="uml:Class" name="City" scope="public">
+			<element xmi:idref="EAID_1AB790E1_188F_429d_B76A_E110E9932EA8" xmi:type="uml:Class" name="com.transportation.airline.tickets.booking.entity.City" scope="public">
 				<model package="EAPK_334F391F_4C7A_432e_A6EA_661B283BB078" tpos="0" ea_localid="64" ea_eleType="element"/>
 				<properties isSpecification="false" sType="Class" nType="0" scope="public" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
 				<project author="A.Arabian" version="1.0" phase="1.0" created="2022-04-12 11:49:39" modified="2022-04-13 08:11:49" complexity="1" status="Proposed"/>
-				<code gentype="Java" genfile="D:\modeling\Demo\City.java"/>
+				<code gentype="Java" genfile="D:\modeling\Demo\com.transportation.airline.tickets.booking.entity.City.java"/>
 				<style appearance="BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
 				<tags/>
 				<xrefs/>
@@ -1189,7 +1189,7 @@
 						<initial/>
 						<documentation/>
 						<model ea_localid="35" ea_guid="{ADBB0045-C1F5-4937-824D-6CBD8EB1501F}"/>
-						<properties type="Country" collection="false" static="0" duplicates="0" changeability="changeable"/>
+						<properties type="com.transportation.airline.tickets.booking.entity.Country" collection="false" static="0" duplicates="0" changeability="changeable"/>
 						<coords ordered="0"/>
 						<containment containment="Not Specified" position="1"/>
 						<stereotype/>
@@ -1221,11 +1221,11 @@
 					<Association xmi:id="EAID_BC4A5DDE_B358_49f9_8807_09F9649BAA42" start="EAID_1AB790E1_188F_429d_B76A_E110E9932EA8" end="EAID_EB80C6C9_6615_44ed_B45A_8519EE81E764"/>
 				</links>
 			</element>
-			<element xmi:idref="EAID_EB80C6C9_6615_44ed_B45A_8519EE81E764" xmi:type="uml:Class" name="Country" scope="public">
+			<element xmi:idref="EAID_EB80C6C9_6615_44ed_B45A_8519EE81E764" xmi:type="uml:Class" name="com.transportation.airline.tickets.booking.entity.Country" scope="public">
 				<model package="EAPK_334F391F_4C7A_432e_A6EA_661B283BB078" tpos="0" ea_localid="67" ea_eleType="element"/>
 				<properties isSpecification="false" sType="Class" nType="0" scope="public" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
 				<project author="A.Arabian" version="1.0" phase="1.0" created="2022-04-12 12:38:37" modified="2022-04-13 08:11:50" complexity="1" status="Proposed"/>
-				<code gentype="Java" genfile="D:\modeling\Demo\Country.java"/>
+				<code gentype="Java" genfile="D:\modeling\Demo\com.transportation.airline.tickets.booking.entity.Country.java"/>
 				<style appearance="BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
 				<tags/>
 				<xrefs/>
@@ -1929,11 +1929,11 @@
 					<Generalization xmi:id="EAID_15C69E2A_B05A_45f3_86EC_647E58797850" start="EAID_2D924E4F_078D_4fdd_B665_88C434E787D6" end="EAID_13DD78F6_9DFF_4de9_B86A_1F9CEE2B16A3"/>
 				</links>
 			</element>
-			<element xmi:idref="EAID_69C334E9_C5C3_4296_B56C_E1D563091500" xmi:type="uml:Class" name="Terminal" scope="public">
+			<element xmi:idref="EAID_69C334E9_C5C3_4296_B56C_E1D563091500" xmi:type="uml:Class" name="com.transportation.airline.tickets.booking.entity.Terminal" scope="public">
 				<model package="EAPK_334F391F_4C7A_432e_A6EA_661B283BB078" tpos="0" ea_localid="21" ea_eleType="element"/>
 				<properties isSpecification="false" sType="Class" nType="0" scope="public" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
 				<project author="A.Arabian" version="1.0" phase="1.0" created="2022-04-11 09:40:59" modified="2022-04-13 09:44:34" complexity="1" status="Proposed"/>
-				<code product_name="Java" gentype="Java" genfile="D:\modeling\Demo\Terminal.java"/>
+				<code product_name="Java" gentype="Java" genfile="D:\modeling\Demo\com.transportation.airline.tickets.booking.entity.Terminal.java"/>
 				<style appearance="BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
 				<tags/>
 				<xrefs/>
@@ -1960,7 +1960,7 @@
 					<Aggregation xmi:id="EAID_DE1346EF_9B26_440a_9808_234C88580100" start="EAID_54B2EB2D_C07D_4592_911E_A42C74471FC7" end="EAID_69C334E9_C5C3_4296_B56C_E1D563091500"/>
 				</links>
 			</element>
-			<element xmi:idref="EAID_5A312FC2_EEBE_412e_AD79_7B276492A860" xmi:type="uml:Class" name="Ticket" scope="public">
+			<element xmi:idref="EAID_5A312FC2_EEBE_412e_AD79_7B276492A860" xmi:type="uml:Class" name="com.transportation.airline.tickets.booking.entity.Ticket" scope="public">
 				<model package="EAPK_334F391F_4C7A_432e_A6EA_661B283BB078" tpos="0" ea_localid="39" ea_eleType="element"/>
 				<properties isSpecification="false" sType="Class" nType="0" scope="public" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
 				<project author="A.Arabian" version="1.0" phase="1.0" created="2022-04-11 16:41:27" modified="2022-04-11 16:41:35" complexity="1" status="Proposed"/>
@@ -2004,7 +2004,7 @@
 						<initial/>
 						<documentation/>
 						<model ea_localid="14" ea_guid="{2B872CF3-270B-440b-9DE8-4825054D3B70}"/>
-						<properties type="Transportation" collection="false" static="0" duplicates="0" changeability="changeable"/>
+						<properties type="com.transportation.airline.tickets.booking.entity.Transportation" collection="false" static="0" duplicates="0" changeability="changeable"/>
 						<coords ordered="0"/>
 						<containment containment="Not Specified" position="2"/>
 						<stereotype/>
@@ -2023,7 +2023,7 @@
 					<Association xmi:id="EAID_0D202B25_8F81_4045_ACCD_D484D1EF8B02" start="EAID_007554F2_8A5E_41c0_950A_F90EC6F89D04" end="EAID_5A312FC2_EEBE_412e_AD79_7B276492A860"/>
 				</links>
 			</element>
-			<element xmi:idref="EAID_E46B4A46_1162_4625_9A23_C70D61A0BF40" xmi:type="uml:Class" name="Ticket" scope="public">
+			<element xmi:idref="EAID_E46B4A46_1162_4625_9A23_C70D61A0BF40" xmi:type="uml:Class" name="com.transportation.airline.tickets.booking.entity.Ticket" scope="public">
 				<model package="EAPK_334F391F_4C7A_432e_A6EA_661B283BB078" tpos="0" ea_localid="72" ea_eleType="element"/>
 				<properties isSpecification="false" sType="Class" nType="0" scope="public" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
 				<project author="A.Arabian" version="1.0" phase="1.0" created="2022-04-12 13:51:39" modified="2022-04-12 13:52:45" complexity="1" status="Proposed"/>
@@ -2033,11 +2033,11 @@
 				<xrefs/>
 				<extendedProperties tagged="0" package_name="Domain Model"/>
 			</element>
-			<element xmi:idref="EAID_9CE7F3ED_9BCC_4135_84EB_35B7AEE2AA0B" xmi:type="uml:Class" name="Ticket" scope="public">
+			<element xmi:idref="EAID_9CE7F3ED_9BCC_4135_84EB_35B7AEE2AA0B" xmi:type="uml:Class" name="com.transportation.airline.tickets.booking.entity.Ticket" scope="public">
 				<model package="EAPK_334F391F_4C7A_432e_A6EA_661B283BB078" tpos="0" ea_localid="75" ea_eleType="element"/>
 				<properties isSpecification="false" sType="Class" nType="17" scope="public" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
 				<project author="A.Arabian" version="1.0" phase="1.0" created="2022-04-13 08:07:04" modified="2022-04-13 08:11:53" complexity="1" status="Proposed"/>
-				<code product_name="Java" gentype="Java" genfile="D:\modeling\Demo\Ticket.java"/>
+				<code product_name="Java" gentype="Java" genfile="D:\modeling\Demo\com.transportation.airline.tickets.booking.entity.Ticket.java"/>
 				<style appearance="BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
 				<tags/>
 				<xrefs/>
@@ -2124,11 +2124,11 @@
 					<Generalization xmi:id="EAID_38EBF190_5E63_4e66_AA9C_E1341289E683" start="EAID_8095805A_C83B_4d3b_9A29_E6EF895E2E21" end="EAID_9CAF063F_A9AB_4fe9_82EC_F7C47F3349A7"/>
 				</links>
 			</element>
-			<element xmi:idref="EAID_C72A3599_C820_406a_9D45_52C6517E6731" xmi:type="uml:Class" name="Transportation" scope="public">
+			<element xmi:idref="EAID_C72A3599_C820_406a_9D45_52C6517E6731" xmi:type="uml:Class" name="com.transportation.airline.tickets.booking.entity.Transportation" scope="public">
 				<model package="EAPK_334F391F_4C7A_432e_A6EA_661B283BB078" tpos="0" ea_localid="16" ea_eleType="element"/>
 				<properties isSpecification="false" sType="Class" nType="0" scope="public" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
 				<project author="A.Arabian" version="1.0" phase="1.0" created="2022-04-11 09:38:56" modified="2022-04-13 08:11:21" complexity="1" status="Proposed"/>
-				<code gentype="Java" genfile="D:\modeling\Demo\Transportation.java"/>
+				<code gentype="Java" genfile="D:\modeling\Demo\com.transportation.airline.tickets.booking.entity.Transportation.java"/>
 				<style appearance="BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
 				<tags/>
 				<xrefs/>
@@ -2189,7 +2189,7 @@
 						<initial/>
 						<documentation/>
 						<model ea_localid="26" ea_guid="{DEB9E09F-EE08-4707-B76B-8A5998D1E45A}"/>
-						<properties type="Address" collection="false" static="0" duplicates="0" changeability="changeable"/>
+						<properties type="com.transportation.airline.tickets.booking.entity.Address" collection="false" static="0" duplicates="0" changeability="changeable"/>
 						<coords ordered="0"/>
 						<containment containment="Not Specified" position="2"/>
 						<stereotype/>
@@ -2219,7 +2219,7 @@
 						<initial/>
 						<documentation/>
 						<model ea_localid="25" ea_guid="{AD2DA801-A7C7-40df-994F-122C5608EF36}"/>
-						<properties type="Transportation" collection="false" static="0" duplicates="0" changeability="changeable"/>
+						<properties type="com.transportation.airline.tickets.booking.entity.Transportation" collection="false" static="0" duplicates="0" changeability="changeable"/>
 						<coords ordered="0"/>
 						<containment containment="Not Specified" position="1"/>
 						<stereotype/>
@@ -2579,7 +2579,7 @@
 		<connectors>
 			<connector xmi:idref="EAID_0D9E5561_8B79_4b1e_9680_D0EFA69B83B2">
 				<source xmi:idref="EAID_54B2EB2D_C07D_4592_911E_A42C74471FC7">
-					<model ea_localid="65" type="Class" name="Address"/>
+					<model ea_localid="65" type="Class" name="com.transportation.airline.tickets.booking.entity.Address"/>
 					<role visibility="Public" targetScope="instance"/>
 					<type aggregation="none" containment="Unspecified"/>
 					<constraints/>
@@ -2614,7 +2614,7 @@
 			</connector>
 			<connector xmi:idref="EAID_DE1346EF_9B26_440a_9808_234C88580100">
 				<source xmi:idref="EAID_54B2EB2D_C07D_4592_911E_A42C74471FC7">
-					<model ea_localid="65" type="Class" name="Address"/>
+					<model ea_localid="65" type="Class" name="com.transportation.airline.tickets.booking.entity.Address"/>
 					<role visibility="Public" targetScope="instance"/>
 					<type aggregation="none" containment="Unspecified"/>
 					<constraints/>
@@ -2625,7 +2625,7 @@
 					<tags/>
 				</source>
 				<target xmi:idref="EAID_69C334E9_C5C3_4296_B56C_E1D563091500">
-					<model ea_localid="21" type="Class" name="Terminal"/>
+					<model ea_localid="21" type="Class" name="com.transportation.airline.tickets.booking.entity.Terminal"/>
 					<role visibility="Public" targetScope="instance"/>
 					<type aggregation="shared" containment="Unspecified"/>
 					<constraints/>
@@ -2648,7 +2648,7 @@
 			</connector>
 			<connector xmi:idref="EAID_64342B92_A294_4602_AF00_B0A972C23690">
 				<source xmi:idref="EAID_1AB790E1_188F_429d_B76A_E110E9932EA8">
-					<model ea_localid="64" type="Class" name="City"/>
+					<model ea_localid="64" type="Class" name="com.transportation.airline.tickets.booking.entity.City"/>
 					<role visibility="Public" targetScope="instance"/>
 					<type aggregation="none" containment="Unspecified"/>
 					<constraints/>
@@ -2659,7 +2659,7 @@
 					<tags/>
 				</source>
 				<target xmi:idref="EAID_54B2EB2D_C07D_4592_911E_A42C74471FC7">
-					<model ea_localid="65" type="Class" name="Address"/>
+					<model ea_localid="65" type="Class" name="com.transportation.airline.tickets.booking.entity.Address"/>
 					<role visibility="Public" targetScope="instance"/>
 					<type aggregation="shared" containment="Unspecified"/>
 					<constraints/>
@@ -2716,7 +2716,7 @@
 			</connector>
 			<connector xmi:idref="EAID_9C26F087_DCC6_492b_B76B_A36BECAE3A34">
 				<source xmi:idref="EAID_60488F0D_E1E9_4abf_BF88_499DDA0C15FB">
-					<model ea_localid="27" type="Class" name="AirlineTransportation"/>
+					<model ea_localid="27" type="Class" name="com.transportation.airline.tickets.booking.entity.AirlineTransportation"/>
 					<role visibility="Public" targetScope="instance"/>
 					<type aggregation="none" containment="Unspecified"/>
 					<constraints/>
@@ -2727,7 +2727,7 @@
 					<tags/>
 				</source>
 				<target xmi:idref="EAID_C72A3599_C820_406a_9D45_52C6517E6731">
-					<model ea_localid="16" type="Class" name="Transportation"/>
+					<model ea_localid="16" type="Class" name="com.transportation.airline.tickets.booking.entity.Transportation"/>
 					<role visibility="Public" targetScope="instance"/>
 					<type aggregation="none" containment="Unspecified"/>
 					<constraints/>
@@ -2761,7 +2761,7 @@
 					<tags/>
 				</source>
 				<target xmi:idref="EAID_60488F0D_E1E9_4abf_BF88_499DDA0C15FB">
-					<model ea_localid="27" type="Class" name="AirlineTransportation"/>
+					<model ea_localid="27" type="Class" name="com.transportation.airline.tickets.booking.entity.AirlineTransportation"/>
 					<role visibility="Public" targetScope="instance"/>
 					<type aggregation="none" containment="Unspecified"/>
 					<constraints/>
@@ -2955,7 +2955,7 @@
 			</connector>
 			<connector xmi:idref="EAID_BC4A5DDE_B358_49f9_8807_09F9649BAA42">
 				<source xmi:idref="EAID_1AB790E1_188F_429d_B76A_E110E9932EA8">
-					<model ea_localid="64" type="Class" name="City"/>
+					<model ea_localid="64" type="Class" name="com.transportation.airline.tickets.booking.entity.City"/>
 					<role visibility="Public" targetScope="instance"/>
 					<type aggregation="none" containment="Unspecified"/>
 					<constraints/>
@@ -2966,7 +2966,7 @@
 					<tags/>
 				</source>
 				<target xmi:idref="EAID_EB80C6C9_6615_44ed_B45A_8519EE81E764">
-					<model ea_localid="67" type="Class" name="Country"/>
+					<model ea_localid="67" type="Class" name="com.transportation.airline.tickets.booking.entity.Country"/>
 					<role visibility="Public" targetScope="instance"/>
 					<type aggregation="none" containment="Unspecified"/>
 					<constraints/>
@@ -2990,7 +2990,7 @@
 			</connector>
 			<connector xmi:idref="EAID_69D4BEAA_46CB_4e97_853F_EF638F8BF19A">
 				<source xmi:idref="EAID_EB80C6C9_6615_44ed_B45A_8519EE81E764">
-					<model ea_localid="67" type="Class" name="Country"/>
+					<model ea_localid="67" type="Class" name="com.transportation.airline.tickets.booking.entity.Country"/>
 					<role visibility="Public" targetScope="instance"/>
 					<type aggregation="none" containment="Unspecified"/>
 					<constraints/>
@@ -3036,7 +3036,7 @@
 					<tags/>
 				</source>
 				<target xmi:idref="EAID_EB80C6C9_6615_44ed_B45A_8519EE81E764">
-					<model ea_localid="67" type="Class" name="Country"/>
+					<model ea_localid="67" type="Class" name="com.transportation.airline.tickets.booking.entity.Country"/>
 					<role visibility="Public" targetScope="instance"/>
 					<type aggregation="none" containment="Unspecified"/>
 					<constraints/>
@@ -3071,7 +3071,7 @@
 					<tags/>
 				</source>
 				<target xmi:idref="EAID_C72A3599_C820_406a_9D45_52C6517E6731">
-					<model ea_localid="16" type="Class" name="Transportation"/>
+					<model ea_localid="16" type="Class" name="com.transportation.airline.tickets.booking.entity.Transportation"/>
 					<role visibility="Public" targetScope="instance"/>
 					<type aggregation="none" containment="Unspecified"/>
 					<constraints/>
@@ -3555,7 +3555,7 @@
 					<tags/>
 				</source>
 				<target xmi:idref="EAID_9CE7F3ED_9BCC_4135_84EB_35B7AEE2AA0B">
-					<model ea_localid="75" type="Class" name="Ticket"/>
+					<model ea_localid="75" type="Class" name="com.transportation.airline.tickets.booking.entity.Ticket"/>
 					<role visibility="Public" targetScope="instance"/>
 					<type multiplicity="1..*" aggregation="none" containment="Unspecified"/>
 					<constraints/>
@@ -3579,7 +3579,7 @@
 			</connector>
 			<connector xmi:idref="EAID_29C19735_A3C6_4d48_9B91_99DFAA1A9420">
 				<source xmi:idref="EAID_5A312FC2_EEBE_412e_AD79_7B276492A860">
-					<model ea_localid="39" type="Class" name="Ticket"/>
+					<model ea_localid="39" type="Class" name="com.transportation.airline.tickets.booking.entity.Ticket"/>
 					<role visibility="Public" targetScope="instance"/>
 					<type aggregation="none" containment="Unspecified"/>
 					<constraints/>
@@ -3660,7 +3660,7 @@
 					<tags/>
 				</source>
 				<target xmi:idref="EAID_5A312FC2_EEBE_412e_AD79_7B276492A860">
-					<model ea_localid="39" type="Class" name="Ticket"/>
+					<model ea_localid="39" type="Class" name="com.transportation.airline.tickets.booking.entity.Ticket"/>
 					<role visibility="Public" targetScope="instance"/>
 					<type aggregation="none" containment="Unspecified"/>
 					<constraints/>
@@ -3695,7 +3695,7 @@
 					<tags/>
 				</source>
 				<target xmi:idref="EAID_9CE7F3ED_9BCC_4135_84EB_35B7AEE2AA0B">
-					<model ea_localid="75" type="Class" name="Ticket"/>
+					<model ea_localid="75" type="Class" name="com.transportation.airline.tickets.booking.entity.Ticket"/>
 					<role visibility="Public" targetScope="instance"/>
 					<type aggregation="none" containment="Unspecified"/>
 					<constraints/>
@@ -4005,7 +4005,7 @@
 					<tags/>
 				</source>
 				<target xmi:idref="EAID_C72A3599_C820_406a_9D45_52C6517E6731">
-					<model ea_localid="16" type="Class" name="Transportation"/>
+					<model ea_localid="16" type="Class" name="com.transportation.airline.tickets.booking.entity.Transportation"/>
 					<role visibility="Public" targetScope="instance"/>
 					<type aggregation="none" containment="Unspecified"/>
 					<constraints/>
@@ -4039,7 +4039,7 @@
 					<tags/>
 				</source>
 				<target xmi:idref="EAID_C72A3599_C820_406a_9D45_52C6517E6731">
-					<model ea_localid="16" type="Class" name="Transportation"/>
+					<model ea_localid="16" type="Class" name="com.transportation.airline.tickets.booking.entity.Transportation"/>
 					<role visibility="Public" targetScope="instance"/>
 					<type aggregation="none" containment="Unspecified"/>
 					<constraints/>
@@ -4063,7 +4063,7 @@
 			</connector>
 			<connector xmi:idref="EAID_A7F054D5_E1F7_40e1_9ED2_080BE59DFEF0">
 				<source xmi:idref="EAID_5A312FC2_EEBE_412e_AD79_7B276492A860">
-					<model ea_localid="39" type="Class" name="Ticket"/>
+					<model ea_localid="39" type="Class" name="com.transportation.airline.tickets.booking.entity.Ticket"/>
 					<role visibility="Public" targetScope="instance"/>
 					<type aggregation="none" containment="Unspecified"/>
 					<constraints/>
@@ -4098,7 +4098,7 @@
 			</connector>
 			<connector xmi:idref="EAID_DD30360C_863C_43f6_9D80_84FE7878C9AA">
 				<source xmi:idref="EAID_9CE7F3ED_9BCC_4135_84EB_35B7AEE2AA0B">
-					<model ea_localid="75" type="Class" name="Ticket"/>
+					<model ea_localid="75" type="Class" name="com.transportation.airline.tickets.booking.entity.Ticket"/>
 					<role visibility="Public" targetScope="instance"/>
 					<type aggregation="none" containment="Unspecified"/>
 					<constraints/>
@@ -4133,7 +4133,7 @@
 			</connector>
 			<connector xmi:idref="EAID_C498A331_5DB4_4473_8F4B_585CDFCC6537">
 				<source xmi:idref="EAID_69C334E9_C5C3_4296_B56C_E1D563091500">
-					<model ea_localid="21" type="Class" name="Terminal"/>
+					<model ea_localid="21" type="Class" name="com.transportation.airline.tickets.booking.entity.Terminal"/>
 					<role visibility="Public" targetScope="instance"/>
 					<type aggregation="none" containment="Unspecified"/>
 					<constraints/>
@@ -4144,7 +4144,7 @@
 					<tags/>
 				</source>
 				<target xmi:idref="EAID_C72A3599_C820_406a_9D45_52C6517E6731">
-					<model ea_localid="16" type="Class" name="Transportation"/>
+					<model ea_localid="16" type="Class" name="com.transportation.airline.tickets.booking.entity.Transportation"/>
 					<role visibility="Public" targetScope="instance"/>
 					<type aggregation="none" containment="Unspecified"/>
 					<constraints/>
@@ -4179,7 +4179,7 @@
 					<tags/>
 				</source>
 				<target xmi:idref="EAID_5A312FC2_EEBE_412e_AD79_7B276492A860">
-					<model ea_localid="39" type="Class" name="Ticket"/>
+					<model ea_localid="39" type="Class" name="com.transportation.airline.tickets.booking.entity.Ticket"/>
 					<role visibility="Public" targetScope="instance"/>
 					<type aggregation="none" containment="Unspecified"/>
 					<constraints/>
@@ -4214,7 +4214,7 @@
 					<tags/>
 				</source>
 				<target xmi:idref="EAID_9CE7F3ED_9BCC_4135_84EB_35B7AEE2AA0B">
-					<model ea_localid="75" type="Class" name="Ticket"/>
+					<model ea_localid="75" type="Class" name="com.transportation.airline.tickets.booking.entity.Ticket"/>
 					<role visibility="Public" targetScope="instance"/>
 					<type aggregation="none" containment="Unspecified"/>
 					<constraints/>
@@ -4238,7 +4238,7 @@
 			</connector>
 			<connector xmi:idref="EAID_06F6C6FB_8BF4_476f_92BB_7B8553206101">
 				<source xmi:idref="EAID_C72A3599_C820_406a_9D45_52C6517E6731">
-					<model ea_localid="16" type="Class" name="Transportation"/>
+					<model ea_localid="16" type="Class" name="com.transportation.airline.tickets.booking.entity.Transportation"/>
 					<role visibility="Public" targetScope="instance"/>
 					<type multiplicity="0..*" aggregation="none" containment="Unspecified"/>
 					<constraints/>
@@ -4284,7 +4284,7 @@
 					<tags/>
 				</source>
 				<target xmi:idref="EAID_C72A3599_C820_406a_9D45_52C6517E6731">
-					<model ea_localid="16" type="Class" name="Transportation"/>
+					<model ea_localid="16" type="Class" name="com.transportation.airline.tickets.booking.entity.Transportation"/>
 					<role visibility="Public" targetScope="instance"/>
 					<type aggregation="none" containment="Unspecified"/>
 					<constraints/>
@@ -4324,7 +4324,7 @@
 					<packagedElement xmi:type="uml:PrimitiveType" xmi:id="EAJava_Date" name="Date"/>
 					<packagedElement xmi:type="uml:PrimitiveType" xmi:id="EAJava_BigDecimal" name="BigDecimal"/>
 					<packagedElement xmi:type="uml:PrimitiveType" xmi:id="EAJava_Passenger" name="Passenger"/>
-					<packagedElement xmi:type="uml:PrimitiveType" xmi:id="EAJava_Transportation" name="Transportation"/>
+					<packagedElement xmi:type="uml:PrimitiveType" xmi:id="EAJava_Transportation" name="com.transportation.airline.tickets.booking.entity.Transportation"/>
 					<packagedElement xmi:type="uml:PrimitiveType" xmi:id="EAJava_Long" name="Long">
 						<generalization xmi:type="uml:Generalization" xmi:id="EAJava_Long_General">
 							<general href="http://www.omg.org/spec/UML/20161101/PrimitiveTypes.xmi#UnlimitedNatural"/>
