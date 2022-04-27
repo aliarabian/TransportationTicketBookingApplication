@@ -14,4 +14,9 @@ public class InMemoryAirlineTransportationDaoImpl implements AirlineTransportati
     public Optional<AirlineTransportation> findTransportationById(Long id) {
         return Optional.ofNullable(TestDataSource.airlineTransportations.transportation(id));
     }
+
+    @Override
+    public void persist(PlaneTicket ticket) {
+        TestDataSource.tickets.addTicket(ticket);
+    }
 }

@@ -47,6 +47,7 @@ public class PlaneTicketBookingService implements BookingService {
                 PlaneTicket ticket = new PlaneTicket(ThreadLocalRandom.current().nextLong(),
                         airlineTransportation, privileges, passengerMapper.mapToPlanePassenger(bookingDetail.getPassenger()),
                         seat, customer);
+                airlineTransportationDao.persist(ticket);
                 bookedTickets.add(ticket);
                 airlineTransportation.addNewBooking(ticket);
                 customer.addTicket(ticket);
