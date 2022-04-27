@@ -22,4 +22,12 @@ public class PlaneBookingPassengerDetail {
     public void setPassenger(PlanePassengerDto passenger) {
         this.passenger = passenger;
     }
+
+    @Override
+    public String toString() {
+        return "PlaneBookingPassengerDetail{" +
+                "seatingSectionPrivilegeIds=" + seatingSectionPrivilegeIds +
+                ", passenger=" + passenger +
+                '}';
+    }
 }

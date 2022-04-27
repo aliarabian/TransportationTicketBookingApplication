@@ -41,4 +41,13 @@ public class PlaneTicketBookingRequest {
         this.seatingSectionId = seatingSectionId;
     }
 
+    @Override
+    public String toString() {
+        return "PlaneTicketBookingRequest{" +
+                "passengersBookingDetails=" + passengersBookingDetails +
+                ", seatingSectionId=" + seatingSectionId +
+                ", customerId=" + customerId +
+                ", transportationId=" + transportationId +
+                '}';
+    }
 }
