@@ -22,6 +22,7 @@ public class TestDataSource implements Serializable {
     public static CustomerDataSource customers;
     public static SeatingSectionPrivilegeDataSource seatingSectionPrivileges;
     public static TerminalDataSource terminals;
+    public static PlaneTicketDataSource tickets;
 
     static {
         if (Files.exists(Paths.get("app.data"))) {
@@ -37,6 +38,7 @@ public class TestDataSource implements Serializable {
             seats = new PlaneSeatDataSource();
             seatingSectionPrivileges = new SeatingSectionPrivilegeDataSource();
             customers = new CustomerDataSource();
+            tickets = new PlaneTicketDataSource();
         }
 
     }
@@ -279,7 +281,23 @@ public class TestDataSource implements Serializable {
         public Terminal terminal(Long id) {
             return terminals.get(id);
         }
+    }
 
+    public static class PlaneTicketDataSource implements Serializable {
+
+        private final Map<Long, PlaneTicket> tickets;
+
+        public PlaneTicketDataSource() {
+            this.tickets = new HashMap<>();
+        }
+
+        public void addTicket(PlaneTicket ticket) {
+            tickets.put(ticket.getId(), ticket);
+        }
+
+        public int count() {
+            return tickets.size();
+        }
     }
 
     public static void save() {
@@ -297,6 +315,7 @@ public class TestDataSource implements Serializable {
             objectOutputStream.writeObject(seats);
             objectOutputStream.writeObject(airlineTransportationCompanies);
             objectOutputStream.writeObject(airlineTransportations);
+            objectOutputStream.writeObject(tickets);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -317,6 +336,7 @@ public class TestDataSource implements Serializable {
             seats = (PlaneSeatDataSource) ois.readObject();
             airlineTransportationCompanies = (AirlineTransportationCompanyDatasource) ois.readObject();
             airlineTransportations = (AirlineTransportationDataSource) ois.readObject();
+            tickets = (PlaneTicketDataSource) ois.readObject();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
