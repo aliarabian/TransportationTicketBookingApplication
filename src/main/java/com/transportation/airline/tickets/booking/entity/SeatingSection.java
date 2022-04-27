@@ -88,6 +88,8 @@ public abstract class SeatingSection implements Serializable {
         return capacity;
     }
 
+    public abstract String title();
+
     @Override
     public String toString() {
         return "SeatingSection{" +
