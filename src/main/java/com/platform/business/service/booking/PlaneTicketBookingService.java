@@ -6,15 +6,16 @@ import com.platform.business.service.booking.dto.PlaneTicketBookingRequest;
 import com.platform.repository.customer.CustomerDao;
 import com.platform.repository.transportation.AirlineTransportationDao;
 
-import java.util.HashSet;
+import java.util.Comparator;
 import java.util.Objects;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class PlaneTicketBookingService implements BookingService {
-    private AirlineTransportationDao airlineTransportationDao;
-    private CustomerDao customerDao;
-    private PassengerMapper passengerMapper;
+    private final AirlineTransportationDao airlineTransportationDao;
+    private final CustomerDao customerDao;
+    private final PassengerMapper passengerMapper;
 
     public PlaneTicketBookingService(AirlineTransportationDao airlineTransportationDao, CustomerDao customerDao, PassengerMapper passengerMapper) {
         this.airlineTransportationDao = airlineTransportationDao;
@@ -37,7 +38,7 @@ public class PlaneTicketBookingService implements BookingService {
     }
 
     private Set<PlaneTicket> bookTickets(PlaneTicketBookingRequest req, AirlineTransportation airlineTransportation, Customer customer) {
-        Set<PlaneTicket> bookedTickets = new HashSet<>();
+        Set<PlaneTicket> bookedTickets = new TreeSet<>(Comparator.comparing(p -> p.getPassenger().getNationalId()));
         for (PlaneBookingPassengerDetail bookingDetail : req.getPassengersBookingDetails()) {
             PlaneSeat seat;
             try {

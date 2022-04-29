@@ -2,6 +2,7 @@ package com.platform.business.enitity;
 
 import java.io.Serializable;
 import java.time.OffsetDateTime;
+import java.util.Objects;
 
 public abstract class Ticket<T extends Transportation, U extends Passenger, S extends Seat> implements Serializable {
     private Long id;
@@ -54,5 +55,19 @@ public abstract class Ticket<T extends Transportation, U extends Passenger, S ex
                 ", seat=" + seat +
                 ", customer=" + customer +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Ticket)) return false;
+        Ticket<?, ?, ?> ticket = (Ticket<?, ?, ?>) o;
+        return id.equals(ticket.id) && transportation.getId().equals(ticket.transportation.getId())
+                && passenger.getNationalId().equals(ticket.passenger.getNationalId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, transportation, passenger);
     }
 }

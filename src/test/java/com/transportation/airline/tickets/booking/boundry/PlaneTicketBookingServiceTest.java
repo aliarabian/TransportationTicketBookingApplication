@@ -12,6 +12,8 @@ import com.platform.business.service.booking.dto.PlaneTicketBookingRequest;
 import com.platform.repository.customer.InMemoryCustomerDao;
 import com.platform.repository.transportation.InMemoryAirlineTransportationDao;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import persistence.data.storage.memory.TransportationBookingSystemImMemoryDataSource;
 
@@ -21,12 +23,38 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@DisplayName("Given there is a flight available ")
 class PlaneTicketBookingServiceTest {
     private final BookingService bookingService = new PlaneTicketBookingService(new InMemoryAirlineTransportationDao(),
             new InMemoryCustomerDao(),
             new PassengerMapperImpl());
 
     private PlaneTicketBookingRequest planeTicketBookingRequest;
+
+    @Nested
+    @DisplayName("When booking ticket for multiple passengers ")
+    class MultipleTicketBookingTest {
+
+        @Test
+        @DisplayName("Then it should not add a passenger twice to the same flight")
+        void testAddingMultiplePassengersResultsInOnlyAddingEachPassengerOnlyOnceToTheFlight() {
+            PlanePassengerDto passengerNumberOneFirstInstance = generatePassengerDto("Amir", "A", "87946621", "00254976321", "IR",
+                    LocalDate.of(2023, 12, 15));
+            PlanePassengerDto passengerNumberOneSecondInstance = generatePassengerDto("Amir", "A", "87946621", "00254976321", "IR",
+                    LocalDate.of(2023, 12, 15));
+            PlanePassengerDto passengerNumberOneThirdInstance = generatePassengerDto("Amir", "A", "87946621", "00254976321", "IR",
+                    LocalDate.of(2023, 12, 15));
+            PlanePassengerDto passengerNumberTwo = generatePassengerDto("Amir", "A", "87946622", "00254976322", "IR",
+                    LocalDate.of(2023, 12, 15));
+            PlaneTicketBookingRequest request = initializePlaneTicketBookingRequest(getPlaneBookingPassengerDetail(passengerNumberOneFirstInstance),
+                    getPlaneBookingPassengerDetail(passengerNumberOneSecondInstance),
+                    getPlaneBookingPassengerDetail(passengerNumberOneThirdInstance),
+                    getPlaneBookingPassengerDetail(passengerNumberTwo));
+            Set<PlaneTicket> bookedTickets = bookingService.bookTickets(request);
+
+            assertEquals(2, bookedTickets.size());
+        }
+    }
 
     @BeforeEach
     void setUp() {
@@ -44,9 +72,9 @@ class PlaneTicketBookingServiceTest {
 
     @Test
     void shouldBookAllRequestTickets() {
-        PlanePassengerDto passengerNumberOne = generatePassengerDto("Amir", "A", "87946621", "00254976321", "IR",
+        PlanePassengerDto passengerNumberOne = generatePassengerDto("Amir", "A", "879466221", "00254976321", "IR",
                 LocalDate.of(2023, 12, 15));
-        PlanePassengerDto passengerNumberTwo = generatePassengerDto("Amir", "A", "87946621", "00254976321", "IR",
+        PlanePassengerDto passengerNumberTwo = generatePassengerDto("Amir", "A", "879466321", "00254976321", "IR",
                 LocalDate.of(2023, 12, 15));
         PlanePassengerDto passengerNumberThree = generatePassengerDto("Amir", "A", "87946621", "00254976321", "IR",
                 LocalDate.of(2023, 12, 15));
