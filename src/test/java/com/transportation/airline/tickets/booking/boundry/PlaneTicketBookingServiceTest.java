@@ -1,22 +1,21 @@
 package com.transportation.airline.tickets.booking.boundry;
 
 import com.platform.business.booking.BookingService;
+import com.platform.business.booking.PassengerMapperImpl;
 import com.platform.business.booking.PlaneTicketBookingService;
-import com.platform.repository.customer.InMemoryCustomerDao;
-import com.platform.repository.transportation.InMemoryAirlineTransportationDao;
 import com.platform.business.booking.dto.PlaneBookingPassengerDetail;
 import com.platform.business.booking.dto.PlanePassengerDto;
 import com.platform.business.booking.dto.PlaneTicketBookingRequest;
-import com.platform.business.booking.PassengerMapperImpl;
 import com.platform.enitity.AirlineTransportation;
 import com.platform.enitity.Customer;
 import com.platform.enitity.PlaneTicket;
+import com.platform.repository.customer.InMemoryCustomerDao;
+import com.platform.repository.transportation.InMemoryAirlineTransportationDao;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import persistence.data.storage.memory.TransportationBookingSystemImMemoryDataSource;
 
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Set;
 
@@ -33,9 +32,7 @@ class PlaneTicketBookingServiceTest {
     void setUp() {
 
         PlanePassengerDto passengerDto = generatePassengerDto("Ali", "Arabian", "425833154",
-                "00089795421113", "IR", ZonedDateTime.of(2022, 10, 14,
-                        0, 0, 0, 0,
-                        ZoneId.systemDefault()));
+                "00089795421113", "IR", LocalDate.of(2022, 10, 14));
         planeTicketBookingRequest = initializePlaneTicketBookingRequest(getPlaneBookingPassengerDetail(passengerDto));
     }
 
@@ -48,11 +45,11 @@ class PlaneTicketBookingServiceTest {
     @Test
     void shouldBookAllRequestTickets() {
         PlanePassengerDto passengerNumberOne = generatePassengerDto("Amir", "A", "87946621", "00254976321", "IR",
-                ZonedDateTime.of(2023, 12, 15, 0, 0, 0, 0, ZoneId.of("Asia/Tehran")));
+                LocalDate.of(2023, 12, 15));
         PlanePassengerDto passengerNumberTwo = generatePassengerDto("Amir", "A", "87946621", "00254976321", "IR",
-                ZonedDateTime.of(2023, 12, 15, 0, 0, 0, 0, ZoneId.of("Asia/Tehran")));
+                LocalDate.of(2023, 12, 15));
         PlanePassengerDto passengerNumberThree = generatePassengerDto("Amir", "A", "87946621", "00254976321", "IR",
-                ZonedDateTime.of(2023, 12, 15, 0, 0, 0, 0, ZoneId.of("Asia/Tehran")));
+                LocalDate.of(2023, 12, 15));
         PlaneTicketBookingRequest request = initializePlaneTicketBookingRequest(getPlaneBookingPassengerDetail(passengerNumberOne),
                 getPlaneBookingPassengerDetail(passengerNumberTwo), getPlaneBookingPassengerDetail(passengerNumberThree));
         Set<PlaneTicket> planeTickets = bookingService.bookTickets(request);
@@ -90,9 +87,9 @@ class PlaneTicketBookingServiceTest {
     @Test
     void shouldAddSeatingSectionPrivilegesOfRequestSeatingSection() {
         PlanePassengerDto passengerDto = generatePassengerDto("Ali", "Arabian", "425833154",
-                "00089795421113", "IR", ZonedDateTime.of(2022, 10, 14,
-                        0, 0, 0, 0,
-                        ZoneId.systemDefault()));
+                "00089795421113", "IR",
+                LocalDate.of(2023, 12, 15));
+        ;
         PlaneTicketBookingRequest request = initializePlaneTicketBookingRequest(getPlaneBookingPassengerDetail(passengerDto));
         Set<PlaneTicket> planeTickets = bookingService.bookTickets(request);
         long ignoredPrivileges = planeTickets.stream()
@@ -106,11 +103,11 @@ class PlaneTicketBookingServiceTest {
     @Test
     void testTransportationAvailableSeats() {
         PlanePassengerDto passengerNumberOne = generatePassengerDto("Amir", "A", "87946621", "00254976321", "IR",
-                ZonedDateTime.of(2023, 12, 15, 0, 0, 0, 0, ZoneId.of("Asia/Tehran")));
+                LocalDate.of(2023, 12, 15));
         PlanePassengerDto passengerNumberTwo = generatePassengerDto("Amir", "A", "87946621", "00254976321", "IR",
-                ZonedDateTime.of(2023, 12, 15, 0, 0, 0, 0, ZoneId.of("Asia/Tehran")));
+                LocalDate.of(2023, 12, 15));
         PlanePassengerDto passengerNumberThree = generatePassengerDto("Amir", "A", "87946621", "00254976321", "IR",
-                ZonedDateTime.of(2023, 12, 15, 0, 0, 0, 0, ZoneId.of("Asia/Tehran")));
+                LocalDate.of(2023, 12, 15));
         PlaneTicketBookingRequest request = initializePlaneTicketBookingRequest(getPlaneBookingPassengerDetail(passengerNumberOne),
                 getPlaneBookingPassengerDetail(passengerNumberTwo), getPlaneBookingPassengerDetail(passengerNumberThree));
         AirlineTransportation transportation = TransportationBookingSystemImMemoryDataSource.getAirlineTransportations().transportation(request.getTransportationId());
@@ -139,7 +136,7 @@ class PlaneTicketBookingServiceTest {
     }
 
     private PlanePassengerDto generatePassengerDto(String firstName, String lastName, String nationalId,
-            String passportNO, String passportIssuingCountryCode, ZonedDateTime passportExpirationDate) {
+                                                   String passportNO, String passportIssuingCountryCode, LocalDate passportExpirationDate) {
         PlanePassengerDto passengerDto = new PlanePassengerDto();
         passengerDto.setFirstName(firstName);
         passengerDto.setLastName(lastName);

@@ -1,20 +1,15 @@
 package persistence.data.storage.memory;
 
-import com.platform.business.enitity.*;
-import com.platform.business.enitity.model.*;
-import com.platform.business.model.*;
-import com.platform.domain.*;
-import com.platform.domain.model.*;
 import com.platform.enitity.*;
-import com.platform.model.*;
 
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.util.*;
 
 public class TransportationBookingSystemImMemoryDataSource implements Serializable {
@@ -115,21 +110,19 @@ public class TransportationBookingSystemImMemoryDataSource implements Serializab
 
         public AirlineTransportationDataSource() {
             transportations = new HashMap<>();
+            LocalDateTime localDateTime = LocalDateTime.of(2022, 6, 12, 5, 10, 0, 0);
+            ZoneId zoneId = ZoneId.of("Asia/Tehran");
             transportations.put(1001L, new AirlineTransportation(1001L,
                     getTerminals().terminal(400L),
                     getTerminals().terminal(402L),
-                    ZonedDateTime.of(2022, 6, 12,
-                            5, 10, 0, 0,
-                            ZoneId.of("Asia/Tehran"))
+                    OffsetDateTime.of(localDateTime, zoneId.getRules().getOffset(localDateTime))
                     , getPlanes().plane(600L))
             );
-
+            localDateTime = LocalDateTime.of(2022, 6, 27, 6, 45, 0, 0);
             transportations.put(1002L, new AirlineTransportation(1002L,
                     getTerminals().terminal(401L),
                     getTerminals().terminal(402L),
-                    ZonedDateTime.of(2022, 6, 27,
-                            6, 45, 0, 0,
-                            ZoneId.of("Asia/Tehran"))
+                    OffsetDateTime.of(localDateTime, zoneId.getRules().getOffset(localDateTime))
                     , getPlanes().plane(607L))
             );
         }

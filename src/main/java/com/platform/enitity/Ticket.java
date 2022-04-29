@@ -1,11 +1,11 @@
 package com.platform.enitity;
 
 import java.io.Serializable;
-import java.time.ZonedDateTime;
+import java.time.OffsetDateTime;
 
 public abstract class Ticket<T extends Transportation, U extends Passenger, S extends Seat> implements Serializable {
     private Long id;
-    private ZonedDateTime timestamp;
+    private OffsetDateTime timestamp;
     private T transportation;
     private U passenger;
     private S seat;
@@ -13,7 +13,7 @@ public abstract class Ticket<T extends Transportation, U extends Passenger, S ex
 
     public Ticket(Long id, T transportation, U passenger, S seat, Customer customer) {
         this.id = id;
-        this.timestamp = ZonedDateTime.now();
+        this.timestamp = OffsetDateTime.now();
         this.passenger = passenger;
         this.transportation = transportation;
         this.customer = customer;
@@ -24,7 +24,7 @@ public abstract class Ticket<T extends Transportation, U extends Passenger, S ex
         return id;
     }
 
-    public ZonedDateTime getTimestamp() {
+    public OffsetDateTime getTimestamp() {
         return timestamp;
     }
 

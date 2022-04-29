@@ -1,10 +1,11 @@
 package com.platform.enitity;
 
+import java.time.OffsetDateTime;
 import java.time.ZonedDateTime;
 
 public class AirlineTransportation extends Transportation<Plane, PlaneTicket> {
 
-    public AirlineTransportation(Long id, Terminal offset, Terminal destination, ZonedDateTime departuresAt, Plane plane) {
+    public AirlineTransportation(Long id, Terminal offset, Terminal destination, OffsetDateTime departuresAt, Plane plane) {
         super(id, offset, destination, departuresAt, plane);
     }
 

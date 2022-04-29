@@ -7,6 +7,7 @@ import com.platform.ui.cli.CommandHandler;
 import com.platform.ui.cli.CommandHandlerFactory;
 import persistence.data.storage.memory.TransportationBookingSystemImMemoryDataSource;
 
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Set;
 
@@ -43,7 +44,7 @@ public class TransportationTicketBookingApplication {
     }
 
     private static PlanePassengerDto generatePassengerDto(String firstName, String lastName, String nationalId,
-                                                          String passportNO, String passportIssuingCountryCode, ZonedDateTime passportExpirationDate) {
+                                                          String passportNO, String passportIssuingCountryCode, LocalDate passportExpirationDate) {
         PlanePassengerDto passengerDto = new PlanePassengerDto();
         passengerDto.setFirstName(firstName);
         passengerDto.setLastName(lastName);

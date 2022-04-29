@@ -1,6 +1,7 @@
 package com.platform.enitity;
 
 import java.io.Serializable;
+import java.time.OffsetDateTime;
 import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.Objects;
@@ -10,12 +11,12 @@ public abstract class Transportation<T extends TransportationVehicle<?>, U exten
     private final Long id;
     private final Terminal offset;
     private final Terminal destination;
-    private final ZonedDateTime departuresAt;
+    private final OffsetDateTime departuresAt;
     private final T vehicle;
     private final Set<U> bookedTickets;
     private final TransportationCompany<?, ?> transportationCompany;
 
-    protected Transportation(Long id, Terminal offset, Terminal destination, ZonedDateTime departuresAt, T vehicle) {
+    protected Transportation(Long id, Terminal offset, Terminal destination, OffsetDateTime departuresAt, T vehicle) {
         this.id = id;
         this.offset = offset;
         this.destination = destination;
@@ -41,7 +42,7 @@ public abstract class Transportation<T extends TransportationVehicle<?>, U exten
         return bookedTickets;
     }
 
-    public ZonedDateTime getDeparturesAt() {
+    public OffsetDateTime getDeparturesAt() {
         return departuresAt;
     }
 

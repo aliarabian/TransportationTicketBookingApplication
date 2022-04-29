@@ -1,22 +1,20 @@
 package com.platform.ui.cli;
 
 import com.platform.business.booking.BookingService;
+import com.platform.business.booking.PassengerMapperImpl;
 import com.platform.business.booking.PlaneTicketBookingService;
-import com.platform.repository.customer.InMemoryCustomerDao;
-import com.platform.repository.transportation.InMemoryAirlineTransportationDao;
 import com.platform.business.booking.dto.PlaneBookingPassengerDetail;
 import com.platform.business.booking.dto.PlanePassengerDto;
 import com.platform.business.booking.dto.PlaneTicketBookingRequest;
-import com.platform.business.booking.PassengerMapperImpl;
+import com.platform.business.search.transportations.AirlineTransportationsResource;
 import com.platform.enitity.AirlineTransportation;
 import com.platform.enitity.PlaneTicket;
 import com.platform.enitity.SeatingSection;
-import com.platform.business.search.transportations.AirlineTransportationsResource;
+import com.platform.repository.customer.InMemoryCustomerDao;
+import com.platform.repository.transportation.InMemoryAirlineTransportationDao;
 
 import java.io.PrintWriter;
-import java.time.Instant;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -84,11 +82,8 @@ public class BookingCommandHandler implements CommandHandler {
             out.print("Passport Country Code:('IR', 'TR', 'UK', 'US') ");
             passengerDto.setPassportIssuingCountryCode(scanner.next());
             out.print("Passport Expiration Date: ");
-            ZonedDateTime expirationDate = ZonedDateTime.of(scanner.nextInt(), scanner.nextInt(), scanner.nextInt(),
-                    0, 0, 0, 0, ZoneId.systemDefault());
-            passengerDto.setPassportExpirationDate(
-                    Instant.from(expirationDate).atZone(ZoneId.systemDefault())
-            );
+            LocalDate expirationDate = LocalDate.of(scanner.nextInt(), scanner.nextInt(), scanner.nextInt());
+            passengerDto.setPassportExpirationDate(expirationDate);
             PlaneBookingPassengerDetail bookingPassengerDetail = new PlaneBookingPassengerDetail();
             bookingPassengerDetail.setPassenger(passengerDto);
             Set<Long> selectedPrivileges = getPassengersDesiredPrivileges(scanner, section);
