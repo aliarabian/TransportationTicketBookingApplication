@@ -1,9 +1,8 @@
 package com.platform.business.service.booking;
 
+import com.platform.business.enitity.*;
 import com.platform.business.service.booking.dto.PlaneBookingPassengerDetail;
 import com.platform.business.service.booking.dto.PlaneTicketBookingRequest;
-import com.platform.business.enitity.*;
-import com.platform.enitity.*;
 import com.platform.repository.customer.CustomerDao;
 import com.platform.repository.transportation.AirlineTransportationDao;
 

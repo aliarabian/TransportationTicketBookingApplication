@@ -3,9 +3,9 @@ package com.platform;
 import com.platform.business.service.booking.dto.PlaneBookingPassengerDetail;
 import com.platform.business.service.booking.dto.PlanePassengerDto;
 import com.platform.business.service.booking.dto.PlaneTicketBookingRequest;
-import com.platform.ui.cli.CommandHandler;
-import com.platform.ui.cli.CommandHandlerFactory;
 import persistence.data.storage.memory.TransportationBookingSystemImMemoryDataSource;
+import ui.cli.CommandHandler;
+import ui.cli.CommandHandlerFactory;
 
 import java.time.LocalDate;
 import java.util.Set;

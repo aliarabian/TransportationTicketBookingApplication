@@ -1,7 +1,7 @@
 package com.platform.business.service.search.transportations;
 
-import com.platform.repository.transportation.AirlineTransportationDao;
 import com.platform.business.enitity.AirlineTransportation;
+import com.platform.repository.transportation.AirlineTransportationDao;
 
 public class AirlineTransportationSearchService implements TransportationSearchService<AirlineTransportation> {
     private AirlineTransportationDao transportationDao;

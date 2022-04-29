@@ -1,4 +1,4 @@
-package com.platform.ui.cli;
+package ui.cli;
 
 public interface CommandHandler {
     void handle();

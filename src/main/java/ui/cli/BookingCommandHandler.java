@@ -1,5 +1,8 @@
-package com.platform.ui.cli;
+package ui.cli;
 
+import com.platform.business.enitity.AirlineTransportation;
+import com.platform.business.enitity.PlaneTicket;
+import com.platform.business.enitity.SeatingSection;
 import com.platform.business.service.booking.BookingService;
 import com.platform.business.service.booking.PassengerMapperImpl;
 import com.platform.business.service.booking.PlaneTicketBookingService;
@@ -7,9 +10,6 @@ import com.platform.business.service.booking.dto.PlaneBookingPassengerDetail;
 import com.platform.business.service.booking.dto.PlanePassengerDto;
 import com.platform.business.service.booking.dto.PlaneTicketBookingRequest;
 import com.platform.business.service.search.transportations.AirlineTransportationsResource;
-import com.platform.business.enitity.AirlineTransportation;
-import com.platform.business.enitity.PlaneTicket;
-import com.platform.business.enitity.SeatingSection;
 import com.platform.repository.customer.InMemoryCustomerDao;
 import com.platform.repository.transportation.InMemoryAirlineTransportationDao;
 

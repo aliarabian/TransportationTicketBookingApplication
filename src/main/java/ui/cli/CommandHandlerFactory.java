@@ -1,4 +1,4 @@
-package com.platform.ui.cli;
+package ui.cli;
 
 import java.util.HashMap;
 import java.util.Map;
