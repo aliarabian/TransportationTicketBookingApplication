@@ -1,6 +1,6 @@
 package com.platform.repository.customer;
 
-import com.platform.enitity.Customer;
+import com.platform.business.enitity.Customer;
 import persistence.data.storage.memory.TransportationBookingSystemImMemoryDataSource;
 
 import java.util.Optional;

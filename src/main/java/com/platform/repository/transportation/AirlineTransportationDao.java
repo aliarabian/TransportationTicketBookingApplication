@@ -1,7 +1,7 @@
 package com.platform.repository.transportation;
 
-import com.platform.enitity.AirlineTransportation;
-import com.platform.enitity.PlaneTicket;
+import com.platform.business.enitity.AirlineTransportation;
+import com.platform.business.enitity.PlaneTicket;
 
 import java.util.Optional;
 

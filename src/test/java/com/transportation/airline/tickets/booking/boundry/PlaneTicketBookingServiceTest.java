@@ -1,14 +1,14 @@
 package com.transportation.airline.tickets.booking.boundry;
 
-import com.platform.business.booking.BookingService;
-import com.platform.business.booking.PassengerMapperImpl;
-import com.platform.business.booking.PlaneTicketBookingService;
-import com.platform.business.booking.dto.PlaneBookingPassengerDetail;
-import com.platform.business.booking.dto.PlanePassengerDto;
-import com.platform.business.booking.dto.PlaneTicketBookingRequest;
-import com.platform.enitity.AirlineTransportation;
-import com.platform.enitity.Customer;
-import com.platform.enitity.PlaneTicket;
+import com.platform.business.service.booking.BookingService;
+import com.platform.business.service.booking.PassengerMapperImpl;
+import com.platform.business.service.booking.PlaneTicketBookingService;
+import com.platform.business.service.booking.dto.PlaneBookingPassengerDetail;
+import com.platform.business.service.booking.dto.PlanePassengerDto;
+import com.platform.business.service.booking.dto.PlaneTicketBookingRequest;
+import com.platform.business.enitity.AirlineTransportation;
+import com.platform.business.enitity.Customer;
+import com.platform.business.enitity.PlaneTicket;
 import com.platform.repository.customer.InMemoryCustomerDao;
 import com.platform.repository.transportation.InMemoryAirlineTransportationDao;
 import org.junit.jupiter.api.BeforeEach;
