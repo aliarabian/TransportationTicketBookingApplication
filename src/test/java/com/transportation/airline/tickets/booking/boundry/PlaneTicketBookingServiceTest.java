@@ -1,17 +1,19 @@
 package com.transportation.airline.tickets.booking.boundry;
 
-import com.transportation.airline.tickets.booking.boundry.dao.CustomerDaoImpl;
-import com.transportation.airline.tickets.booking.boundry.dao.InMemoryAirlineTransportationDaoImpl;
-import com.transportation.airline.tickets.booking.boundry.dto.PlaneBookingPassengerDetail;
-import com.transportation.airline.tickets.booking.boundry.dto.PlanePassengerDto;
-import com.transportation.airline.tickets.booking.boundry.dto.PlaneTicketBookingRequest;
-import com.transportation.airline.tickets.booking.control.PassengerMapperImpl;
-import com.transportation.airline.tickets.booking.entity.AirlineTransportation;
-import com.transportation.airline.tickets.booking.entity.Customer;
-import com.transportation.airline.tickets.booking.entity.PlaneTicket;
+import com.platform.business.booking.BookingService;
+import com.platform.business.booking.PlaneTicketBookingService;
+import com.platform.repository.customer.InMemoryCustomerDao;
+import com.platform.repository.transportation.InMemoryAirlineTransportationDao;
+import com.platform.business.booking.dto.PlaneBookingPassengerDetail;
+import com.platform.business.booking.dto.PlanePassengerDto;
+import com.platform.business.booking.dto.PlaneTicketBookingRequest;
+import com.platform.business.booking.PassengerMapperImpl;
+import com.platform.enitity.AirlineTransportation;
+import com.platform.enitity.Customer;
+import com.platform.enitity.PlaneTicket;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import sample.data.TestDataSource;
+import persistence.data.storage.memory.TransportationBookingSystemImMemoryDataSource;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -21,8 +23,8 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.*;
 
 class PlaneTicketBookingServiceTest {
-    private final BookingService bookingService = new PlaneTicketBookingService(new InMemoryAirlineTransportationDaoImpl(),
-            new CustomerDaoImpl(),
+    private final BookingService bookingService = new PlaneTicketBookingService(new InMemoryAirlineTransportationDao(),
+            new InMemoryCustomerDao(),
             new PassengerMapperImpl());
 
     private PlaneTicketBookingRequest planeTicketBookingRequest;
@@ -73,7 +75,7 @@ class PlaneTicketBookingServiceTest {
     @Test
     void shouldAddBookedTicketToCustomersBookedTicketsSet() {
         Set<PlaneTicket> planeTickets = bookingService.bookTickets(planeTicketBookingRequest);
-        Customer customer = TestDataSource.customers.customer(planeTicketBookingRequest.getCustomerId());
+        Customer customer = TransportationBookingSystemImMemoryDataSource.getCustomers().customer(planeTicketBookingRequest.getCustomerId());
         assertTrue(customer.getBookedTickets().containsAll(planeTickets));
     }
 
@@ -81,7 +83,7 @@ class PlaneTicketBookingServiceTest {
     void shouldAddBookedTicketsToTransportationsBookedTicketsSet() {
 
         Set<PlaneTicket> planeTickets = bookingService.bookTickets(planeTicketBookingRequest);
-        AirlineTransportation transportation = TestDataSource.airlineTransportations.transportation(planeTicketBookingRequest.getTransportationId());
+        AirlineTransportation transportation = TransportationBookingSystemImMemoryDataSource.getAirlineTransportations().transportation(planeTicketBookingRequest.getTransportationId());
         assertTrue(transportation.getBookedTickets().containsAll(planeTickets));
     }
 
@@ -111,7 +113,7 @@ class PlaneTicketBookingServiceTest {
                 ZonedDateTime.of(2023, 12, 15, 0, 0, 0, 0, ZoneId.of("Asia/Tehran")));
         PlaneTicketBookingRequest request = initializePlaneTicketBookingRequest(getPlaneBookingPassengerDetail(passengerNumberOne),
                 getPlaneBookingPassengerDetail(passengerNumberTwo), getPlaneBookingPassengerDetail(passengerNumberThree));
-        AirlineTransportation transportation = TestDataSource.airlineTransportations.transportation(request.getTransportationId());
+        AirlineTransportation transportation = TransportationBookingSystemImMemoryDataSource.getAirlineTransportations().transportation(request.getTransportationId());
         int oldAvailableSeats = transportation.availableSeats();
         Set<PlaneTicket> planeTickets = bookingService.bookTickets(request);
         System.out.println(transportation.capacity());
