@@ -1,14 +1,8 @@
 package com.platform;
 
-import com.platform.business.service.booking.dto.PlaneBookingPassengerDetail;
-import com.platform.business.service.booking.dto.PlanePassengerDto;
-import com.platform.business.service.booking.dto.PlaneTicketBookingRequest;
 import persistence.data.storage.memory.TransportationBookingSystemImMemoryDataSource;
 import ui.cli.CommandHandler;
 import ui.cli.CommandHandlerFactory;
-
-import java.time.LocalDate;
-import java.util.Set;
 
 import static java.lang.System.*;
 
@@ -24,34 +18,6 @@ public class TransportationTicketBookingApplication {
 
         out.println(TransportationBookingSystemImMemoryDataSource.getTickets().count());
         TransportationBookingSystemImMemoryDataSource.save();
-    }
-
-    private static PlaneTicketBookingRequest initializePlaneTicketBookingRequest(PlaneBookingPassengerDetail... passengersDetails) {
-        PlaneTicketBookingRequest request = new PlaneTicketBookingRequest();
-        request.setCustomerId(924427L);
-        request.setTransportationId(1002L);
-        request.setSeatingSectionId(710L);
-        request.setPassengersBookingDetails(Set.of(passengersDetails));
-        return request;
-    }
-
-    private static PlaneBookingPassengerDetail getPlaneBookingPassengerDetail(PlanePassengerDto passengerDto) {
-        PlaneBookingPassengerDetail ticketBookingDetail = new PlaneBookingPassengerDetail();
-        ticketBookingDetail.setPassenger(passengerDto);
-        ticketBookingDetail.setSeatingSectionPrivilegeIds(Set.of(901L, 903234L));
-        return ticketBookingDetail;
-    }
-
-    private static PlanePassengerDto generatePassengerDto(String firstName, String lastName, String nationalId,
-                                                          String passportNO, String passportIssuingCountryCode, LocalDate passportExpirationDate) {
-        PlanePassengerDto passengerDto = new PlanePassengerDto();
-        passengerDto.setFirstName(firstName);
-        passengerDto.setLastName(lastName);
-        passengerDto.setNationalIdNO(nationalId);
-        passengerDto.setPassportNO(passportNO);
-        passengerDto.setPassportIssuingCountryCode(passportIssuingCountryCode);
-        passengerDto.setPassportExpirationDate(passportExpirationDate);
-        return passengerDto;
     }
 }
 
