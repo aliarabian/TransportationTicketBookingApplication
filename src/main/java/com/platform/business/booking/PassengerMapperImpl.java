@@ -5,6 +5,7 @@ import com.platform.enitity.Country;
 import com.platform.enitity.Passport;
 import com.platform.enitity.PlanePassenger;
 
+import java.time.LocalDate;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class PassengerMapperImpl implements PassengerMapper {
@@ -13,7 +14,7 @@ public class PassengerMapperImpl implements PassengerMapper {
         Country country = new Country(ThreadLocalRandom.current().nextLong(1, Long.MAX_VALUE), passengerDto.getPassportIssuingCountryCode(), passengerDto.getPassportIssuingCountryCode());
         Passport passport = new Passport(598L, passengerDto.getPassportNO(), passengerDto.getPassportExpirationDate(), country);
         PlanePassenger passenger = new PlanePassenger(478L, passengerDto.getFirstName(), passengerDto.getLastName()
-                , passengerDto.getNationalIdNO(), passport);
+                , passengerDto.getNationalIdNO(), passengerDto.getBirthdate(), passport);
         return passenger;
     }
 

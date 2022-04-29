@@ -1,14 +1,15 @@
 package com.platform.business.booking.dto;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDate;
 
 public class PlanePassengerDto {
     private String firstName;
     private String lastName;
     private String nationalIdNO;
-    private ZonedDateTime passportExpirationDate;
+    private LocalDate passportExpirationDate;
     private String passportIssuingCountryCode;
     private String passportNO;
+    private LocalDate birthdate;
 
     public String getFirstName() {
         return firstName;
@@ -34,11 +35,11 @@ public class PlanePassengerDto {
         this.nationalIdNO = nationalIdNO;
     }
 
-    public ZonedDateTime getPassportExpirationDate() {
+    public LocalDate getPassportExpirationDate() {
         return passportExpirationDate;
     }
 
-    public void setPassportExpirationDate(ZonedDateTime passportExpirationDate) {
+    public void setPassportExpirationDate(LocalDate passportExpirationDate) {
         this.passportExpirationDate = passportExpirationDate;
     }
 
@@ -58,4 +59,11 @@ public class PlanePassengerDto {
         this.passportNO = passportNO;
     }
 
+    public LocalDate getBirthdate() {
+        return birthdate;
+    }
+
+    public void setBirthdate(LocalDate birthdate) {
+        this.birthdate = birthdate;
+    }
 }

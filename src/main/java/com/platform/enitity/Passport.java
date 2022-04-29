@@ -1,16 +1,17 @@
 package com.platform.enitity;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 
 public class Passport implements Serializable {
     private Long id;
     // Natural ID
     private String passportNO;
-    private ZonedDateTime expiresAt;
+    private LocalDate expiresAt;
     private Country issuedIn;
 
-    public Passport(Long id, String passportNO, ZonedDateTime expiresAt, Country issuedIn) {
+    public Passport(Long id, String passportNO, LocalDate expiresAt, Country issuedIn) {
         this.id = id;
         this.passportNO = passportNO;
         this.expiresAt = expiresAt;
@@ -21,7 +22,7 @@ public class Passport implements Serializable {
         return passportNO;
     }
 
-    public ZonedDateTime getExpiresAt() {
+    public LocalDate getExpiresAt() {
         return expiresAt;
     }
 
