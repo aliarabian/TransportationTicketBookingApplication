@@ -1,8 +1,15 @@
 package com.platform.business.service.booking;
 
 import com.platform.business.enitity.*;
-import com.platform.business.service.booking.dto.PlaneBookingPassengerDetail;
-import com.platform.business.service.booking.dto.PlaneTicketBookingRequest;
+import com.platform.business.mapper.Mapper;
+import com.platform.business.service.booking.dto.request.PlaneBookingPassengerDetail;
+import com.platform.business.service.booking.dto.request.PlanePassengerDto;
+import com.platform.business.service.booking.dto.request.PlaneTicketBookingRequest;
+import com.platform.business.service.booking.dto.response.PlaneTicketDto;
+import com.platform.business.service.booking.exception.BadRequest;
+import com.platform.business.service.booking.exception.BookingException;
+import com.platform.business.service.booking.exception.CustomerNotFoundException;
+import com.platform.business.service.booking.exception.TransportationNotFoundException;
 import com.platform.repository.customer.CustomerDao;
 import com.platform.repository.transportation.AirlineTransportationDao;
 
@@ -15,43 +22,45 @@ import java.util.concurrent.ThreadLocalRandom;
 public class PlaneTicketBookingService implements BookingService {
     private final AirlineTransportationDao airlineTransportationDao;
     private final CustomerDao customerDao;
-    private final PassengerMapper passengerMapper;
+    private final Mapper<PlanePassenger, PlanePassengerDto> passengerMapper;
+    private final Mapper<PlaneTicket, PlaneTicketDto> ticketDtoMapper;
 
-    public PlaneTicketBookingService(AirlineTransportationDao airlineTransportationDao, CustomerDao customerDao, PassengerMapper passengerMapper) {
+    public PlaneTicketBookingService(AirlineTransportationDao airlineTransportationDao, CustomerDao customerDao, Mapper<PlanePassenger, PlanePassengerDto> passengerMapper, Mapper<PlaneTicket, PlaneTicketDto> ticketDtoMapper) {
         this.airlineTransportationDao = airlineTransportationDao;
         this.customerDao = customerDao;
         this.passengerMapper = passengerMapper;
+        this.ticketDtoMapper = ticketDtoMapper;
     }
 
     @Override
-    public Set<PlaneTicket> bookTickets(PlaneTicketBookingRequest req) {
+    public Set<PlaneTicketDto> bookTickets(PlaneTicketBookingRequest req) {
         Objects.requireNonNull(req);
         if (req.getPassengersBookingDetails().isEmpty()) {
-            throw new RuntimeException();
+            throw new BadRequest("No Passenger Info Provided");
         }
         AirlineTransportation airlineTransportation = airlineTransportationDao.findTransportationById(req.getTransportationId())
-                                                                              .orElseThrow();
+                                                                              .orElseThrow(TransportationNotFoundException::new);
         Customer customer = customerDao.findCustomerById(req.getCustomerId())
-                                       .orElseThrow(() -> new RuntimeException("Customer not found"));
+                                       .orElseThrow(CustomerNotFoundException::new);
 
         return bookTickets(req, airlineTransportation, customer);
     }
 
-    private Set<PlaneTicket> bookTickets(PlaneTicketBookingRequest req, AirlineTransportation airlineTransportation, Customer customer) {
-        Set<PlaneTicket> bookedTickets = new TreeSet<>(Comparator.comparing(p -> p.getPassenger().getNationalId()));
+    private Set<PlaneTicketDto> bookTickets(PlaneTicketBookingRequest req, AirlineTransportation airlineTransportation, Customer customer) {
+        Set<PlaneTicketDto> bookedTickets = new TreeSet<>(Comparator.comparing(PlaneTicketDto::getPassportNO));
         for (PlaneBookingPassengerDetail bookingDetail : req.getPassengersBookingDetails()) {
             PlaneSeat seat;
             try {
                 seat = airlineTransportation.bookSeat(req.getSeatingSectionId());
                 Set<SeatingSectionPrivilege> privileges = seat.getSection().retrievePrivilegesById(bookingDetail.getSeatingSectionPrivilegeIds());
                 PlaneTicket ticket = new PlaneTicket(ThreadLocalRandom.current().nextLong(),
-                        airlineTransportation, privileges, passengerMapper.mapToPlanePassenger(bookingDetail.getPassenger()),
+                        airlineTransportation, privileges, passengerMapper.fromDto(bookingDetail.getPassenger()),
                         seat, customer);
                 airlineTransportationDao.persist(ticket);
-                bookedTickets.add(ticket);
+                bookedTickets.add(ticketDtoMapper.toDto(ticket));
                 airlineTransportation.addNewBooking(ticket);
                 customer.addTicket(ticket);
-            } catch (Exception e) {
+            } catch (BookingException e) {
                 e.printStackTrace();
             }
         }

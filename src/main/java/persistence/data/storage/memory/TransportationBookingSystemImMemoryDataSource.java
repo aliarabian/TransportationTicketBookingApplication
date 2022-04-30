@@ -44,49 +44,6 @@ public class TransportationBookingSystemImMemoryDataSource implements Serializab
 
     }
 
-    public static CityDataSource getCities() {
-        return cities;
-    }
-
-    public static CountryDataSource getCountries() {
-        return countries;
-    }
-
-    public static AirlineTransportationCompanyDatasource getAirlineTransportationCompanies() {
-        return airlineTransportationCompanies;
-    }
-
-    public static PlaneDataSource getPlanes() {
-        return planes;
-    }
-
-    public static AirlineTransportationDataSource getAirlineTransportations() {
-        return airlineTransportations;
-    }
-
-    public static PlaneSeatDataSource getSeats() {
-        return seats;
-    }
-
-    public static SeatingSectionDataSource getSeatingSections() {
-        return seatingSections;
-    }
-
-    public static CustomerDataSource getCustomers() {
-        return customers;
-    }
-
-    public static SeatingSectionPrivilegeDataSource getSeatingSectionPrivileges() {
-        return seatingSectionPrivileges;
-    }
-
-    public static TerminalDataSource getTerminals() {
-        return terminals;
-    }
-
-    public static PlaneTicketDataSource getTickets() {
-        return tickets;
-    }
 
     private static class AirlineTransportationCompanyDatasource implements Serializable {
 
@@ -341,6 +298,50 @@ public class TransportationBookingSystemImMemoryDataSource implements Serializab
         public int count() {
             return tickets.size();
         }
+    }
+
+    public static CityDataSource getCities() {
+        return cities;
+    }
+
+    public static CountryDataSource getCountries() {
+        return countries;
+    }
+
+    public static AirlineTransportationCompanyDatasource getAirlineTransportationCompanies() {
+        return airlineTransportationCompanies;
+    }
+
+    public static PlaneDataSource getPlanes() {
+        return planes;
+    }
+
+    public static AirlineTransportationDataSource getAirlineTransportations() {
+        return airlineTransportations;
+    }
+
+    public static PlaneSeatDataSource getSeats() {
+        return seats;
+    }
+
+    public static SeatingSectionDataSource getSeatingSections() {
+        return seatingSections;
+    }
+
+    public static CustomerDataSource getCustomers() {
+        return customers;
+    }
+
+    public static SeatingSectionPrivilegeDataSource getSeatingSectionPrivileges() {
+        return seatingSectionPrivileges;
+    }
+
+    public static TerminalDataSource getTerminals() {
+        return terminals;
+    }
+
+    public static PlaneTicketDataSource getTickets() {
+        return tickets;
     }
 
     public static void save() {

@@ -1,5 +1,7 @@
 package com.platform.business.enitity;
 
+import com.platform.business.service.booking.exception.BookingException;
+
 import java.time.OffsetDateTime;
 
 public class AirlineTransportation extends Transportation<Plane, PlaneTicket> {
@@ -8,13 +10,14 @@ public class AirlineTransportation extends Transportation<Plane, PlaneTicket> {
         super(id, offset, destination, departuresAt, plane);
     }
 
-    public PlaneSeat bookSeat(Long sectionClassId) throws Exception {
+    public PlaneSeat bookSeat(Long sectionClassId) throws BookingException {
         for (SeatingSection section : getVehicle().getSeatingSections()) {
             if (section.getId().equals(sectionClassId)) {
-                return section.bookSeat().orElseThrow();
+                return section.bookSeat()
+                              .orElseThrow(BookingException::new);
             }
         }
-        throw new Exception();
+        throw new BookingException();
     }
 
 

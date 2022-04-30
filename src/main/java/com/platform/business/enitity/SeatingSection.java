@@ -15,8 +15,6 @@ public abstract class SeatingSection implements Serializable {
     private int capacity;
     private int availableSeats;
 
-    public SeatingSection() {
-    }
 
     public SeatingSection(Long id, int capacity, Plane plane) {
         if (capacity + plane.availableSeats() > plane.getCapacity()) {
