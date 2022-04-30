@@ -1,5 +1,6 @@
 package com.platform.business.enitity;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -8,8 +9,8 @@ public class Customer extends User {
     private String nationalId;
     private Set<PlaneTicket> bookedTickets;
 
-    public Customer(Long id, String username, String firstName, String lastName, String nationalId) {
-        super(id, username, firstName, lastName);
+    public Customer(Long id, String username, String password, String firstName, String lastName, String nationalId) {
+        super(id, username, password, firstName, lastName);
         Objects.requireNonNull(nationalId);
         if (nationalId.isBlank()) {
             throw new IllegalArgumentException();
@@ -48,6 +49,6 @@ public class Customer extends User {
     }
 
     public Set<PlaneTicket> getBookedTickets() {
-        return bookedTickets;
+        return Collections.unmodifiableSet(bookedTickets);
     }
 }

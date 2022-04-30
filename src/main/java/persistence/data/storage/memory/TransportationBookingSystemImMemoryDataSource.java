@@ -126,16 +126,16 @@ public class TransportationBookingSystemImMemoryDataSource implements Serializab
 
     public static class CustomerDataSource implements Serializable {
         private final Map<Long, Customer> customers = new HashMap<>(Map.of(
-                924427L, new Customer(924427L, "ali.arabian@gmail.com", "Ali", "Arabian", "4986350641"),
-                924429L, new Customer(924429L, "Faraanak.ghm@gmail.com", "Faraanak", "Gholaami", "44886450641"),
-                924430L, new Customer(924430L, "laleh.malekian@gmail.com", "Laleh", "Malekian", "00651298772"),
-                924431L, new Customer(924431L, "alihosseini@gmail.com", "Ali", "Hosseini", "98752136987"),
-                924432L, new Customer(924432L, "elhamkebriya@gmail.com", "Elham", "Kebriyayi", "45925300140"),
-                924433L, new Customer(924433L, "abbasi.nazli@gmail.com", "Nazli", "Abbasi", "01215480006"),
-                924434L, new Customer(924434L, "homi.k@gmail.com", "Homayoun", "kazemi", "23423220887"),
-                924435L, new Customer(924435L, "kaboli.m@gmail.com", "Mahdi", "Kaboli", "87799544552"),
-                924436L, new Customer(924436L, "pedramrazaghi@gmail.com", "Pedram", "Razzaghi", "73453112234"),
-                924437L, new Customer(924437L, "omid.n@gmail.com", "Omid", "Naaderi", "34235345233")
+                924427L, new Customer(924427L, "ali.arabian@gmail.com", "12345", "Ali", "Arabian", "4986350641"),
+                924429L, new Customer(924429L, "Faraanak.ghm@gmail.com", "12345", "Faraanak", "Gholaami", "44886450641"),
+                924430L, new Customer(924430L, "laleh.malekian@gmail.com", "12345", "Laleh", "Malekian", "00651298772"),
+                924431L, new Customer(924431L, "alihosseini@gmail.com", "12345", "Ali", "Hosseini", "98752136987"),
+                924432L, new Customer(924432L, "elhamkebriya@gmail.com", "12345", "Elham", "Kebriyayi", "45925300140"),
+                924433L, new Customer(924433L, "abbasi.nazli@gmail.com", "12345", "Nazli", "Abbasi", "01215480006"),
+                924434L, new Customer(924434L, "homi.k@gmail.com", "12345", "Homayoun", "kazemi", "23423220887"),
+                924435L, new Customer(924435L, "kaboli.m@gmail.com", "12345", "Mahdi", "Kaboli", "87799544552"),
+                924436L, new Customer(924436L, "pedramrazaghi@gmail.com", "12345", "Pedram", "Razzaghi", "73453112234"),
+                924437L, new Customer(924437L, "omid.n@gmail.com", "12345", "Omid", "Naaderi", "34235345233")
         ));
 
         public Customer customer(Long id) {
