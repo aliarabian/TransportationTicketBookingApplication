@@ -9,7 +9,7 @@ public class CommandHandlerFactory {
 
     static {
         commandHandlerMap = new HashMap<>();
-        commandHandlerMap.put("--book-ticket", new BookingCommandHandler());
+        commandHandlerMap.put("book-ticket", new BookingCommandHandler());
     }
 
     public static Optional<CommandHandler> commandHandler(String commandId) {
