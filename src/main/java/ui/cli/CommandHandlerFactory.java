@@ -10,6 +10,7 @@ public class CommandHandlerFactory {
     static {
         commandHandlerMap = new HashMap<>();
         commandHandlerMap.put("book-ticket", new BookingCommandHandler());
+        commandHandlerMap.put("login", new LoginCommandHandler());
     }
 
     public static Optional<CommandHandler> commandHandler(String commandId) {

@@ -4,15 +4,12 @@ import persistence.data.storage.memory.TransportationBookingSystemImMemoryDataSo
 import ui.cli.CommandHandler;
 import ui.cli.CommandHandlerFactory;
 
-import static java.lang.System.*;
+import static java.lang.System.err;
+import static java.lang.System.exit;
 
 public class TransportationTicketBookingApplication {
     public static void main(String[] args) {
-        if (args.length == 0) {
-            err.println("No Commands Provided!");
-            exit(-1);
-        }
-        CommandHandlerFactory.commandHandler(args[0])
+        CommandHandlerFactory.commandHandler("login")
                              .ifPresentOrElse(CommandHandler::handle, () -> err.println("Command Not Supported"));
 
         TransportationBookingSystemImMemoryDataSource.save();

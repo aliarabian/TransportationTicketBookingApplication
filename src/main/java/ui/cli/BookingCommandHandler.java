@@ -14,6 +14,7 @@ import com.platform.business.service.search.transportations.dto.AirlineTransport
 import com.platform.business.service.search.transportations.dto.SeatingSectionDto;
 import com.platform.repository.country.InMemoryCountryDao;
 import com.platform.repository.customer.InMemoryCustomerDao;
+import com.platform.repository.ticket.InMemoryPlaneTicketDao;
 import com.platform.repository.transportation.InMemoryAirlineTransportationDao;
 
 import java.time.LocalDate;
@@ -31,7 +32,7 @@ public class BookingCommandHandler implements CommandHandler {
     public BookingCommandHandler() {
         transportationsResource = new AirlineTransportationsResource();
         BookingService bookingService = new PlaneTicketBookingService(new InMemoryAirlineTransportationDao(),
-                new InMemoryCustomerDao(),
+                new InMemoryPlaneTicketDao(), new InMemoryCustomerDao(),
                 new PassengerMapper(new InMemoryCountryDao()),
                 new PlaneTicketMapper());
         bookingResource = new PlainTicketBookingResource(bookingService);
