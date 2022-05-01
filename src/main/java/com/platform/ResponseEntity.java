@@ -2,15 +2,15 @@ package com.platform;
 
 public class ResponseEntity<T> {
     private final T data;
-    private final boolean errorCode;
+    private final boolean error;
 
     public ResponseEntity(T data, boolean errorCode) {
         this.data = data;
-        this.errorCode = errorCode;
+        this.error = errorCode;
     }
 
-    public boolean isErrorCode() {
-        return errorCode;
+    public boolean isError() {
+        return error;
     }
 
     public T getData() {
