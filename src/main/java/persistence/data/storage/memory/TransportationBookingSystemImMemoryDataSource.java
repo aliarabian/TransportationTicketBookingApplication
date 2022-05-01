@@ -29,19 +29,23 @@ public class TransportationBookingSystemImMemoryDataSource implements Serializab
         if (Files.exists(Paths.get("app.data"))) {
             loadDate();
         } else {
-            countries = new CountryDataSource();
-            cities = new CityDataSource();
-            terminals = new TerminalDataSource();
-            airlineTransportationCompanies = new AirlineTransportationCompanyDatasource();
-            planes = new PlaneDataSource();
-            airlineTransportations = new AirlineTransportationDataSource();
-            seatingSections = new SeatingSectionDataSource();
-            seats = new PlaneSeatDataSource();
-            seatingSectionPrivileges = new SeatingSectionPrivilegeDataSource();
-            customers = new CustomerDataSource();
-            tickets = new PlaneTicketDataSource();
+            init();
         }
 
+    }
+
+    private static void init() {
+        countries = new CountryDataSource();
+        cities = new CityDataSource();
+        terminals = new TerminalDataSource();
+        airlineTransportationCompanies = new AirlineTransportationCompanyDatasource();
+        planes = new PlaneDataSource();
+        airlineTransportations = new AirlineTransportationDataSource();
+        seatingSections = new SeatingSectionDataSource();
+        seats = new PlaneSeatDataSource();
+        seatingSectionPrivileges = new SeatingSectionPrivilegeDataSource();
+        customers = new CustomerDataSource();
+        tickets = new PlaneTicketDataSource();
     }
 
 
@@ -150,6 +154,12 @@ public class TransportationBookingSystemImMemoryDataSource implements Serializab
             Objects.requireNonNull(customer);
             Objects.requireNonNull(customer.getId());
             customers.put(customer.getId(), customer);
+        }
+
+        public Optional<Customer> findCustomerByUsername(String username) {
+            return customers.values().stream()
+                            .filter(customer -> customer.getUsername().equals(username))
+                            .findFirst();
         }
     }
 
@@ -382,7 +392,7 @@ public class TransportationBookingSystemImMemoryDataSource implements Serializab
             airlineTransportations = (AirlineTransportationDataSource) ois.readObject();
             tickets = (PlaneTicketDataSource) ois.readObject();
         } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
+            init();
         }
     }
 }
