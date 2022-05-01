@@ -1,5 +1,9 @@
 package com.platform.business.service.search.transportations;
 
+import com.platform.ErrorResponse;
+import com.platform.ResponseEntity;
+import com.platform.business.exception.AirlineTransportationSearchService;
+import com.platform.business.exception.ApplicationException;
 import com.platform.business.mapper.AirlineTransportationMapper;
 import com.platform.business.mapper.SeatingSectionMapper;
 import com.platform.business.service.search.transportations.dto.AirlineTransportationDto;
@@ -14,7 +18,11 @@ public class AirlineTransportationsResource {
                 new AirlineTransportationMapper(new SeatingSectionMapper()));
     }
 
-    public AirlineTransportationDto getTransportationById(long transportationId) {
-        return transportationSearchService.findTransportationById(transportationId);
+    public ResponseEntity<?> getTransportationById(long transportationId) {
+        try {
+            return new ResponseEntity<>(transportationSearchService.findTransportationById(transportationId), false);
+        } catch (ApplicationException applicationException) {
+            return new ResponseEntity<>(new ErrorResponse(applicationException.getMessage(), applicationException.errorCode()), true);
+        }
     }
 }
