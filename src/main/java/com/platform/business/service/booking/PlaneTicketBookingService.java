@@ -6,10 +6,10 @@ import com.platform.business.service.booking.dto.request.PlaneBookingPassengerDe
 import com.platform.business.service.booking.dto.request.PlanePassengerDto;
 import com.platform.business.service.booking.dto.request.PlaneTicketBookingRequest;
 import com.platform.business.service.booking.dto.response.PlaneTicketDto;
-import com.platform.business.service.booking.exception.BadRequest;
+import com.platform.business.exception.BadRequestException;
 import com.platform.business.service.booking.exception.BookingException;
-import com.platform.business.service.booking.exception.CustomerNotFoundException;
-import com.platform.business.service.booking.exception.TransportationNotFoundException;
+import com.platform.business.exception.CustomerNotFoundException;
+import com.platform.business.exception.TransportationNotFoundException;
 import com.platform.repository.customer.CustomerDao;
 import com.platform.repository.transportation.AirlineTransportationDao;
 
@@ -36,12 +36,12 @@ public class PlaneTicketBookingService implements BookingService {
     public Set<PlaneTicketDto> bookTickets(PlaneTicketBookingRequest req) {
         Objects.requireNonNull(req);
         if (req.getPassengersBookingDetails().isEmpty()) {
-            throw new BadRequest("No Passenger Info Provided");
+            throw new BadRequestException("No Passenger Info Provided");
         }
         AirlineTransportation airlineTransportation = airlineTransportationDao.findTransportationById(req.getTransportationId())
-                                                                              .orElseThrow(TransportationNotFoundException::new);
+                                                                              .orElseThrow(() -> new TransportationNotFoundException("Wrong Transportation Number"));
         Customer customer = customerDao.findCustomerById(req.getCustomerId())
-                                       .orElseThrow(CustomerNotFoundException::new);
+                                       .orElseThrow(() -> new CustomerNotFoundException("Customer Doesn't Exists"));
 
         return bookTickets(req, airlineTransportation, customer);
     }

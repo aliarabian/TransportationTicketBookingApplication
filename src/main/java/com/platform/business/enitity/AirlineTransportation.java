@@ -1,6 +1,8 @@
 package com.platform.business.enitity;
 
 import com.platform.business.service.booking.exception.BookingException;
+import com.platform.business.service.booking.exception.SeatNotAvailableException;
+import com.platform.business.service.booking.exception.SectionNotExistsException;
 
 import java.time.OffsetDateTime;
 
@@ -14,10 +16,10 @@ public class AirlineTransportation extends Transportation<Plane, PlaneTicket> {
         for (SeatingSection section : getVehicle().getSeatingSections()) {
             if (section.getId().equals(sectionClassId)) {
                 return section.bookSeat()
-                              .orElseThrow(BookingException::new);
+                              .orElseThrow(() -> new SeatNotAvailableException("Seat Not Available"));
             }
         }
-        throw new BookingException();
+        throw new SectionNotExistsException("Wrong Section Number");
     }
 
 
