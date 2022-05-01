@@ -1,5 +1,6 @@
 package ui.cli;
 
+import com.platform.ResponseEntity;
 import com.platform.business.mapper.PassengerMapper;
 import com.platform.business.mapper.PlaneTicketMapper;
 import com.platform.business.service.booking.BookingService;
@@ -8,7 +9,6 @@ import com.platform.business.service.booking.PlaneTicketBookingService;
 import com.platform.business.service.booking.dto.request.PlaneBookingPassengerDetail;
 import com.platform.business.service.booking.dto.request.PlanePassengerDto;
 import com.platform.business.service.booking.dto.request.PlaneTicketBookingRequest;
-import com.platform.business.service.booking.dto.response.PlaneTicketDto;
 import com.platform.business.service.search.transportations.AirlineTransportationsResource;
 import com.platform.business.service.search.transportations.dto.AirlineTransportationDto;
 import com.platform.business.service.search.transportations.dto.SeatingSectionDto;
@@ -43,14 +43,18 @@ public class BookingCommandHandler implements CommandHandler {
             out.print("Transportation ID: ");
             try {
                 long transportationId = scanner.nextLong();
-                AirlineTransportationDto transportation = transportationsResource.getTransportationById(transportationId);
+                ResponseEntity<?> response = transportationsResource.getTransportationById(transportationId);
+                if (response.isError()) {
+                    err.println("Wrong Transportation Number");
+                }
+                AirlineTransportationDto transportation = (AirlineTransportationDto) response.getData();
                 printFlightDetails(transportation);
                 out.println();
                 out.print("Enter Section ID: ");
                 long sectionId = scanner.nextLong();
 
                 Optional<SeatingSectionDto> sectionDto = getSection(transportation, sectionId);
-                if (!sectionDto.isPresent()) {
+                if (sectionDto.isEmpty()) {
                     err.println("Wrong Section Id");
                     return;
                 }
@@ -64,8 +68,11 @@ public class BookingCommandHandler implements CommandHandler {
                 request.setTransportationId(transportationId);
                 request.setSeatingSectionId(sectionId);
                 request.setPassengersBookingDetails(passengerDetails);
-                Set<PlaneTicketDto> planeTickets = bookingResource.bookTickets(request);
-                out.println(planeTickets);
+                ResponseEntity<?> bookingResponse = bookingResource.bookTickets(request);
+                if (bookingResponse.isError()) {
+                    err.println(bookingResponse.getData().toString());
+                }
+                out.println(bookingResponse.getData());
             } catch (InputMismatchException inputMismatchException) {
                 err.println("Invalid Input Type");
             }
