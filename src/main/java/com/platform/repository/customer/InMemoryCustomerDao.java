@@ -16,4 +16,10 @@ public class InMemoryCustomerDao implements CustomerDao {
         return Optional.ofNullable(TransportationBookingSystemImMemoryDataSource.getCustomers().customer(id));
 
     }
+
+    @Override
+    public Optional<Customer> findCustomerByUsername(String username) {
+        return TransportationBookingSystemImMemoryDataSource.getCustomers()
+                                                            .findCustomerByUsername(username);
+    }
 }

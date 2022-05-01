@@ -6,4 +6,6 @@ import java.util.Optional;
 
 public interface CustomerDao {
     Optional<Customer> findCustomerById(Long id);
+
+    Optional<Customer> findCustomerByUsername(String username);
 }
