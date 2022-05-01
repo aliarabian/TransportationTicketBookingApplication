@@ -1,16 +1,17 @@
 package com.platform.business.service.booking;
 
 import com.platform.business.enitity.*;
+import com.platform.business.exception.BadRequestException;
+import com.platform.business.exception.CustomerNotFoundException;
+import com.platform.business.exception.TransportationNotFoundException;
 import com.platform.business.mapper.Mapper;
 import com.platform.business.service.booking.dto.request.PlaneBookingPassengerDetail;
 import com.platform.business.service.booking.dto.request.PlanePassengerDto;
 import com.platform.business.service.booking.dto.request.PlaneTicketBookingRequest;
 import com.platform.business.service.booking.dto.response.PlaneTicketDto;
-import com.platform.business.exception.BadRequestException;
 import com.platform.business.service.booking.exception.BookingException;
-import com.platform.business.exception.CustomerNotFoundException;
-import com.platform.business.exception.TransportationNotFoundException;
 import com.platform.repository.customer.CustomerDao;
+import com.platform.repository.ticket.PlaneTicketDao;
 import com.platform.repository.transportation.AirlineTransportationDao;
 
 import java.util.Comparator;
@@ -21,12 +22,14 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class PlaneTicketBookingService implements BookingService {
     private final AirlineTransportationDao airlineTransportationDao;
+    private final PlaneTicketDao ticketDao;
     private final CustomerDao customerDao;
     private final Mapper<PlanePassenger, PlanePassengerDto> passengerMapper;
     private final Mapper<PlaneTicket, PlaneTicketDto> ticketDtoMapper;
 
-    public PlaneTicketBookingService(AirlineTransportationDao airlineTransportationDao, CustomerDao customerDao, Mapper<PlanePassenger, PlanePassengerDto> passengerMapper, Mapper<PlaneTicket, PlaneTicketDto> ticketDtoMapper) {
+    public PlaneTicketBookingService(AirlineTransportationDao airlineTransportationDao, PlaneTicketDao ticketDao, CustomerDao customerDao, Mapper<PlanePassenger, PlanePassengerDto> passengerMapper, Mapper<PlaneTicket, PlaneTicketDto> ticketDtoMapper) {
         this.airlineTransportationDao = airlineTransportationDao;
+        this.ticketDao = ticketDao;
         this.customerDao = customerDao;
         this.passengerMapper = passengerMapper;
         this.ticketDtoMapper = ticketDtoMapper;
@@ -56,7 +59,7 @@ public class PlaneTicketBookingService implements BookingService {
                 PlaneTicket ticket = new PlaneTicket(ThreadLocalRandom.current().nextLong(),
                         airlineTransportation, privileges, passengerMapper.fromDto(bookingDetail.getPassenger()),
                         seat, customer);
-                airlineTransportationDao.persist(ticket);
+                ticketDao.persist(ticket);
                 bookedTickets.add(ticketDtoMapper.toDto(ticket));
                 airlineTransportation.addNewBooking(ticket);
                 customer.addTicket(ticket);

@@ -3,14 +3,13 @@ package com.platform.business.service.booking;
 import com.platform.business.enitity.*;
 import com.platform.business.mapper.PassengerMapper;
 import com.platform.business.mapper.PlaneTicketMapper;
-import com.platform.business.service.booking.BookingService;
-import com.platform.business.service.booking.PlaneTicketBookingService;
 import com.platform.business.service.booking.dto.request.PlaneBookingPassengerDetail;
 import com.platform.business.service.booking.dto.request.PlanePassengerDto;
 import com.platform.business.service.booking.dto.request.PlaneTicketBookingRequest;
 import com.platform.business.service.booking.dto.response.PlaneTicketDto;
 import com.platform.repository.country.InMemoryCountryDao;
 import com.platform.repository.customer.InMemoryCustomerDao;
+import com.platform.repository.ticket.InMemoryPlaneTicketDao;
 import com.platform.repository.transportation.InMemoryAirlineTransportationDao;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -30,7 +29,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class PlaneTicketBookingServiceTest {
     private final BookingService bookingService = new PlaneTicketBookingService(
             new InMemoryAirlineTransportationDao(),
-            new InMemoryCustomerDao(),
+            new InMemoryPlaneTicketDao(), new InMemoryCustomerDao(),
             new PassengerMapper(new InMemoryCountryDao()), new PlaneTicketMapper());
 
     private PlaneTicketBookingRequest planeTicketBookingRequest;
