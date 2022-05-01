@@ -16,8 +16,4 @@ public class InMemoryAirlineTransportationDao implements AirlineTransportationDa
         return Optional.ofNullable(TransportationBookingSystemImMemoryDataSource.getAirlineTransportations().transportation(id));
     }
 
-    @Override
-    public void persist(PlaneTicket ticket) {
-        TransportationBookingSystemImMemoryDataSource.getTickets().addTicket(ticket);
-    }
 }
