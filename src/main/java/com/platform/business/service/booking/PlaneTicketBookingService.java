@@ -55,10 +55,7 @@ public class PlaneTicketBookingService implements BookingService {
             PlaneSeat seat;
             try {
                 seat = airlineTransportation.bookSeat(req.getSeatingSectionId());
-                Set<SeatingSectionPrivilege> privileges = seat.getSection().retrievePrivilegesById(bookingDetail.getSeatingSectionPrivilegeIds());
-                PlaneTicket ticket = new PlaneTicket(ThreadLocalRandom.current().nextLong(),
-                        airlineTransportation, privileges, passengerMapper.fromDto(bookingDetail.getPassenger()),
-                        seat, customer);
+                PlaneTicket ticket = createPlaneTicket(airlineTransportation, customer, bookingDetail, seat);
                 ticketDao.persist(ticket);
                 bookedTickets.add(ticketDtoMapper.toDto(ticket));
                 airlineTransportation.addNewBooking(ticket);
@@ -68,6 +65,13 @@ public class PlaneTicketBookingService implements BookingService {
             }
         }
         return bookedTickets;
+    }
+
+    private PlaneTicket createPlaneTicket(AirlineTransportation airlineTransportation, Customer customer, PlaneBookingPassengerDetail bookingDetail, PlaneSeat seat) {
+        Set<SeatingSectionPrivilege> privileges = seat.getSection().retrievePrivilegesById(bookingDetail.getSeatingSectionPrivilegeIds());
+        return new PlaneTicket(ThreadLocalRandom.current().nextLong(),
+                airlineTransportation, privileges, passengerMapper.fromDto(bookingDetail.getPassenger()),
+                seat, customer);
     }
 
 }
