@@ -3,3 +3,5 @@
 *.data
 .idea/sonarlint/*
 *.bat
+/src/main/webapp/WEB-INF/lib/
+
