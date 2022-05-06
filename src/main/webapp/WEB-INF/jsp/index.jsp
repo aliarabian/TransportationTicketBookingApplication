@@ -8,7 +8,7 @@
 <body>
 <main>
     <section>
-        <c:if  test="${searchError}">
+        <c:if  test="${searchError != null}">
             <div style="color: red">
                 <p>${searchError}</p>
             </div>

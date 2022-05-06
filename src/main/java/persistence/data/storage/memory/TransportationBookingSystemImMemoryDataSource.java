@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class TransportationBookingSystemImMemoryDataSource implements Serializable {
     private static CityDataSource cities;
@@ -90,6 +91,16 @@ public class TransportationBookingSystemImMemoryDataSource implements Serializab
 
         public AirlineTransportation transportation(Long id) {
             return transportations.get(id);
+        }
+
+        public Set<AirlineTransportation> findTransportationsByDate(OffsetDateTime dateTime) {
+            return transportations.values().stream()
+                                  .filter(transportation -> transportation.getDeparturesAt().equals(dateTime))
+                                  .collect(Collectors.toSet());
+        }
+
+        public Set<AirlineTransportation> findAllTransportations() {
+            return Set.copyOf(transportations.values());
         }
     }
 

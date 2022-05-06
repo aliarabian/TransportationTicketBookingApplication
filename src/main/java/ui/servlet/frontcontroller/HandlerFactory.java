@@ -1,5 +1,9 @@
 package ui.servlet.frontcontroller;
 
+import ui.servlet.HomePageHandler;
+import ui.servlet.search.transportations.SearchAirlineTransportationsHandler;
+import ui.servlet.transportations.TransportationDetailsHandler;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.InvocationTargetException;
@@ -20,6 +24,9 @@ public final class HandlerFactory {
     static {
         HANDLER_MAPPINGS = new HashMap<>();
         HANDLER_MAPPINGS.put(UNKNOWN_HANDLER_REQUEST_MAPPING, UnknownHandler.class);
+        addRoute("GET", "/app", HomePageHandler.class);
+        addRoute("GET", "/app/search/transportations", SearchAirlineTransportationsHandler.class);
+        addRoute("GET", "/app/transportations/{transportationId}", TransportationDetailsHandler.class);
     }
 
     private HandlerFactory() {

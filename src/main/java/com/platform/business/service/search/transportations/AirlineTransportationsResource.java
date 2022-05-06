@@ -2,12 +2,12 @@ package com.platform.business.service.search.transportations;
 
 import com.platform.ErrorResponse;
 import com.platform.ResponseEntity;
-import com.platform.business.exception.AirlineTransportationSearchService;
 import com.platform.business.exception.ApplicationException;
 import com.platform.business.mapper.AirlineTransportationMapper;
 import com.platform.business.mapper.SeatingSectionMapper;
-import com.platform.business.service.search.transportations.dto.AirlineTransportationDto;
 import com.platform.repository.transportation.InMemoryAirlineTransportationDao;
+
+import java.time.OffsetDateTime;
 
 public class AirlineTransportationsResource {
 
@@ -24,5 +24,17 @@ public class AirlineTransportationsResource {
         } catch (ApplicationException applicationException) {
             return new ResponseEntity<>(new ErrorResponse(applicationException.getMessage(), applicationException.errorCode()), true);
         }
+    }
+
+    public ResponseEntity<?> getTransportationsByDate(OffsetDateTime dateTime) {
+        return new ResponseEntity<>(transportationSearchService.findTransportation(dateTime), false);
+    }
+
+    public ResponseEntity<?> getAllTransportations() {
+        return new ResponseEntity<>(transportationSearchService.findAllTransportations(), false);
+    }
+
+    public ResponseEntity<?> findTransportations(String from, String to, OffsetDateTime dateTime) {
+        return new ResponseEntity<>(transportationSearchService.findTransportations(from, to, dateTime), false);
     }
 }

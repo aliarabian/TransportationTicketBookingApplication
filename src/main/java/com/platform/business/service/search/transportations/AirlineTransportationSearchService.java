@@ -1,6 +1,7 @@
-package com.platform.business.exception;
+package com.platform.business.service.search.transportations;
 
 import com.platform.business.enitity.AirlineTransportation;
+import com.platform.business.exception.TransportationNotFoundException;
 import com.platform.business.mapper.AirlineTransportationMapper;
 import com.platform.business.service.search.transportations.TransportationSearchService;
 import com.platform.business.service.search.transportations.dto.AirlineTransportationDto;
