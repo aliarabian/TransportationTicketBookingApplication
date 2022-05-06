@@ -24,9 +24,15 @@ public class AirlineTransportationMapper implements Mapper<AirlineTransportation
         Set<SeatingSectionDto> seatingSectionDtos = entity.getVehicle().getSeatingSections().stream()
                                                           .map(seatingSection -> sectionMapper.toDto(seatingSection))
                                                           .collect(Collectors.toSet());
-        return new AirlineTransportationDto(entity.getId(), entity.getVehicle().getModelName(), entity.getOffset().getName(), entity.getDestination().getName(),
+        return new AirlineTransportationDto(entity.getId(), entity.getVehicle().getModelName(),
+                getAirportAndCityNames(entity.getOffset().getName(), entity.getOffset().getCity().getName()),
+                getAirportAndCityNames(entity.getDestination().getName(), entity.getDestination().getCity().getName()),
                 entity.getDeparturesAt().toZonedDateTime(),
                 entity.availableSeats(),
                 seatingSectionDtos);
+    }
+
+    private String getAirportAndCityNames(String airport, String city) {
+        return airport + "/" + city;
     }
 }
