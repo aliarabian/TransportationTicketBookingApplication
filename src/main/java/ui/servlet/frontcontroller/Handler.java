@@ -1,7 +1,9 @@
 package ui.servlet.frontcontroller;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,13 +12,13 @@ public abstract class Handler {
     protected final HttpServletResponse httpResponse;
     protected final RequestMapping requestMapping;
 
-    protected Handler(HttpServletRequest httpRequest, HttpServletResponse httpResponse, RequestMapping requestMapping) {
+    public Handler(HttpServletRequest httpRequest, HttpServletResponse httpResponse, RequestMapping requestMapping) {
         this.httpRequest = httpRequest;
         this.httpResponse = httpResponse;
         this.requestMapping = requestMapping;
     }
 
-    public abstract String process();
+    public abstract String process() throws ServletException, IOException;
 
     protected final Map<String, String> extractPathVariables() {
 
