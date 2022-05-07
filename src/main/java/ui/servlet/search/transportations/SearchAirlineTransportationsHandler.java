@@ -46,7 +46,7 @@ public class SearchAirlineTransportationsHandler extends Handler {
             LocalDateTime localDateTime = LocalDateTime.parse(dateTime, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
             OffsetDateTime departureDateTime = OffsetDateTime.of(localDateTime, ZoneId.of("Asia/Tehran").getRules().getOffset(localDateTime));
             return Optional.of(departureDateTime);
-        } catch (DateTimeParseException parseException) {
+        } catch (DateTimeParseException | NullPointerException parseException) {
             return Optional.empty();
         }
 
