@@ -1,9 +1,6 @@
 <%@ page pageEncoding="UTF-8" contentType="text/html; charset=utf-8" import="java.util.Set" %>
-<%@ page import="java.time.ZonedDateTime" %>
 <%@ page import="com.platform.business.service.search.transportations.dto.AirlineTransportationDto" %>
 <%@ page import="java.time.format.DateTimeFormatter" %>
-<%@ page import="java.time.format.TextStyle" %>
-<%@ page import="java.util.Locale" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>

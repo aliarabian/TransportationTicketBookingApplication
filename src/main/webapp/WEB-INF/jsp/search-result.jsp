@@ -1,5 +1,4 @@
 <%@ page pageEncoding="UTF-8" contentType="text/html; charset=utf-8" import="java.util.Set" %>
-<%@ page import="com.platform.business.service.search.transportations.dto.AirlineTransportationDto" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,7 +35,7 @@
             <tr>
                 <td>${flight.id}</td>
                 <td>${flight.departuresAt}</td>
-                <td><a href="/app/transportations/${flight.id}">View</a></td>
+                <td><a href="${pageContext.request.contextPath}/resources/transportations/${flight.id}">View</a></td>
             </tr>
         </c:forEach>
     </table>
