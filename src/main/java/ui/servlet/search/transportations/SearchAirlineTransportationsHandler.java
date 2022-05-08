@@ -31,7 +31,7 @@ public class SearchAirlineTransportationsHandler extends Handler {
         ResponseEntity<?> transportations;
         if (dateTime.isEmpty() || from == null || to == null) {
             httpRequest.setAttribute("searchError", "Invalid Search Parameter");
-            return "index";
+            return "forward:/resources/home";
         } else {
             transportations = transportationsResource.findTransportations(from, to, dateTime.get());
         }
