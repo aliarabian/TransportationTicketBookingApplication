@@ -16,12 +16,12 @@ public class CustomerAuthenticationService implements AuthenticationService {
     }
 
     @Override
-    public AuthToken authenticate(AuthenticationRequest request) throws AuthenticationFailedException {
+    public AuthenticationResponse authenticate(AuthenticationRequest request) throws AuthenticationFailedException {
         Objects.requireNonNull(request);
         Customer customer = customerDao.findCustomerByUsername(request.getUsername())
                                        .orElseThrow(() -> new AuthenticationFailedException("Wrong Credentials"));
         if (passwordMatches(request.getPassword(), customer.getPassword())) {
-            return new AuthToken(UUID.randomUUID().toString().replaceAll("-", ""));
+            return new AuthenticationResponse(UUID.randomUUID().toString().replaceAll("-", ""), customer.getUsername(), customer.getId());
         }
 
         throw new AuthenticationFailedException("Wrong Credentials");
