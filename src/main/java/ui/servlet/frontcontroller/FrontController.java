@@ -21,8 +21,16 @@ public class FrontController extends HttpServlet {
     }
 
     private void dispatch(HttpServletRequest req, HttpServletResponse resp, String page) throws ServletException, IOException {
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher(ViewResolver.resolve(page));
-        requestDispatcher.forward(req, resp);
+        if (page.startsWith("forward:")) {
+            page = page.replace("forward:", "");
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher(page);
+            requestDispatcher.forward(req, resp);
+        } else if (page.startsWith("redirect:")) {
+            resp.sendRedirect(req.getContextPath() + page.replace("redirect:", ""));
+        } else {
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher(ViewResolver.resolve(page));
+            requestDispatcher.forward(req, resp);
+        }
     }
 }
 

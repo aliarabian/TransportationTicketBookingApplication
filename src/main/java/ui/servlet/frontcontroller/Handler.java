@@ -24,7 +24,7 @@ public abstract class Handler {
 
         Map<String, String> pathVariablesMap = new HashMap<>();
 
-        String[] uriParts = httpRequest.getRequestURI().split("/");
+        String[] uriParts = httpRequest.getRequestURI().replace(httpRequest.getContextPath(), "").split("/");
         String[] templateParts = requestMapping.getUri().split("/");
 
         for (int i = 0; i < uriParts.length; i++) {
