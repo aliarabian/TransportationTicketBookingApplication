@@ -28,6 +28,7 @@ public final class HandlerFactory {
         HANDLER_MAPPINGS.put(UNKNOWN_HANDLER_REQUEST_MAPPING, UnknownHandler.class);
         addRoute("GET", "/resources/home", HomePageHandler.class);
         addRoute("GET", "/login", LoginPageViewHandler.class);
+        addRoute("GET", "/", LoginPageViewHandler.class);
         addRoute("POST", "/login", LoginHandler.class);
         addRoute("GET", "/resources/search/transportations", SearchAirlineTransportationsHandler.class);
         addRoute("GET", "/resources/transportations/{transportationId}", TransportationDetailsHandler.class);
