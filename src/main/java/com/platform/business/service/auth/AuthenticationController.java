@@ -4,10 +4,10 @@ import com.platform.ErrorResponse;
 import com.platform.ResponseEntity;
 import com.platform.business.exception.ApplicationException;
 
-public class LoginController {
+public class AuthenticationController {
     private final AuthenticationService authenticationService;
 
-    public LoginController(AuthenticationService authenticationService) {
+    public AuthenticationController(AuthenticationService authenticationService) {
         this.authenticationService = authenticationService;
     }
 
