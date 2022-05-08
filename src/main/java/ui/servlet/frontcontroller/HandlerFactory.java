@@ -1,6 +1,8 @@
 package ui.servlet.frontcontroller;
 
 import ui.servlet.HomePageHandler;
+import ui.servlet.auth.LoginHandler;
+import ui.servlet.auth.LoginPageViewHandler;
 import ui.servlet.search.transportations.SearchAirlineTransportationsHandler;
 import ui.servlet.transportations.TransportationDetailsHandler;
 
@@ -24,9 +26,11 @@ public final class HandlerFactory {
     static {
         HANDLER_MAPPINGS = new HashMap<>();
         HANDLER_MAPPINGS.put(UNKNOWN_HANDLER_REQUEST_MAPPING, UnknownHandler.class);
-        addRoute("GET", "/app", HomePageHandler.class);
-        addRoute("GET", "/app/search/transportations", SearchAirlineTransportationsHandler.class);
-        addRoute("GET", "/app/transportations/{transportationId}", TransportationDetailsHandler.class);
+        addRoute("GET", "/resources/home", HomePageHandler.class);
+        addRoute("GET", "/login", LoginPageViewHandler.class);
+        addRoute("POST", "/login", LoginHandler.class);
+        addRoute("GET", "/resources/search/transportations", SearchAirlineTransportationsHandler.class);
+        addRoute("GET", "/resources/transportations/{transportationId}", TransportationDetailsHandler.class);
     }
 
     private HandlerFactory() {
@@ -35,7 +39,10 @@ public final class HandlerFactory {
     public static Handler createHandler(HttpServletRequest request, HttpServletResponse response) {
         Handler handler;
         try {
-            RequestMapping requestMapping = getMatchingRequestMapping(request.getMethod(), request.getRequestURI()).get();
+            request.getServletContext().log(request.getContextPath());
+            request.getServletContext().log(request.getRequestURI());
+            request.getServletContext().log(request.getPathInfo());
+            RequestMapping requestMapping = getMatchingRequestMapping(request.getMethod(), request.getRequestURI().replace(request.getContextPath(), "")).get();
             handler = HANDLER_MAPPINGS.get(requestMapping)
                                       .getDeclaredConstructor(
                                               HttpServletRequest.class,

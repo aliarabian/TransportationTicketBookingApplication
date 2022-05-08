@@ -31,7 +31,7 @@ public class SearchAirlineTransportationsHandler extends Handler {
         ResponseEntity<?> transportations;
         if (dateTime.isEmpty() || from == null || to == null) {
             httpRequest.setAttribute("searchError", "Invalid Search Parameter");
-            return "index";
+            return "forward:/resources/home";
         } else {
             transportations = transportationsResource.findTransportations(from, to, dateTime.get());
         }
@@ -46,7 +46,7 @@ public class SearchAirlineTransportationsHandler extends Handler {
             LocalDateTime localDateTime = LocalDateTime.parse(dateTime, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
             OffsetDateTime departureDateTime = OffsetDateTime.of(localDateTime, ZoneId.of("Asia/Tehran").getRules().getOffset(localDateTime));
             return Optional.of(departureDateTime);
-        } catch (DateTimeParseException parseException) {
+        } catch (DateTimeParseException | NullPointerException parseException) {
             return Optional.empty();
         }
 

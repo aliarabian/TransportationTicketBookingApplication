@@ -24,7 +24,7 @@ class AuthenticationServiceTest {
         @DisplayName("should return auth token")
         void authenticate() {
             AuthenticationRequest request = new AuthenticationRequest("ali.arabian@gmail.com", "12345");
-            AuthToken token = authenticationService.authenticate(request);
+            AuthenticationResponse token = authenticationService.authenticate(request);
             Assertions.assertEquals(32, token.getToken().length());
         }
     }
