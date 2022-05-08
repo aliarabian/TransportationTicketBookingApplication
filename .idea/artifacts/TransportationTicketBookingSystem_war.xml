@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="TransportationTicketBookingSystem:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>TransportationTicketBookingSystem</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="TransportationBookingSystem-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="TransportationTicketBookingSystem:war exploded" />
+    </root>
+  </artifact>
+</component>
