@@ -17,7 +17,7 @@ import java.io.IOException;
 
 public class LoginHandler extends Handler {
     private AuthenticationController authenticationController;
-
+    private static final int SESSION_TIMEOUT =  60 * 30;
     public LoginHandler(HttpServletRequest httpRequest, HttpServletResponse httpResponse, RequestMapping requestMapping) {
         super(httpRequest, httpResponse, requestMapping);
         this.authenticationController = new AuthenticationController(new CustomerAuthenticationService(new InMemoryCustomerDao()));
@@ -32,9 +32,11 @@ public class LoginHandler extends Handler {
         ResponseEntity<?> authResponse = authenticationController.login(authenticationRequest);
         if (!authResponse.isError()) {
             HttpSession session = httpRequest.getSession();
+            httpRequest.changeSessionId();
             session.setAttribute("auth-token", ((AuthenticationResponse) authResponse.getData()).getToken());
             session.setAttribute("userId", ((AuthenticationResponse) authResponse.getData()).getId());
             session.setAttribute("username", ((AuthenticationResponse) authResponse.getData()).getUsername());
+            session.setMaxInactiveInterval(SESSION_TIMEOUT);
             return "redirect:/resources/home";
         }
         httpRequest.getSession().invalidate();
