@@ -1,0 +1,27 @@
+@media screen and (min-width: 992px) {
+    #flights-container {
+        flex-direction: row;
+        margin: 0 2%;
+    }
+
+    .flight-card {
+        width: 45%;
+        margin-top: 1%;
+        font-size: 0.8rem;
+        margin-right: auto;
+    }
+
+    .flight-card-body {
+        flex-direction: row;
+    }
+
+    .flight-card-header {
+        justify-content: space-around;
+    }
+
+    .flight-card-footer {
+        letter-spacing: 0;
+        font-size: medium;
+        font-weight: normal;
+    }
+}
