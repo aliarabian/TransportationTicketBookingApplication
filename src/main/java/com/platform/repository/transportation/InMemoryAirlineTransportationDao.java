@@ -42,8 +42,8 @@ public class InMemoryAirlineTransportationDao implements AirlineTransportationDa
     }
 
     private boolean isMatch(String from, String to, OffsetDateTime dateTime, AirlineTransportation airlineTransportation) {
-        return airlineTransportation.getOffset().getName().equals(from) &&
-                airlineTransportation.getDestination().getName().equals(to) &&
+        return airlineTransportation.getOffset().getCity().getName().equals(from) &&
+                airlineTransportation.getDestination().getCity().getName().equals(to) &&
                 airlineTransportation.getDeparturesAt().equals(dateTime);
     }
 
