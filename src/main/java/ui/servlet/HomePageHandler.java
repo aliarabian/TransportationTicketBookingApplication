@@ -15,6 +15,6 @@ public class HomePageHandler extends Handler {
 
     @Override
     public String process() throws ServletException, IOException {
-        return "index";
+        return "home";
     }
 }

@@ -42,7 +42,7 @@ public class SearchAirlineTransportationsHandler extends Handler {
             System.out.println(((Set<AirlineTransportationDto>) transportations.getData()).size());
             httpRequest.setAttribute("flights", transportations.getData());
         }
-        return "index";
+        return "home";
     }
 
     private Optional<OffsetDateTime> parseDateTime(String dateTime) {
