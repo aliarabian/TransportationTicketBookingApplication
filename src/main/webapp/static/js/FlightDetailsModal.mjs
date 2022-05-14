@@ -20,6 +20,7 @@ var FlightDetailsModal = {
           <p>${offset} to ${destination}</p>
           <p>Plane: ${planeModel}</p>
           <p>Available Seats: ${availableSeats}</p>
+          <h5>Privileges:</h5>
           <ul class="section-privileges">
             ${createPrivilegesHtmlListItems(privileges)}
           </ul>
@@ -68,7 +69,7 @@ function createPrivilegesHtmlListItems(privileges) {
     parsedPrivileges.privileges.forEach((privilege) => {
         privilegesListItems += `<li data-privilege-id="${privilege.id}">${privilege.description}</li>`;
     });
-    return privilegesListItems;
+    return privilegesListItems.trim().length > 0 ? privilegesListItems.trim() : "Nothing.";
 }
 
 function capitalize(str) {

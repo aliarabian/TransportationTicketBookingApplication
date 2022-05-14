@@ -15,11 +15,11 @@ public class PlainTicketBookingResource {
         this.bookingService = bookingService;
     }
 
-    public ResponseEntity<?> bookTickets(PlaneTicketBookingRequest request) {
+    public ResponseEntity<Set<PlaneTicketDto>> bookTickets(PlaneTicketBookingRequest request) {
         try {
-            return new ResponseEntity<Set<PlaneTicketDto>>(bookingService.bookTickets(request), false);
+            return new ResponseEntity<>(bookingService.bookTickets(request), false);
         } catch (ApplicationException ex) {
-            return new ResponseEntity<ErrorResponse>(new ErrorResponse(ex.getMessage(), ex.errorCode()), true);
+            return new ResponseEntity<>(new ErrorResponse(ex.getMessage(), ex.errorCode()));
         }
 
     }
