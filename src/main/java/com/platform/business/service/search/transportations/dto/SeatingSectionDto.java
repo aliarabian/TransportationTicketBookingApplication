@@ -30,6 +30,16 @@ public class SeatingSectionDto {
         return availableSeats;
     }
 
+    @Override
+    public String toString() {
+        return "SeatingSectionDto{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", availableSeats=" + availableSeats +
+                ", privileges=" + privileges +
+                '}';
+    }
+
     public String getTitle() {
         return title;
     }
