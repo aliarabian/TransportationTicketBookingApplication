@@ -26,7 +26,10 @@ public class InMemoryAirlineTransportationDao implements AirlineTransportationDa
 
     @Override
     public Set<AirlineTransportation> findAllTransportations() {
-        return TransportationBookingSystemImMemoryDataSource.getAirlineTransportations().findAllTransportations();
+        return TransportationBookingSystemImMemoryDataSource.getAirlineTransportations()
+                                                            .findAllTransportations().stream()
+                                                            .filter(airlineTransportation -> airlineTransportation.getDeparturesAt().compareTo(OffsetDateTime.now(airlineTransportation.getDeparturesAt().getOffset())) >= 0)
+                                                            .collect(Collectors.toSet());
     }
 
     @Override
