@@ -235,7 +235,7 @@ public class TransportationBookingSystemImMemoryDataSource implements Serializab
             seatingSections.put(708L, new EconomyClassSeatingSection(708L, 639, getPlanes().plane(606L)));
             seatingSections.put(709L, new EconomyClassSeatingSection(709L, 260, getPlanes().plane(607L)));
             seatingSections.put(710L, new FirstClassSeatingSection(710L, 130, getPlanes().plane(607L)));
-            seatingSections.put(714L, new FirstClassSeatingSection(714L, 30, getPlanes().plane(607L)));
+            seatingSections.put(714L, new BusinessClassSeatingSection(714L, 30, getPlanes().plane(607L)));
             seatingSections.put(711L, new EconomyClassSeatingSection(711L, 300, getPlanes().plane(608L)));
             seatingSections.put(712L, new FirstClassSeatingSection(712L, 200, getPlanes().plane(608L)));
             seatingSections.put(713L, new BusinessClassSeatingSection(713L, 45, getPlanes().plane(608L)));
