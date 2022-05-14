@@ -23,8 +23,8 @@ var SelectComponents = (function () {
       // show cities list when clicked on select component
       this.componentElement.addEventListener("click", () => {
         if (
-          this.citiesList.style.display == "" ||
-          this.citiesList.style.display == "none"
+          this.citiesList.style.display === "" ||
+          this.citiesList.style.display === "none"
         ) {
           hiddenBackground.style.display = "block";
           this.citiesList.style.display = "block";

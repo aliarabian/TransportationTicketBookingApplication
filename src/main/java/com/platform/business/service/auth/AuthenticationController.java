@@ -11,11 +11,11 @@ public class AuthenticationController {
         this.authenticationService = authenticationService;
     }
 
-    public ResponseEntity<?> login(AuthenticationRequest request) {
+    public ResponseEntity<AuthenticationResponse> login(AuthenticationRequest request) {
         try {
             return new ResponseEntity<>(authenticationService.authenticate(request), false);
         } catch (ApplicationException exception) {
-            return new ResponseEntity<>(new ErrorResponse(exception.getMessage(), exception.errorCode()), true);
+            return new ResponseEntity<>(new ErrorResponse(exception.getMessage(), exception.errorCode()) );
         }
     }
 
