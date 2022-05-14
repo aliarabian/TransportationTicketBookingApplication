@@ -5,9 +5,7 @@ var fetchService = (function () {
 
   return {
     fetch: function fetchCities() {
-      return new Promise((resolve, reject) => {
-        resolve(citites);
-      });
+      return Promise.resolve(citites);
     },
   };
 })();

@@ -1,14 +1,13 @@
 @media screen and (min-width: 992px) {
     #flights-container {
         flex-direction: row;
-        margin: 0 2%;
+        justify-content: space-between;
     }
 
     .flight-card {
-        width: 45%;
+        width: 48%;
         margin-top: 1%;
         font-size: 0.8rem;
-        margin-right: auto;
     }
 
     .flight-card-body {
@@ -23,5 +22,19 @@
         letter-spacing: 0;
         font-size: medium;
         font-weight: normal;
+    }
+
+    #filter-component {
+        display: block;
+        padding: 0 1% 1%;
+    }
+
+    #filter-component > label {
+        margin-left: 1%;
+    }
+
+    #filter-component h3 {
+        margin-top: 1rem;
+        line-height: 1.2;
     }
 }

@@ -6,13 +6,13 @@ var SelectComponents = (function () {
     citiesList: null,
     input: null,
     init(componentElement) {
-      console.log(componentElement);
       this.componentElement = componentElement;
       this.citiesList = this.componentElement.querySelector(".cities");
       this.input = this.componentElement.querySelector("input");
       this.bindUIActions();
     },
     bindUIActions() {
+      let hiddenBackground = document.getElementById("hidden-background");
       //  Set list item value to input value
       this.citiesList.addEventListener("click", function (evt) {
         if (evt.target.tagName.toLowerCase() === "li") {
@@ -22,13 +22,20 @@ var SelectComponents = (function () {
 
       // show cities list when clicked on select component
       this.componentElement.addEventListener("click", () => {
-        console.log(this.citiesList);
-        console.log(this.citiesList.style);
-        this.citiesList.style.display =
+        if (
           this.citiesList.style.display == "" ||
           this.citiesList.style.display == "none"
-            ? "block"
-            : "none";
+        ) {
+          hiddenBackground.style.display = "block";
+          this.citiesList.style.display = "block";
+        } else {
+          hiddenBackground.style.display = "none";
+          this.citiesList.style.display = "none";
+        }
+        hiddenBackground.addEventListener("click", () => {
+          this.citiesList.style.display = "none";
+          hiddenBackground.style = "none";
+        });
       });
     },
     renderCitiesList(citiesData) {
@@ -54,16 +61,6 @@ var SelectComponents = (function () {
         selectComponents.forEach((component) =>
           component.renderCitiesList(respone)
         );
-      });
-      document.addEventListener("click", (evt) => {
-        selectComponents.forEach((component) => {
-          if (
-            evt.target != component.input &&
-            component.citiesList.style.display == "block"
-          ) {
-            component.citiesList.style.display = "none";
-          }
-        });
       });
     },
   };
