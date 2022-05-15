@@ -1,4 +1,4 @@
-import fetchService from "./service/CityFetchService.mjs";
+import fetchService from "./service/CityFetchService.js";
 export { SelectComponents as default };
 var SelectComponents = (function () {
   var SelectComponent = {

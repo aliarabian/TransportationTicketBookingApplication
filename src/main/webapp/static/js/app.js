@@ -1,6 +1,6 @@
 "use strict";
-import SelectComponents from "./SelectComponent.mjs";
-import FilterableFlightsList from "./FlightsListComponent.mjs"
+import SelectComponents from "./SelectComponent.js";
+import FilterableFlightsList from "./FlightsListComponent.js"
 (function () {
   SelectComponents.init();
   FilterableFlightsList.init();

@@ -1,4 +1,4 @@
-import FlightDetailsModal from "./FlightDetailsModal.mjs";
+import FlightDetailsModal from "./FlightDetailsModal.js";
 
 var FlightsList = {
     flights: document.querySelectorAll(".flight-card"),
