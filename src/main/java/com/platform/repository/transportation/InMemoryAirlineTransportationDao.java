@@ -26,7 +26,10 @@ public class InMemoryAirlineTransportationDao implements AirlineTransportationDa
 
     @Override
     public Set<AirlineTransportation> findAllTransportations() {
-        return TransportationBookingSystemImMemoryDataSource.getAirlineTransportations().findAllTransportations();
+        return TransportationBookingSystemImMemoryDataSource.getAirlineTransportations()
+                                                            .findAllTransportations().stream()
+                                                            .filter(airlineTransportation -> airlineTransportation.getDeparturesAt().compareTo(OffsetDateTime.now(airlineTransportation.getDeparturesAt().getOffset())) >= 0)
+                                                            .collect(Collectors.toSet());
     }
 
     @Override
@@ -42,8 +45,8 @@ public class InMemoryAirlineTransportationDao implements AirlineTransportationDa
     }
 
     private boolean isMatch(String from, String to, OffsetDateTime dateTime, AirlineTransportation airlineTransportation) {
-        return airlineTransportation.getOffset().getName().equals(from) &&
-                airlineTransportation.getDestination().getName().equals(to) &&
+        return airlineTransportation.getOffset().getCity().getName().equals(from) &&
+                airlineTransportation.getDestination().getCity().getName().equals(to) &&
                 airlineTransportation.getDeparturesAt().equals(dateTime);
     }
 

@@ -1,0 +1,282 @@
+:root {
+    --padding-left-right-default: 2%;
+    /* --primary-color: rgb(82, 84, 187); */
+    /* --primary-color: rgb(30, 76, 163); */
+    --primary-color: #3c6d9e;
+
+    --headline-font: Georgia;
+}
+
+* {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+body {
+    position: relative;
+    background: whitesmoke;
+}
+
+#hidden-background {
+    display: none;
+    position: fixed;
+    padding: 0;
+    margin: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    background-color: var(--primary-color);
+    /*color: rgb(226, 219, 128);*/
+    padding: 0.2rem var(--padding-left-right-default);
+    color: #e0dfdc;
+    /* background: #556677; */
+    letter-spacing: 0.1em;
+    text-shadow: 0 -1px 0 #fff, 0 1px 0 #2e2e2e, 0 2px 0 #2c2c2c, 0 3px 0 #2a2a2a,
+    0 4px 0 #282828, 0 5px 0 #262626, 0 6px 0 #242424, 0 7px 0 #222,
+    0 8px 0 #202020, 0 9px 0 #1e1e1e, 0 10px 0 #1c1c1c, 0 11px 0 #1a1a1a,
+    0 12px 0 #181818, 0 13px 0 #161616, 0 14px 0 #141414, 0 15px 0 #121212,
+    0 22px 30px rgba(0, 0, 0, 0.9);
+}
+
+header h1 {
+    font-family: Georgia, sans-serif;
+}
+
+header img {
+    width: 30%;
+    height: 100%;
+    border-radius: 3%;
+}
+
+main {
+    font-family: Verdana, sans-serif;
+}
+
+/** Search Component  Begin **/
+
+#flight-search-form {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem var(--padding-left-right-default);
+}
+
+.flight-search-form-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-bottom: 1.5rem;
+}
+
+.flight-search-form-section input {
+    width: 45%;
+    padding: 0.1rem 5%;
+    line-height: 1.5;
+}
+
+.flight-search-form-section button {
+    width: 45%;
+    background-color: var(--primary-color);
+    /* color: rgb(248, 237, 76); */
+    border: none;
+    color: #fffcf5f3;
+    font-size: 1.1rem;
+    font-weight: bold;
+    letter-spacing: 0.04rem;
+    padding: 0.1rem 5%;
+}
+
+.select-component {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 45%;
+}
+
+.select-component input {
+    padding: 0.1rem 5%;
+    width: 100%;
+}
+
+.select-component ul {
+    display: none;
+    position: absolute;
+    top: 2rem;
+    z-index: 1;
+    background-color: whitesmoke;
+    width: 100%;
+    list-style: none;
+    border: 1px solid rgb(184, 184, 184);
+    padding: 0.5rem var(--padding-left-right-default);
+    line-height: 1.6;
+    margin-top: 0;
+    margin-bottom: 0;
+    overflow: scroll;
+}
+
+.select-component ul li {
+    padding: 0 5%;
+}
+
+.select-component ul li:nth-child(2n + 1) {
+    background-color: rgb(167, 167, 167);
+    color: rgb(61, 61, 61);
+}
+
+.flight-search-form-section input[type="datetime-local"] {
+    padding: 0.1rem var(--padding-left-right-default);
+}
+
+/** Search Component  End **/
+
+/** Available Flights List **/
+
+#filterable-flight-list {
+    display: flex;
+    flex-direction: column;
+    margin: 0 2%;
+    padding: 1% 2%;
+}
+
+#flights-container {
+    display: flex;
+    flex-flow: column wrap;
+}
+
+.flight-card {
+    display: flex;
+    flex-direction: column;
+    border-radius: 2%;
+    padding: 1% var(--padding-left-right-default);
+    -webkit-box-shadow: 1px 1px 17px -9px rgba(66, 68, 90, 1);
+    -moz-box-shadow: 1px 1px 17px -9px rgba(66, 68, 90, 1);
+    box-shadow: 1px 1px 17px -9px rgba(66, 68, 90, 1);
+    background-color: rgb(57, 102, 160);
+    color: #cfcfcf;
+    margin-top: 1%;
+}
+
+.flight-card hr {
+    width: 100%;
+}
+
+.flight-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: var(--headline-font);
+}
+
+.flight-card-header a {
+    text-decoration: none;
+    letter-spacing: 0.1rem;
+    font-family: fantasy, sans-serif;
+    color: #cfcfcf;
+}
+
+.flight-card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: bold;
+    color: antiquewhite;
+}
+
+.flight-card-body .flight-route {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    line-height: 1;
+}
+
+.flight-card-footer {
+    display: flex;
+    letter-spacing: 0.1rem;
+    font-weight: bold;
+    font-family: Georgia, sans-serif;
+    color: #cfcfcf;
+}
+
+.flight-card-footer p {
+    font-size: large;
+    text-decoration: underline;
+}
+
+.flight-card-footer p:hover {
+    color: rgb(255, 255, 255);
+    cursor: grabbing;
+}
+
+.flight-direction-icon {
+    transform: rotate(180deg);
+}
+
+#filter-component {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 1px 1px 15px 0px rgba(130, 122, 122, 0.7);
+    -webkit-box-shadow: 1px 1px 15px 0px rgba(130, 122, 122, 0.7);
+    -moz-box-shadow: 1px 1px 15px 0px rgba(130, 122, 122, 0.7);
+    padding: 3% var(--padding-left-right-default);
+    background-color: rgba(58, 86, 122, 0.977);
+    color: rgb(255, 255, 255);
+    border-radius: 2%;
+    align-items: baseline;
+}
+
+#filter-component h3 {
+    margin-top: 0;
+}
+
+#flight-details-modal {
+    padding: 1rem var(--padding-left-right-default);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #2e2e2e3d;
+    width: 100vw;
+    height: 100vh;
+}
+
+#flight-details-modal-content {
+    display: flex;
+    width: 80%;
+    flex-direction: column;
+    -webkit-box-shadow: 1px 1px 17px -9px rgba(66, 68, 90, 1);
+    -moz-box-shadow: 1px 1px 17px -9px rgba(66, 68, 90, 1);
+    box-shadow: 1px 1px 17px -9px rgba(66, 68, 90, 1);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 var(--padding-left-right-default);
+    background-color: var(--primary-color);
+    color: #e0dfdc;
+    font-weight: bold;
+    font-family: Verdana, sans-serif;
+}
+
+.modal-body {
+    padding: 0 var(--padding-left-right-default);
+    background-color: whitesmoke;
+}
+
+.deactive {
+    display: none;
+}

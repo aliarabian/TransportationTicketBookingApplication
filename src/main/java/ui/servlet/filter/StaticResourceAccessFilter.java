@@ -1,6 +1,7 @@
 package ui.servlet.filter;
 
-import javax.servlet.*;
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpFilter;
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +17,6 @@ public class StaticResourceAccessFilter extends HttpFilter {
             getServletContext().getNamedDispatcher("default").forward(req, res);
             return;
         }
-        chain.doFilter(req,res);
+        chain.doFilter(req, res);
     }
 }

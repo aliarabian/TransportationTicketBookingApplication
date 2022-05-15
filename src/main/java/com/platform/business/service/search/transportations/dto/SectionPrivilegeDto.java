@@ -14,6 +14,14 @@ public class SectionPrivilegeDto {
         return id;
     }
 
+    @Override
+    public String toString() {
+        return "SectionPrivilegeDto{" +
+                "id=" + id +
+                ", description='" + description + '\'' +
+                '}';
+    }
+
     public String getDescription() {
         return description;
     }

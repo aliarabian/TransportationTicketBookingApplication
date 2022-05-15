@@ -1,0 +1,40 @@
+@media screen and (min-width: 992px) {
+    #flights-container {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .flight-card {
+        width: 48%;
+        margin-top: 1%;
+        font-size: 0.8rem;
+    }
+
+    .flight-card-body {
+        flex-direction: row;
+    }
+
+    .flight-card-header {
+        justify-content: space-around;
+    }
+
+    .flight-card-footer {
+        letter-spacing: 0;
+        font-size: medium;
+        font-weight: normal;
+    }
+
+    #filter-component {
+        display: block;
+        padding: 0 1% 1%;
+    }
+
+    #filter-component > label {
+        margin-left: 1%;
+    }
+
+    #filter-component h3 {
+        margin-top: 1rem;
+        line-height: 1.2;
+    }
+}
