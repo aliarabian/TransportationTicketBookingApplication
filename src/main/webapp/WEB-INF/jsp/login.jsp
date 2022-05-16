@@ -12,6 +12,7 @@
     <section id="login-form-container">
         <h2>Login</h2>
         <form id="login-form" method="post" action="${pageContext.request.contextPath}/login">
+            <input name="_csrfToken" value="${sessionScope._csrfToken}" type="hidden">
             <input id="username" type="text" name="username" placeholder="Email" required>
             <input id="password" type="password" name="password" placeholder="Password" required>
             <div>

@@ -39,7 +39,6 @@ public class SearchAirlineTransportationsHandler extends Handler {
             System.out.println(transportations.getData().toString());
         }
         if (!transportations.isError()) {
-            System.out.println(((Set<AirlineTransportationDto>) transportations.getData()).size());
             httpRequest.setAttribute("flights", transportations.getData());
         }
         return "home";
