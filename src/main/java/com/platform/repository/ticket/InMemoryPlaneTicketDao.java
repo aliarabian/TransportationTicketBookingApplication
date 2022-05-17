@@ -1,6 +1,6 @@
 package com.platform.repository.ticket;
 
-import com.platform.business.enitity.PlaneTicket;
+import com.platform.model.PlaneTicket;
 import org.springframework.stereotype.Repository;
 import persistence.data.storage.memory.TransportationBookingSystemImMemoryDataSource;
 

@@ -1,6 +1,6 @@
 package com.platform.repository.ticket;
 
-import com.platform.business.enitity.PlaneTicket;
+import com.platform.model.PlaneTicket;
 
 public interface PlaneTicketDao {
 

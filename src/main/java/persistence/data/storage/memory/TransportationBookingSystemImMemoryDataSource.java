@@ -1,6 +1,6 @@
 package persistence.data.storage.memory;
 
-import com.platform.business.enitity.*;
+import com.platform.model.*;
 
 import java.io.*;
 import java.nio.file.Files;

@@ -1,6 +1,10 @@
 package com.platform.business.service.auth;
 
-import com.platform.business.service.auth.exception.AuthenticationFailedException;
+import com.platform.business.auth.AuthenticationRequest;
+import com.platform.business.auth.AuthenticationResponse;
+import com.platform.business.auth.AuthenticationService;
+import com.platform.business.auth.CustomerAuthenticationService;
+import com.platform.business.auth.exception.AuthenticationFailedException;
 import com.platform.repository.customer.InMemoryCustomerDao;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

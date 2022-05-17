@@ -1,6 +1,6 @@
 package com.platform.repository.country;
 
-import com.platform.business.enitity.Country;
+import com.platform.model.Country;
 
 import java.util.Optional;
 
