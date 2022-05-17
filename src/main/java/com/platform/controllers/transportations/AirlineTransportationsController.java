@@ -26,7 +26,7 @@ public class AirlineTransportationsController {
     @GetMapping
     public ApiResponseEntity<Set<AirlineTransportationDto>> findTransportations(@RequestParam(name = "offset", required = false) String offset,
             @RequestParam(name = "destination", required = false) String destination,
-            @RequestParam(name = "departureTime", required = false) @DateTimeFormat(pattern = "yyyy") OffsetDateTime departureTime) {
+            @RequestParam(name = "departureTime", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) OffsetDateTime departureTime) {
         if (offset == null && destination == null && departureTime == null) {
             return new ApiResponseEntity<>(transportationSearchService.findAllTransportations());
         }
