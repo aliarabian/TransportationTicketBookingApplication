@@ -7,6 +7,8 @@ import com.platform.business.search.transportations.TransportationSearchService;
 import com.platform.business.search.transportations.dto.AirlineTransportationDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.OffsetDateTime;
@@ -24,21 +26,28 @@ public class AirlineTransportationsController {
     }
 
     @GetMapping
-    public ApiResponseEntity<Set<AirlineTransportationDto>> findTransportations(@RequestParam(name = "offset", required = false) String offset,
-            @RequestParam(name = "destination", required = false) String destination,
-            @RequestParam(name = "departureTime", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) OffsetDateTime departureTime) {
+    public ResponseEntity<ApiResponseEntity<Set<AirlineTransportationDto>>> findTransportations(@RequestParam(name = "offset", required = false) String offset,
+                                                                                                @RequestParam(name = "destination", required = false) String destination,
+                                                                                                @RequestParam(name = "departureTime", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) OffsetDateTime departureTime) {
+
+        ApiResponseEntity<Set<AirlineTransportationDto>> apiResponse;
         if (offset == null && destination == null && departureTime == null) {
-            return new ApiResponseEntity<>(transportationSearchService.findAllTransportations());
+            apiResponse = new ApiResponseEntity<>(transportationSearchService.findAllTransportations());
+        } else {
+            apiResponse = new ApiResponseEntity<>(transportationSearchService.findTransportations(offset, destination, departureTime), false);
         }
-        return new ApiResponseEntity<>(transportationSearchService.findTransportations(offset, destination, departureTime), false);
+        return ResponseEntity.ok(apiResponse);
     }
 
     @GetMapping("{transportationId}")
-    public ApiResponseEntity<AirlineTransportationDto> getTransportationById(@PathVariable("transportationId") long transportationId) {
+    public ResponseEntity<ApiResponseEntity<AirlineTransportationDto>> getTransportationById(@PathVariable("transportationId") long transportationId) {
+        ApiResponseEntity<AirlineTransportationDto> apiResponse;
         try {
-            return new ApiResponseEntity<>(transportationSearchService.findTransportationById(transportationId), false);
+            apiResponse = new ApiResponseEntity<>(transportationSearchService.findTransportationById(transportationId), false);
+            return ResponseEntity.ok(apiResponse);
         } catch (ApplicationException applicationException) {
-            return new ApiResponseEntity<>(new ApiErrorResponse(applicationException.getMessage(), applicationException.errorCode()));
+            apiResponse = new ApiResponseEntity<>(new ApiErrorResponse(applicationException.getMessage(), applicationException.errorCode()));
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(apiResponse);
         }
     }
 
