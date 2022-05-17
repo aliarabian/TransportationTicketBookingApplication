@@ -1,6 +1,7 @@
 package com.platform.repository.transportation;
 
 import com.platform.business.enitity.AirlineTransportation;
+import org.springframework.stereotype.Repository;
 import persistence.data.storage.memory.TransportationBookingSystemImMemoryDataSource;
 
 import java.time.OffsetDateTime;
@@ -9,6 +10,7 @@ import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+@Repository
 public class InMemoryAirlineTransportationDao implements AirlineTransportationDao {
 
     public InMemoryAirlineTransportationDao() {

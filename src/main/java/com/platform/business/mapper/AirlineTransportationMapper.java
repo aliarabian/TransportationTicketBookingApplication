@@ -3,10 +3,12 @@ package com.platform.business.mapper;
 import com.platform.business.enitity.AirlineTransportation;
 import com.platform.business.service.search.transportations.dto.AirlineTransportationDto;
 import com.platform.business.service.search.transportations.dto.SeatingSectionDto;
+import org.springframework.stereotype.Component;
 
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Component
 public class AirlineTransportationMapper implements Mapper<AirlineTransportation, AirlineTransportationDto> {
     private SeatingSectionMapper sectionMapper;
 

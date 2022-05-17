@@ -3,11 +3,13 @@ package com.platform.business.mapper;
 import com.platform.business.enitity.PlaneTicket;
 import com.platform.business.enitity.SeatingSectionPrivilege;
 import com.platform.business.service.booking.dto.response.PlaneTicketDto;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Component
 public class PlaneTicketMapper implements Mapper<PlaneTicket, PlaneTicketDto> {
     @Override
     public PlaneTicket fromDto(PlaneTicketDto planeTicketDto) {

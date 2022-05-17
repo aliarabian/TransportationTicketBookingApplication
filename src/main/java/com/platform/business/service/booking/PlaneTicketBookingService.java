@@ -13,6 +13,7 @@ import com.platform.business.service.booking.exception.BookingException;
 import com.platform.repository.customer.CustomerDao;
 import com.platform.repository.ticket.PlaneTicketDao;
 import com.platform.repository.transportation.AirlineTransportationDao;
+import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 import java.util.Objects;
@@ -20,6 +21,7 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.ThreadLocalRandom;
 
+@Service
 public class PlaneTicketBookingService implements BookingService {
     private final AirlineTransportationDao airlineTransportationDao;
     private final PlaneTicketDao ticketDao;

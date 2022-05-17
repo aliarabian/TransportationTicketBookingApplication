@@ -3,10 +3,12 @@ package com.platform.business.mapper;
 import com.platform.business.enitity.SeatingSection;
 import com.platform.business.service.search.transportations.dto.SeatingSectionDto;
 import com.platform.business.service.search.transportations.dto.SectionPrivilegeDto;
+import org.springframework.stereotype.Component;
 
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Component
 public class SeatingSectionMapper implements Mapper<SeatingSection, SeatingSectionDto> {
     @Override
     public SeatingSection fromDto(SeatingSectionDto dto) {

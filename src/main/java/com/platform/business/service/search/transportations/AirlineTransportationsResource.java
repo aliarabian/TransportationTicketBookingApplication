@@ -7,20 +7,26 @@ import com.platform.business.mapper.AirlineTransportationMapper;
 import com.platform.business.mapper.SeatingSectionMapper;
 import com.platform.business.service.search.transportations.dto.AirlineTransportationDto;
 import com.platform.repository.transportation.InMemoryAirlineTransportationDao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.time.OffsetDateTime;
 import java.util.Set;
 
+@RestController
 public class AirlineTransportationsResource {
 
     private final TransportationSearchService transportationSearchService;
 
-    public AirlineTransportationsResource() {
-        transportationSearchService = new AirlineTransportationSearchService(new InMemoryAirlineTransportationDao(),
-                new AirlineTransportationMapper(new SeatingSectionMapper()));
+    @Autowired
+    public AirlineTransportationsResource(TransportationSearchService transportationSearchService) {
+        this.transportationSearchService = transportationSearchService;
     }
 
-    public ResponseEntity<AirlineTransportationDto> getTransportationById(long transportationId) {
+    @GetMapping("/resources/transportations/{transportationId}")
+    public ResponseEntity<AirlineTransportationDto> getTransportationById(@PathVariable("transportationId") long transportationId) {
         try {
             return new ResponseEntity<>(transportationSearchService.findTransportationById(transportationId), false);
         } catch (ApplicationException applicationException) {

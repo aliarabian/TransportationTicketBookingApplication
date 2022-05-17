@@ -1,8 +1,10 @@
 package com.platform.repository.ticket;
 
 import com.platform.business.enitity.PlaneTicket;
+import org.springframework.stereotype.Repository;
 import persistence.data.storage.memory.TransportationBookingSystemImMemoryDataSource;
 
+@Repository
 public class InMemoryPlaneTicketDao implements PlaneTicketDao {
     @Override
     public void persist(PlaneTicket ticket) {

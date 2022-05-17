@@ -6,15 +6,19 @@ import com.platform.business.mapper.AirlineTransportationMapper;
 import com.platform.business.service.search.transportations.TransportationSearchService;
 import com.platform.business.service.search.transportations.dto.AirlineTransportationDto;
 import com.platform.repository.transportation.AirlineTransportationDao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.time.OffsetDateTime;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Service
 public class AirlineTransportationSearchService implements TransportationSearchService {
     private final AirlineTransportationDao transportationDao;
     private final AirlineTransportationMapper transportationMapper;
 
+    @Autowired
     public AirlineTransportationSearchService(AirlineTransportationDao transportationDao, AirlineTransportationMapper transportationMapper) {
         this.transportationDao = transportationDao;
         this.transportationMapper = transportationMapper;

@@ -1,6 +1,7 @@
 package com.platform.repository.transportation;
 
 import com.platform.business.enitity.AirlineTransportation;
+import org.springframework.stereotype.Repository;
 
 import java.time.OffsetDateTime;
 import java.util.Optional;

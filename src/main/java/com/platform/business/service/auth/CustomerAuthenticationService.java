@@ -3,10 +3,12 @@ package com.platform.business.service.auth;
 import com.platform.business.enitity.Customer;
 import com.platform.business.service.auth.exception.AuthenticationFailedException;
 import com.platform.repository.customer.CustomerDao;
+import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 import java.util.UUID;
 
+@Service
 public class CustomerAuthenticationService implements AuthenticationService {
 
     private final CustomerDao customerDao;
