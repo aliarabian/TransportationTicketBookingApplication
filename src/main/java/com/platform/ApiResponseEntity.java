@@ -1,16 +1,23 @@
 package com.platform;
 
-public class ResponseEntity<T> {
+public class ApiResponseEntity<T> {
     private final T data;
     private final boolean error;
-    private final ErrorResponse errorResponse;
+    private final ApiErrorResponse errorResponse;
 
-    public ResponseEntity(ErrorResponse errorResponse){
+    public ApiResponseEntity(ApiErrorResponse errorResponse) {
         this.errorResponse = errorResponse;
         this.data = null;
         this.error = true;
     }
-    public ResponseEntity(T data, boolean errorCode) {
+
+    public ApiResponseEntity(T data) {
+        this.data = data;
+        this.error = false;
+        this.errorResponse = null;
+    }
+
+    public ApiResponseEntity(T data, boolean errorCode) {
         this.data = data;
         this.error = errorCode;
         this.errorResponse = null;
@@ -24,7 +31,7 @@ public class ResponseEntity<T> {
         return data;
     }
 
-    public ErrorResponse getErrorResponse() {
+    public ApiErrorResponse getErrorResponse() {
         return errorResponse;
     }
 }

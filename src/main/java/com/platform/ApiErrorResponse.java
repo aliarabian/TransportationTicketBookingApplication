@@ -2,12 +2,12 @@ package com.platform;
 
 import java.time.Instant;
 
-public class ErrorResponse {
+public class ApiErrorResponse {
     private final String message;
     private final int errorCode;
     private final Instant timestamp;
 
-    public ErrorResponse(String message, int errorCode) {
+    public ApiErrorResponse(String message, int errorCode) {
         this.message = message;
         this.errorCode = errorCode;
         this.timestamp = Instant.now();

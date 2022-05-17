@@ -1,7 +1,7 @@
 package com.platform.controllers.auth;
 
-import com.platform.ErrorResponse;
-import com.platform.ResponseEntity;
+import com.platform.ApiErrorResponse;
+import com.platform.ApiResponseEntity;
 import com.platform.business.exception.ApplicationException;
 import com.platform.business.auth.AuthenticationRequest;
 import com.platform.business.auth.AuthenticationResponse;
@@ -18,11 +18,11 @@ public class AuthenticationController {
         this.authenticationService = authenticationService;
     }
 
-    public ResponseEntity<AuthenticationResponse> login(AuthenticationRequest request) {
+    public ApiResponseEntity<AuthenticationResponse> login(AuthenticationRequest request) {
         try {
-            return new ResponseEntity<>(authenticationService.authenticate(request), false);
+            return new ApiResponseEntity<>(authenticationService.authenticate(request), false);
         } catch (ApplicationException exception) {
-            return new ResponseEntity<>(new ErrorResponse(exception.getMessage(), exception.errorCode()) );
+            return new ApiResponseEntity<>(new ApiErrorResponse(exception.getMessage(), exception.errorCode()) );
         }
     }
 
