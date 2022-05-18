@@ -2,7 +2,7 @@ package com.platform.business.booking.dto.request;
 
 import java.time.LocalDate;
 
-public class PlanePassengerDto {
+public class FlightPassengerDto {
     private String firstName;
     private String lastName;
     private String nationalIdNO;

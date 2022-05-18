@@ -4,7 +4,7 @@ import java.time.ZonedDateTime;
 import java.util.Collections;
 import java.util.Set;
 
-public class AirlineTransportationDto {
+public class FlightDto {
     private final Long id;
     private final String vehicleModelName;
     private final String offset;
@@ -14,7 +14,7 @@ public class AirlineTransportationDto {
     private final Set<SeatingSectionDto> sections;
 
 
-    public AirlineTransportationDto(Long id, String vehicleModelName, String offset, String destination, ZonedDateTime departuresAt, int availableSeats, Set<SeatingSectionDto> sections) {
+    public FlightDto(Long id, String vehicleModelName, String offset, String destination, ZonedDateTime departuresAt, int availableSeats, Set<SeatingSectionDto> sections) {
         this.id = id;
         this.vehicleModelName = vehicleModelName;
         this.offset = offset;

@@ -2,11 +2,11 @@ package com.platform.model;
 
 import java.util.Set;
 
-public class PlaneTicket extends Ticket<AirlineTransportation, PlanePassenger, PlaneSeat>  {
+public class FlightTicket extends Ticket<Flight, FlightPassenger, PlaneSeat>  {
 
     private Set<SeatingSectionPrivilege> selectedPrivileges;
 
-    public PlaneTicket(Long id, AirlineTransportation transportation, Set<SeatingSectionPrivilege> privileges, PlanePassenger passenger, PlaneSeat seat, Customer customer) {
+    public FlightTicket(Long id, Flight transportation, Set<SeatingSectionPrivilege> privileges, FlightPassenger passenger, PlaneSeat seat, Customer customer) {
         super(id, transportation, passenger, seat, customer);
         this.selectedPrivileges = privileges;
     }

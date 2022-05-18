@@ -6,9 +6,9 @@ import com.platform.business.booking.exception.SectionNotExistsException;
 
 import java.time.OffsetDateTime;
 
-public class AirlineTransportation extends Transportation<Plane, PlaneTicket> {
+public class Flight extends Transportation<Plane, FlightTicket> {
 
-    public AirlineTransportation(Long id, Terminal offset, Terminal destination, OffsetDateTime departuresAt, Plane plane) {
+    public Flight(Long id, Terminal offset, Terminal destination, OffsetDateTime departuresAt, Plane plane) {
         super(id, offset, destination, departuresAt, plane);
     }
 

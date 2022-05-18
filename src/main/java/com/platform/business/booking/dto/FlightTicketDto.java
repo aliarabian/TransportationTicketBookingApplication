@@ -1,9 +1,9 @@
-package com.platform.business.booking.dto.response;
+package com.platform.business.booking.dto;
 
 import java.time.ZonedDateTime;
 import java.util.Set;
 
-public class PlaneTicketDto {
+public class FlightTicketDto {
     private Long ticketId;
     private Long transportationId;
     private String offset;

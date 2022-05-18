@@ -2,17 +2,15 @@ package com.platform.mapper;
 
 import com.platform.model.Country;
 import com.platform.model.Passport;
-import com.platform.model.PlanePassenger;
-import com.platform.business.booking.dto.request.PlanePassengerDto;
+import com.platform.model.FlightPassenger;
+import com.platform.business.booking.dto.request.FlightPassengerDto;
 import com.platform.repository.country.CountryDao;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import java.util.concurrent.ThreadLocalRandom;
-
 @Component
 @Scope(value = "singleton")
-public class PassengerMapper implements Mapper<PlanePassenger, PlanePassengerDto> {
+public class PassengerMapper implements Mapper<FlightPassenger, FlightPassengerDto> {
 
     private final CountryDao countryDao;
 
@@ -22,17 +20,17 @@ public class PassengerMapper implements Mapper<PlanePassenger, PlanePassengerDto
 
 
     @Override
-    public PlanePassenger fromDto(PlanePassengerDto passengerDto) {
+    public FlightPassenger fromDto(FlightPassengerDto passengerDto) {
         Country country = countryDao.findByCountryCode(passengerDto.getPassportIssuingCountryCode())
                                     .orElseThrow();
         Passport passport = new Passport(Long.valueOf(passengerDto.getPassportNO()), passengerDto.getPassportNO(), passengerDto.getPassportExpirationDate(), country);
-        return new PlanePassenger(Long.valueOf(passengerDto.getNationalIdNO()), passengerDto.getFirstName(), passengerDto.getLastName()
+        return new FlightPassenger(Long.valueOf(passengerDto.getNationalIdNO()), passengerDto.getFirstName(), passengerDto.getLastName()
                 , passengerDto.getNationalIdNO(), passengerDto.getBirthdate(), passport);
     }
 
     @Override
-    public PlanePassengerDto toDto(PlanePassenger passenger) {
-        PlanePassengerDto passengerDto = new PlanePassengerDto();
+    public FlightPassengerDto toDto(FlightPassenger passenger) {
+        FlightPassengerDto passengerDto = new FlightPassengerDto();
         passengerDto.setFirstName(passenger.getFirstName());
         passengerDto.setLastName(passenger.getLastName());
         passengerDto.setPassportIssuingCountryCode(passenger.getPassportDetails().getIssuedIn().getName());

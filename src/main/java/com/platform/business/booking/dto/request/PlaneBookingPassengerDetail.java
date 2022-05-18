@@ -4,7 +4,7 @@ import java.util.Set;
 
 public class PlaneBookingPassengerDetail {
     private Set<Long> seatingSectionPrivilegeIds;
-    private PlanePassengerDto passenger;
+    private FlightPassengerDto passenger;
 
 
     public Set<Long> getSeatingSectionPrivilegeIds() {
@@ -15,11 +15,11 @@ public class PlaneBookingPassengerDetail {
         this.seatingSectionPrivilegeIds = seatingSectionPrivilegeIds;
     }
 
-    public PlanePassengerDto getPassenger() {
+    public FlightPassengerDto getPassenger() {
         return passenger;
     }
 
-    public void setPassenger(PlanePassengerDto passenger) {
+    public void setPassenger(FlightPassengerDto passenger) {
         this.passenger = passenger;
     }
 

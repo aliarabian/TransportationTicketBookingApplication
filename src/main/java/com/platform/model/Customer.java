@@ -7,7 +7,7 @@ import java.util.Set;
 
 public class Customer extends User {
     private String nationalId;
-    private Set<PlaneTicket> bookedTickets;
+    private Set<FlightTicket> bookedTickets;
 
     public Customer(Long id, String username, String password, String firstName, String lastName, String nationalId) {
         super(id, username, password, firstName, lastName);
@@ -23,7 +23,7 @@ public class Customer extends User {
         return nationalId;
     }
 
-    public void addTicket(PlaneTicket ticket) {
+    public void addTicket(FlightTicket ticket) {
         Objects.requireNonNull(ticket);
         this.bookedTickets.add(ticket);
     }
@@ -48,7 +48,7 @@ public class Customer extends User {
                 "} " + super.toString();
     }
 
-    public Set<PlaneTicket> getBookedTickets() {
+    public Set<FlightTicket> getBookedTickets() {
         return Collections.unmodifiableSet(bookedTickets);
     }
 }

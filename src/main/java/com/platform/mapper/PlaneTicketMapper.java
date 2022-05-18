@@ -1,8 +1,8 @@
 package com.platform.mapper;
 
-import com.platform.model.PlaneTicket;
+import com.platform.model.FlightTicket;
 import com.platform.model.SeatingSectionPrivilege;
-import com.platform.business.booking.dto.response.PlaneTicketDto;
+import com.platform.business.booking.dto.FlightTicketDto;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -10,16 +10,16 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
-public class PlaneTicketMapper implements Mapper<PlaneTicket, PlaneTicketDto> {
+public class PlaneTicketMapper implements Mapper<FlightTicket, FlightTicketDto> {
     @Override
-    public PlaneTicket fromDto(PlaneTicketDto planeTicketDto) {
+    public FlightTicket fromDto(FlightTicketDto planeTicketDto) {
         return null;
     }
 
     @Override
-    public PlaneTicketDto toDto(PlaneTicket planeTicket) {
+    public FlightTicketDto toDto(FlightTicket planeTicket) {
 
-        PlaneTicketDto planeTicketDto = new PlaneTicketDto();
+        FlightTicketDto planeTicketDto = new FlightTicketDto();
         planeTicketDto.setPassportNO(planeTicket.getPassenger().getPassportDetails().getPassportNO());
         planeTicketDto.setOffset(planeTicket.getTransportation().getOffset().getName());
         planeTicketDto.setDestination(planeTicket.getTransportation().getDestination().getName());

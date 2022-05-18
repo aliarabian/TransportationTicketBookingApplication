@@ -1,8 +1,8 @@
 package com.platform.repository.ticket;
 
-import com.platform.model.PlaneTicket;
+import com.platform.model.FlightTicket;
 
 public interface PlaneTicketDao {
 
-    void persist(PlaneTicket ticket);
+    void persist(FlightTicket ticket);
 }

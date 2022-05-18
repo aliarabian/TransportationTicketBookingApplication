@@ -1,18 +1,18 @@
 package com.platform.business.service.booking;
 
 import com.platform.business.booking.BookingService;
-import com.platform.business.booking.PlaneTicketBookingService;
+import com.platform.business.booking.FlightTicketBookingService;
 import com.platform.mapper.PassengerMapper;
 import com.platform.mapper.PlaneTicketMapper;
 import com.platform.business.booking.dto.request.PlaneBookingPassengerDetail;
-import com.platform.business.booking.dto.request.PlanePassengerDto;
+import com.platform.business.booking.dto.request.FlightPassengerDto;
 import com.platform.business.booking.dto.request.PlaneTicketBookingRequest;
-import com.platform.business.booking.dto.response.PlaneTicketDto;
+import com.platform.business.booking.dto.FlightTicketDto;
 import com.platform.model.*;
 import com.platform.repository.country.InMemoryCountryDao;
 import com.platform.repository.customer.InMemoryCustomerDao;
 import com.platform.repository.ticket.InMemoryPlaneTicketDao;
-import com.platform.repository.transportation.InMemoryAirlineTransportationDao;
+import com.platform.repository.transportation.InMemoryFlightsDao;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -29,8 +29,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("Given there is a flight available ")
 class PlaneTicketBookingServiceTest {
-    private final BookingService bookingService = new PlaneTicketBookingService(
-            new InMemoryAirlineTransportationDao(),
+    private final BookingService bookingService = new FlightTicketBookingService(
+            new InMemoryFlightsDao(),
             new InMemoryPlaneTicketDao(), new InMemoryCustomerDao(),
             new PassengerMapper(new InMemoryCountryDao()), new PlaneTicketMapper());
 
@@ -44,24 +44,24 @@ class PlaneTicketBookingServiceTest {
         @DisplayName("Then it should not add a passenger twice to the same flight")
         void testAddingMultiplePassengersResultsInOnlyAddingEachPassengerOnlyOnceToTheFlight() {
             LocalDate localDate = LocalDate.of(1998, 4, 12);
-            PlanePassengerDto passengerNumberOneFirstInstance = generatePassengerDto("Amir", "A", "87946621",
+            FlightPassengerDto passengerNumberOneFirstInstance = generatePassengerDto("Amir", "A", "87946621",
                     localDate, "00254976321", "IR",
                     LocalDate.of(2023, 12, 15));
-            PlanePassengerDto passengerNumberOneSecondInstance = generatePassengerDto("Amir", "A", "87946621", localDate,
+            FlightPassengerDto passengerNumberOneSecondInstance = generatePassengerDto("Amir", "A", "87946621", localDate,
                     "00254976321", "IR",
                     LocalDate.of(2023, 12, 15));
-            PlanePassengerDto passengerNumberOneThirdInstance = generatePassengerDto("Amir", "A", "87946621", localDate,
+            FlightPassengerDto passengerNumberOneThirdInstance = generatePassengerDto("Amir", "A", "87946621", localDate,
                     "00254976321", "IR",
                     LocalDate.of(2023, 12, 15));
             localDate = LocalDate.of(1984, 7, 16);
-            PlanePassengerDto passengerNumberTwo = generatePassengerDto("Amir", "A", "87946622",
+            FlightPassengerDto passengerNumberTwo = generatePassengerDto("Amir", "A", "87946622",
                     localDate, "00254976322", "IR",
                     LocalDate.of(2023, 12, 15));
             PlaneTicketBookingRequest request = initializePlaneTicketBookingRequest(getPlaneBookingPassengerDetail(passengerNumberOneFirstInstance),
                     getPlaneBookingPassengerDetail(passengerNumberOneSecondInstance),
                     getPlaneBookingPassengerDetail(passengerNumberOneThirdInstance),
                     getPlaneBookingPassengerDetail(passengerNumberTwo));
-            Set<PlaneTicketDto> bookedTickets = bookingService.bookTickets(request);
+            Set<FlightTicketDto> bookedTickets = bookingService.bookTickets(request);
 
             assertEquals(2, bookedTickets.size());
         }
@@ -70,7 +70,7 @@ class PlaneTicketBookingServiceTest {
     @BeforeEach
     void setUp() {
 
-        PlanePassengerDto passengerDto = generatePassengerDto("Ali", "Arabian", "425833154",
+        FlightPassengerDto passengerDto = generatePassengerDto("Ali", "Arabian", "425833154",
                 LocalDate.of(1989, 11, 2),
                 "00089795421113", "IR", LocalDate.of(2022, 10, 14));
         planeTicketBookingRequest = initializePlaneTicketBookingRequest(getPlaneBookingPassengerDetail(passengerDto));
@@ -78,24 +78,24 @@ class PlaneTicketBookingServiceTest {
 
     @Test
     void shouldBookOneTicket() {
-        Set<PlaneTicketDto> planeTickets = bookingService.bookTickets(planeTicketBookingRequest);
+        Set<FlightTicketDto> planeTickets = bookingService.bookTickets(planeTicketBookingRequest);
         assertEquals(1, planeTickets.size());
     }
 
     @Test
     void shouldBookAllRequestTickets() {
-        PlanePassengerDto passengerNumberOne = generatePassengerDto("Amir", "A", "879462621",
+        FlightPassengerDto passengerNumberOne = generatePassengerDto("Amir", "A", "879462621",
                 LocalDate.of(1995, 12, 1), "0025491276321", "IR",
                 LocalDate.of(2023, 12, 15));
-        PlanePassengerDto passengerNumberTwo = generatePassengerDto("Amir", "A", "879463621",
+        FlightPassengerDto passengerNumberTwo = generatePassengerDto("Amir", "A", "879463621",
                 LocalDate.of(2000, 2, 22), "0025431976321", "IR",
                 LocalDate.of(2023, 12, 15));
-        PlanePassengerDto passengerNumberThree = generatePassengerDto("Amir", "A", "879446621",
+        FlightPassengerDto passengerNumberThree = generatePassengerDto("Amir", "A", "879446621",
                 LocalDate.of(1984, 5, 13), "002543976321", "IR",
                 LocalDate.of(2023, 12, 15));
         PlaneTicketBookingRequest request = initializePlaneTicketBookingRequest(getPlaneBookingPassengerDetail(passengerNumberOne),
                 getPlaneBookingPassengerDetail(passengerNumberTwo), getPlaneBookingPassengerDetail(passengerNumberThree));
-        Set<PlaneTicketDto> planeTickets = bookingService.bookTickets(request);
+        Set<FlightTicketDto> planeTickets = bookingService.bookTickets(request);
         int numberOfRequestedTickets = request.getPassengersBookingDetails().size();
 
         assertEquals(numberOfRequestedTickets, planeTickets.size());
@@ -114,7 +114,7 @@ class PlaneTicketBookingServiceTest {
 
     @Test
     void shouldAddBookedTicketToCustomersBookedTicketsSet() {
-        Set<PlaneTicketDto> planeTickets = bookingService.bookTickets(planeTicketBookingRequest);
+        Set<FlightTicketDto> planeTickets = bookingService.bookTickets(planeTicketBookingRequest);
         List<Long> ticketIds = getTicketIds(planeTickets);
         Customer customer = TransportationBookingSystemImMemoryDataSource.getCustomers().customer(planeTicketBookingRequest.getCustomerId());
         List<Long> customersBookedTicketsIds = customer.getBookedTickets().stream()
@@ -126,8 +126,8 @@ class PlaneTicketBookingServiceTest {
     @Test
     void shouldAddBookedTicketsToTransportationsBookedTicketsSet() {
 
-        Set<PlaneTicketDto> planeTickets = bookingService.bookTickets(planeTicketBookingRequest);
-        AirlineTransportation transportation = TransportationBookingSystemImMemoryDataSource.getAirlineTransportations().transportation(planeTicketBookingRequest.getTransportationId());
+        Set<FlightTicketDto> planeTickets = bookingService.bookTickets(planeTicketBookingRequest);
+        Flight transportation = TransportationBookingSystemImMemoryDataSource.getAirlineTransportations().transportation(planeTicketBookingRequest.getTransportationId());
         List<Long> ticketIds = getTicketIds(planeTickets);
         List<Long> transportationBookedTicketsId = transportation.getBookedTickets().stream()
                                                                  .map(Ticket::getId)
@@ -136,29 +136,29 @@ class PlaneTicketBookingServiceTest {
         assertTrue(transportationBookedTicketsId.containsAll(ticketIds));
     }
 
-    private List<Long> getTicketIds(Set<PlaneTicketDto> planeTickets) {
+    private List<Long> getTicketIds(Set<FlightTicketDto> planeTickets) {
         List<Long> ticketIds = planeTickets.stream()
-                                           .map(PlaneTicketDto::getTicketId)
+                                           .map(FlightTicketDto::getTicketId)
                                            .collect(Collectors.toList());
         return ticketIds;
     }
 
     @Test
     void shouldAddSeatingSectionPrivilegesOfRequestSeatingSection() {
-        PlanePassengerDto passengerDto = generatePassengerDto("Ali", "Arabian", "425833154",
+        FlightPassengerDto passengerDto = generatePassengerDto("Ali", "Arabian", "425833154",
                 LocalDate.of(1994, 3, 1),
                 "00089795421113", "IR",
                 LocalDate.of(2023, 12, 15));
         ;
         PlaneTicketBookingRequest request = initializePlaneTicketBookingRequest(getPlaneBookingPassengerDetail(passengerDto));
-        Set<PlaneTicketDto> planeTickets = bookingService.bookTickets(request);
-        PlaneTicketDto planeTicketDto = planeTickets.stream().findFirst().get();
+        Set<FlightTicketDto> planeTickets = bookingService.bookTickets(request);
+        FlightTicketDto planeTicketDto = planeTickets.stream().findFirst().get();
         SeatingSection seatingSection = TransportationBookingSystemImMemoryDataSource.getSeatingSections().seatingSection(planeTicketDto.getSectionId());
         Set<String> sectionPrivileges = seatingSection.getSectionPrivileges().stream()
                                                       .map(SeatingSectionPrivilege::getServiceDescription)
                                                       .collect(Collectors.toSet());
         long ignoredPrivileges = planeTickets.stream()
-                                             .map(PlaneTicketDto::getSelectedPrivileges)
+                                             .map(FlightTicketDto::getSelectedPrivileges)
                                              .flatMap(Collection::stream)
                                              .distinct()
                                              .filter(privilege -> !sectionPrivileges.contains(privilege))
@@ -168,20 +168,20 @@ class PlaneTicketBookingServiceTest {
 
     @Test
     void shouldAddPassengersToTheSameSection() {
-        PlanePassengerDto passengerNumberOne = generatePassengerDto("Amir", "A", "87946621",
+        FlightPassengerDto passengerNumberOne = generatePassengerDto("Amir", "A", "87946621",
                 LocalDate.of(1995, 12, 1), "00254976321", "IR",
                 LocalDate.of(2023, 12, 15));
-        PlanePassengerDto passengerNumberTwo = generatePassengerDto("Amir", "A", "879121446621",
+        FlightPassengerDto passengerNumberTwo = generatePassengerDto("Amir", "A", "879121446621",
                 LocalDate.of(2000, 2, 22), "00254121976321", "IR",
                 LocalDate.of(2023, 12, 15));
-        PlanePassengerDto passengerNumberThree = generatePassengerDto("Amir", "A", "8794612621",
+        FlightPassengerDto passengerNumberThree = generatePassengerDto("Amir", "A", "8794612621",
                 LocalDate.of(1984, 5, 13), "0025124976321", "IR",
                 LocalDate.of(2023, 12, 15));
         PlaneTicketBookingRequest request = initializePlaneTicketBookingRequest(getPlaneBookingPassengerDetail(passengerNumberOne),
                 getPlaneBookingPassengerDetail(passengerNumberTwo), getPlaneBookingPassengerDetail(passengerNumberThree));
-        Set<PlaneTicketDto> tickets = bookingService.bookTickets(request);
+        Set<FlightTicketDto> tickets = bookingService.bookTickets(request);
         long count = tickets.stream()
-                            .map(PlaneTicketDto::getSeatingSectionDescription)
+                            .map(FlightTicketDto::getSeatingSectionDescription)
                             .distinct()
                             .count();
         assertEquals(1, count);
@@ -189,20 +189,20 @@ class PlaneTicketBookingServiceTest {
 
     @Test
     void testTransportationAvailableSeats() {
-        PlanePassengerDto passengerNumberOne = generatePassengerDto("Amir", "A", "87946621",
+        FlightPassengerDto passengerNumberOne = generatePassengerDto("Amir", "A", "87946621",
                 LocalDate.of(1995, 12, 1), "00254976321", "IR",
                 LocalDate.of(2023, 12, 15));
-        PlanePassengerDto passengerNumberTwo = generatePassengerDto("Amir", "A", "879121446621",
+        FlightPassengerDto passengerNumberTwo = generatePassengerDto("Amir", "A", "879121446621",
                 LocalDate.of(2000, 2, 22), "00254121976321", "IR",
                 LocalDate.of(2023, 12, 15));
-        PlanePassengerDto passengerNumberThree = generatePassengerDto("Amir", "A", "8794612621",
+        FlightPassengerDto passengerNumberThree = generatePassengerDto("Amir", "A", "8794612621",
                 LocalDate.of(1984, 5, 13), "0025124976321", "IR",
                 LocalDate.of(2023, 12, 15));
         PlaneTicketBookingRequest request = initializePlaneTicketBookingRequest(getPlaneBookingPassengerDetail(passengerNumberOne),
                 getPlaneBookingPassengerDetail(passengerNumberTwo), getPlaneBookingPassengerDetail(passengerNumberThree));
-        AirlineTransportation transportation = TransportationBookingSystemImMemoryDataSource.getAirlineTransportations().transportation(request.getTransportationId());
+        Flight transportation = TransportationBookingSystemImMemoryDataSource.getAirlineTransportations().transportation(request.getTransportationId());
         int oldAvailableSeats = transportation.availableSeats();
-        Set<PlaneTicketDto> planeTickets = bookingService.bookTickets(request);
+        Set<FlightTicketDto> planeTickets = bookingService.bookTickets(request);
         assertEquals(oldAvailableSeats - request.getPassengersBookingDetails().size(), transportation.availableSeats());
     }
 
@@ -216,16 +216,16 @@ class PlaneTicketBookingServiceTest {
         return request;
     }
 
-    private PlaneBookingPassengerDetail getPlaneBookingPassengerDetail(PlanePassengerDto passengerDto) {
+    private PlaneBookingPassengerDetail getPlaneBookingPassengerDetail(FlightPassengerDto passengerDto) {
         PlaneBookingPassengerDetail ticketBookingDetail = new PlaneBookingPassengerDetail();
         ticketBookingDetail.setPassenger(passengerDto);
         ticketBookingDetail.setSeatingSectionPrivilegeIds(Set.of(901L, 903234L));
         return ticketBookingDetail;
     }
 
-    private PlanePassengerDto generatePassengerDto(String firstName, String lastName, String nationalId, LocalDate birthdate,
+    private FlightPassengerDto generatePassengerDto(String firstName, String lastName, String nationalId, LocalDate birthdate,
             String passportNO, String passportIssuingCountryCode, LocalDate passportExpirationDate) {
-        PlanePassengerDto passengerDto = new PlanePassengerDto();
+        FlightPassengerDto passengerDto = new FlightPassengerDto();
         passengerDto.setFirstName(firstName);
         passengerDto.setLastName(lastName);
         passengerDto.setNationalIdNO(nationalId);

@@ -4,10 +4,10 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-public class Plane extends TransportationVehicle<TransportationCompany<AirlineTransportation, Plane>> {
+public class Plane extends TransportationVehicle<TransportationCompany<Flight, Plane>> {
     private Set<SeatingSection> seatingSections;
 
-    public Plane(Long id, int capacity, String modelName, TransportationCompany<AirlineTransportation, Plane> transportationCompany) {
+    public Plane(Long id, int capacity, String modelName, TransportationCompany<Flight, Plane> transportationCompany) {
         super(id, capacity, modelName, transportationCompany);
         this.seatingSections = new HashSet<>();
     }

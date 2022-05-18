@@ -5,14 +5,14 @@ import com.platform.business.exception.CustomerNotFoundException;
 import com.platform.business.exception.TransportationNotFoundException;
 import com.platform.mapper.Mapper;
 import com.platform.business.booking.dto.request.PlaneBookingPassengerDetail;
-import com.platform.business.booking.dto.request.PlanePassengerDto;
+import com.platform.business.booking.dto.request.FlightPassengerDto;
 import com.platform.business.booking.dto.request.PlaneTicketBookingRequest;
-import com.platform.business.booking.dto.response.PlaneTicketDto;
+import com.platform.business.booking.dto.FlightTicketDto;
 import com.platform.business.booking.exception.BookingException;
 import com.platform.model.*;
 import com.platform.repository.customer.CustomerDao;
 import com.platform.repository.ticket.PlaneTicketDao;
-import com.platform.repository.transportation.AirlineTransportationDao;
+import com.platform.repository.transportation.FlightsDao;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
@@ -22,14 +22,14 @@ import java.util.TreeSet;
 import java.util.concurrent.ThreadLocalRandom;
 
 @Service
-public class PlaneTicketBookingService implements BookingService {
-    private final AirlineTransportationDao airlineTransportationDao;
+public class FlightTicketBookingService implements BookingService {
+    private final FlightsDao airlineTransportationDao;
     private final PlaneTicketDao ticketDao;
     private final CustomerDao customerDao;
-    private final Mapper<PlanePassenger, PlanePassengerDto> passengerMapper;
-    private final Mapper<PlaneTicket, PlaneTicketDto> ticketDtoMapper;
+    private final Mapper<FlightPassenger, FlightPassengerDto> passengerMapper;
+    private final Mapper<FlightTicket, FlightTicketDto> ticketDtoMapper;
 
-    public PlaneTicketBookingService(AirlineTransportationDao airlineTransportationDao, PlaneTicketDao ticketDao, CustomerDao customerDao, Mapper<PlanePassenger, PlanePassengerDto> passengerMapper, Mapper<PlaneTicket, PlaneTicketDto> ticketDtoMapper) {
+    public FlightTicketBookingService(FlightsDao airlineTransportationDao, PlaneTicketDao ticketDao, CustomerDao customerDao, Mapper<FlightPassenger, FlightPassengerDto> passengerMapper, Mapper<FlightTicket, FlightTicketDto> ticketDtoMapper) {
         this.airlineTransportationDao = airlineTransportationDao;
         this.ticketDao = ticketDao;
         this.customerDao = customerDao;
@@ -38,26 +38,26 @@ public class PlaneTicketBookingService implements BookingService {
     }
 
     @Override
-    public Set<PlaneTicketDto> bookTickets(PlaneTicketBookingRequest req) {
+    public Set<FlightTicketDto> bookTickets(PlaneTicketBookingRequest req) {
         Objects.requireNonNull(req);
         if (req.getPassengersBookingDetails().isEmpty()) {
             throw new BadRequestException("No Passenger Info Provided");
         }
-        AirlineTransportation airlineTransportation = airlineTransportationDao.findTransportationById(req.getTransportationId())
-                                                                              .orElseThrow(() -> new TransportationNotFoundException("Wrong Transportation Number"));
+        Flight airlineTransportation = airlineTransportationDao.findTransportationById(req.getTransportationId())
+                                                               .orElseThrow(() -> new TransportationNotFoundException("Wrong Transportation Number"));
         Customer customer = customerDao.findCustomerById(req.getCustomerId())
                                        .orElseThrow(() -> new CustomerNotFoundException("Customer Doesn't Exists"));
 
         return bookTickets(req, airlineTransportation, customer);
     }
 
-    private Set<PlaneTicketDto> bookTickets(PlaneTicketBookingRequest req, AirlineTransportation airlineTransportation, Customer customer) {
-        Set<PlaneTicketDto> bookedTickets = new TreeSet<>(Comparator.comparing(PlaneTicketDto::getPassportNO));
+    private Set<FlightTicketDto> bookTickets(PlaneTicketBookingRequest req, Flight airlineTransportation, Customer customer) {
+        Set<FlightTicketDto> bookedTickets = new TreeSet<>(Comparator.comparing(FlightTicketDto::getPassportNO));
         for (PlaneBookingPassengerDetail bookingDetail : req.getPassengersBookingDetails()) {
             PlaneSeat seat;
             try {
                 seat = airlineTransportation.bookSeat(req.getSeatingSectionId());
-                PlaneTicket ticket = createPlaneTicket(airlineTransportation, customer, bookingDetail, seat);
+                FlightTicket ticket = createPlaneTicket(airlineTransportation, customer, bookingDetail, seat);
                 ticketDao.persist(ticket);
                 bookedTickets.add(ticketDtoMapper.toDto(ticket));
                 airlineTransportation.addNewBooking(ticket);
@@ -69,9 +69,9 @@ public class PlaneTicketBookingService implements BookingService {
         return bookedTickets;
     }
 
-    private PlaneTicket createPlaneTicket(AirlineTransportation airlineTransportation, Customer customer, PlaneBookingPassengerDetail bookingDetail, PlaneSeat seat) {
+    private FlightTicket createPlaneTicket(Flight airlineTransportation, Customer customer, PlaneBookingPassengerDetail bookingDetail, PlaneSeat seat) {
         Set<SeatingSectionPrivilege> privileges = seat.getSection().retrievePrivilegesById(bookingDetail.getSeatingSectionPrivilegeIds());
-        return new PlaneTicket(ThreadLocalRandom.current().nextLong(),
+        return new FlightTicket(ThreadLocalRandom.current().nextLong(),
                 airlineTransportation, privileges, passengerMapper.fromDto(bookingDetail.getPassenger()),
                 seat, customer);
     }

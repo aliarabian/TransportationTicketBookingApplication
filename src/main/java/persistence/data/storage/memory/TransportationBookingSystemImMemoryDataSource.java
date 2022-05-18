@@ -52,7 +52,7 @@ public class TransportationBookingSystemImMemoryDataSource implements Serializab
 
     private static class AirlineTransportationCompanyDatasource implements Serializable {
 
-        private final Map<Long, TransportationCompany<AirlineTransportation, Plane>> airlines = new HashMap<>(Map.of(
+        private final Map<Long, TransportationCompany<Flight, Plane>> airlines = new HashMap<>(Map.of(
                 500L, new TransportationCompany<>(500L, "Homa", getCities().city(334L)),
                 501L, new TransportationCompany<>(501L, "Iran Air", getCities().city(334L)),
                 502L, new TransportationCompany<>(502L, "Hafez", getCities().city(335L)),
@@ -62,26 +62,26 @@ public class TransportationBookingSystemImMemoryDataSource implements Serializab
                 506L, new TransportationCompany<>(505L, "Anadolu Airlines", getCities().city(340L))
         ));
 
-        public TransportationCompany<AirlineTransportation, Plane> company(Long id) {
+        public TransportationCompany<Flight, Plane> company(Long id) {
             return airlines.get(id);
         }
     }
 
     public static class AirlineTransportationDataSource implements Serializable {
-        private final Map<Long, AirlineTransportation> transportations;
+        private final Map<Long, Flight> transportations;
 
         public AirlineTransportationDataSource() {
             transportations = new HashMap<>();
             LocalDateTime localDateTime = LocalDateTime.of(2022, 6, 12, 5, 10, 0, 0);
             ZoneId zoneId = ZoneId.of("Asia/Tehran");
-            transportations.put(1001L, new AirlineTransportation(1001L,
+            transportations.put(1001L, new Flight(1001L,
                     getTerminals().terminal(400L),
                     getTerminals().terminal(402L),
                     OffsetDateTime.of(localDateTime, zoneId.getRules().getOffset(localDateTime))
                     , getPlanes().plane(600L))
             );
             localDateTime = LocalDateTime.of(2022, 6, 27, 6, 45, 0, 0);
-            transportations.put(1002L, new AirlineTransportation(1002L,
+            transportations.put(1002L, new Flight(1002L,
                     getTerminals().terminal(401L),
                     getTerminals().terminal(402L),
                     OffsetDateTime.of(localDateTime, zoneId.getRules().getOffset(localDateTime))
@@ -89,17 +89,17 @@ public class TransportationBookingSystemImMemoryDataSource implements Serializab
             );
         }
 
-        public AirlineTransportation transportation(Long id) {
+        public Flight transportation(Long id) {
             return transportations.get(id);
         }
 
-        public Set<AirlineTransportation> findTransportationsByDate(OffsetDateTime dateTime) {
+        public Set<Flight> findTransportationsByDate(OffsetDateTime dateTime) {
             return transportations.values().stream()
                                   .filter(transportation -> transportation.getDeparturesAt().equals(dateTime))
                                   .collect(Collectors.toSet());
         }
 
-        public Set<AirlineTransportation> findAllTransportations() {
+        public Set<Flight> findAllTransportations() {
             return Set.copyOf(transportations.values());
         }
     }
@@ -307,13 +307,13 @@ public class TransportationBookingSystemImMemoryDataSource implements Serializab
 
     public static class PlaneTicketDataSource implements Serializable {
 
-        private final Map<Long, PlaneTicket> tickets;
+        private final Map<Long, FlightTicket> tickets;
 
         public PlaneTicketDataSource() {
             this.tickets = new HashMap<>();
         }
 
-        public void addTicket(PlaneTicket ticket) {
+        public void addTicket(FlightTicket ticket) {
             tickets.put(ticket.getId(), ticket);
         }
 
