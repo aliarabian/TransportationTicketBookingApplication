@@ -1,8 +1,7 @@
 package com.platform.controllers.terminals;
 
 import com.platform.ApiResponseEntity;
-import com.platform.business.booking.dto.FlightTicketDto;
-import com.platform.model.Terminal;
+import com.platform.business.model.Terminal;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

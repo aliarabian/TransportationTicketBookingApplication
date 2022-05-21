@@ -1,8 +1,8 @@
 package com.platform.mapper;
 
-import com.platform.model.SeatingSection;
-import com.platform.business.search.transportations.dto.SeatingSectionDto;
-import com.platform.business.search.transportations.dto.SectionPrivilegeDto;
+import com.platform.business.model.SeatingSection;
+import com.platform.business.service.transportations.dto.SeatingSectionDto;
+import com.platform.business.service.transportations.dto.SectionPrivilegeDto;
 import org.springframework.stereotype.Component;
 
 import java.util.Set;

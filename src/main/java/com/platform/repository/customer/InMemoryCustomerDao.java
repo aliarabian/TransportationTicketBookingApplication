@@ -1,6 +1,6 @@
 package com.platform.repository.customer;
 
-import com.platform.model.Customer;
+import com.platform.business.model.Customer;
 import org.springframework.stereotype.Repository;
 import persistence.data.storage.memory.TransportationBookingSystemImMemoryDataSource;
 

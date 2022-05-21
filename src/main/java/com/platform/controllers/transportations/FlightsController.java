@@ -2,10 +2,10 @@ package com.platform.controllers.transportations;
 
 import com.platform.ApiErrorResponse;
 import com.platform.ApiResponseEntity;
-import com.platform.business.booking.dto.request.FlightPassengerDto;
 import com.platform.business.exception.ApplicationException;
-import com.platform.business.search.transportations.TransportationSearchService;
-import com.platform.business.search.transportations.dto.FlightDto;
+import com.platform.business.service.booking.dto.request.FlightPassengerDto;
+import com.platform.business.service.transportations.TransportationSearchService;
+import com.platform.business.service.transportations.dto.FlightDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;

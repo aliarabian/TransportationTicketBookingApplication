@@ -1,9 +1,9 @@
 package com.platform.mapper;
 
-import com.platform.model.Country;
-import com.platform.model.Passport;
-import com.platform.model.FlightPassenger;
-import com.platform.business.booking.dto.request.FlightPassengerDto;
+import com.platform.business.model.Country;
+import com.platform.business.model.Passport;
+import com.platform.business.model.FlightPassenger;
+import com.platform.business.service.booking.dto.request.FlightPassengerDto;
 import com.platform.repository.country.CountryDao;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;

@@ -1,11 +1,6 @@
 package com.platform.business.service.auth;
 
-import com.platform.business.auth.AuthenticationRequest;
-import com.platform.business.auth.AuthenticationResponse;
-import com.platform.business.auth.AuthenticationService;
-import com.platform.business.auth.CustomerAuthenticationService;
-import com.platform.business.auth.exception.AuthenticationFailedException;
-import com.platform.repository.customer.InMemoryCustomerDao;
+import com.platform.business.service.auth.exception.AuthenticationFailedException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -20,8 +15,8 @@ class AuthenticationServiceTest {
 
         private final AuthenticationService authenticationService;
 
-        AuthenticationWithCorrectCredentialsTest() {
-            authenticationService = new CustomerAuthenticationService(new InMemoryCustomerDao());
+        AuthenticationWithCorrectCredentialsTest(AuthenticationService authenticationService) {
+            this.authenticationService = authenticationService;
         }
 
         @Test
@@ -39,8 +34,8 @@ class AuthenticationServiceTest {
 
         private final AuthenticationService authenticationService;
 
-        AuthenticationWithWrongCredentialsTest() {
-            authenticationService = new CustomerAuthenticationService(new InMemoryCustomerDao());
+        AuthenticationWithWrongCredentialsTest(AuthenticationService authenticationService) {
+            this.authenticationService = authenticationService;
         }
 
         @Test

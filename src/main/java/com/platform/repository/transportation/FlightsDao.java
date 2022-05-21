@@ -1,6 +1,6 @@
 package com.platform.repository.transportation;
 
-import com.platform.model.Flight;
+import com.platform.business.model.Flight;
 
 import java.time.OffsetDateTime;
 import java.util.Optional;

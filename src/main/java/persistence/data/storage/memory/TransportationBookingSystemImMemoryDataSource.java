@@ -1,6 +1,6 @@
 package persistence.data.storage.memory;
 
-import com.platform.model.*;
+import com.platform.business.model.*;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -141,7 +141,7 @@ public class TransportationBookingSystemImMemoryDataSource implements Serializab
 
     public static class CustomerDataSource implements Serializable {
         private final Map<Long, Customer> customers = new HashMap<>(Map.of(
-                924427L, new Customer(924427L, "ali.arabian@gmail.com", "12345", "Ali", "Arabian", "4986350641"),
+                924427L, new Customer(924427L, "ali.arabian@gmail.com", "$2a$11$wCuJw0/HfW7OjAc9KLEkWOAKoBsHkfYsuupgImdkXFYFYPEAVJ79K", "Ali", "Arabian", "4986350641"),
                 924429L, new Customer(924429L, "Faraanak.ghm@gmail.com", "12345", "Faraanak", "Gholaami", "44886450641"),
                 924430L, new Customer(924430L, "laleh.malekian@gmail.com", "12345", "Laleh", "Malekian", "00651298772"),
                 924431L, new Customer(924431L, "alihosseini@gmail.com", "12345", "Ali", "Hosseini", "98752136987"),

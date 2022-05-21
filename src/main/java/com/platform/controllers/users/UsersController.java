@@ -3,9 +3,9 @@ package com.platform.controllers.users;
 
 import com.platform.ApiResponseEntity;
 import com.platform.ResourceCreationDetails;
-import com.platform.business.users.RegistrationService;
-import com.platform.model.FlightTicket;
-import com.platform.model.User;
+import com.platform.business.service.users.RegistrationService;
+import com.platform.business.model.FlightTicket;
+import com.platform.business.model.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

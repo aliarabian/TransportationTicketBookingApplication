@@ -1,8 +1,8 @@
 package com.platform.mapper;
 
-import com.platform.model.Flight;
-import com.platform.business.search.transportations.dto.FlightDto;
-import com.platform.business.search.transportations.dto.SeatingSectionDto;
+import com.platform.business.model.Flight;
+import com.platform.business.service.transportations.dto.FlightDto;
+import com.platform.business.service.transportations.dto.SeatingSectionDto;
 import org.springframework.stereotype.Component;
 
 import java.util.Set;

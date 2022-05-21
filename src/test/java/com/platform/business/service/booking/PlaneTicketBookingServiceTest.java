@@ -1,14 +1,12 @@
 package com.platform.business.service.booking;
 
-import com.platform.business.booking.BookingService;
-import com.platform.business.booking.FlightTicketBookingService;
+import com.platform.business.model.*;
+import com.platform.business.service.booking.dto.FlightTicketDto;
+import com.platform.business.service.booking.dto.request.FlightPassengerDto;
+import com.platform.business.service.booking.dto.request.PlaneBookingPassengerDetail;
+import com.platform.business.service.booking.dto.request.PlaneTicketBookingRequest;
 import com.platform.mapper.PassengerMapper;
 import com.platform.mapper.PlaneTicketMapper;
-import com.platform.business.booking.dto.request.PlaneBookingPassengerDetail;
-import com.platform.business.booking.dto.request.FlightPassengerDto;
-import com.platform.business.booking.dto.request.PlaneTicketBookingRequest;
-import com.platform.business.booking.dto.FlightTicketDto;
-import com.platform.model.*;
 import com.platform.repository.country.InMemoryCountryDao;
 import com.platform.repository.customer.InMemoryCustomerDao;
 import com.platform.repository.ticket.InMemoryPlaneTicketDao;

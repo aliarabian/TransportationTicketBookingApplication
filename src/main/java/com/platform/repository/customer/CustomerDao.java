@@ -1,6 +1,6 @@
 package com.platform.repository.customer;
 
-import com.platform.model.Customer;
+import com.platform.business.model.Customer;
 
 import java.util.Optional;
 

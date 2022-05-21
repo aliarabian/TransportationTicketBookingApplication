@@ -1,6 +1,6 @@
 package com.platform.repository.transportation;
 
-import com.platform.model.Flight;
+import com.platform.business.model.Flight;
 import org.springframework.stereotype.Repository;
 import persistence.data.storage.memory.TransportationBookingSystemImMemoryDataSource;
 

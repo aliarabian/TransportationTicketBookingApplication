@@ -1,6 +1,6 @@
 package com.platform.repository.country;
 
-import com.platform.model.Country;
+import com.platform.business.model.Country;
 import org.springframework.stereotype.Repository;
 import persistence.data.storage.memory.TransportationBookingSystemImMemoryDataSource;
 
