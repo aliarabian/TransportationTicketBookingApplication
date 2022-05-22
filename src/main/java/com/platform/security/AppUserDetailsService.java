@@ -1,8 +1,8 @@
 package com.platform.security;
 
 import com.platform.business.model.Customer;
-import com.platform.business.service.auth.exception.AuthenticationFailedException;
 import com.platform.repository.customer.CustomerDao;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -27,7 +27,7 @@ public class AppUserDetailsService implements UserDetailsService {
 
         return User.builder().username(username)
                    .password(customer.getPassword())
-                   .authorities(List.of())
+                   .authorities(List.of(new SimpleGrantedAuthority("USER")))
                    .disabled(false)
                    .accountLocked(false)
                    .accountExpired(false)
