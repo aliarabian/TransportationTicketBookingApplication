@@ -113,6 +113,10 @@ public class JwtConfiguration {
         try {
             JwtClaims jwtClaims = jwtConsumer.processToClaims(token);
             JwtContext jwtContext = jwtConsumer.process(token);
+            jwtContext.getJoseObjects().stream().findFirst().ifPresent((jwt) -> {
+                String alg = jwt.getHeaders().getStringHeaderValue("alg");
+                System.out.println(alg);
+            });
             return Jwt.withTokenValue(jwtClaims.toString())
                       .audience(jwtClaims.getAudience())
                       .claim("roles", jwtClaims.getClaimValue("roles"))
