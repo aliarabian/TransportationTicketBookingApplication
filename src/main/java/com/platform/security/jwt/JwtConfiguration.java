@@ -5,14 +5,26 @@ import org.jose4j.jws.AlgorithmIdentifiers;
 import org.jose4j.jwt.JwtClaims;
 import org.jose4j.jwt.MalformedClaimException;
 import org.jose4j.jwt.consumer.*;
+<<<<<<< HEAD
+=======
+import org.jose4j.jwx.JsonWebStructure;
+>>>>>>> 1c43ee15b94e205d9fde4af186e873548672c0c4
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+<<<<<<< HEAD
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.JwtException;
+=======
+import org.springframework.security.oauth2.jose.jws.SignatureAlgorithm;
+import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
+import org.springframework.security.oauth2.jwt.JwtException;
+import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
+>>>>>>> 1c43ee15b94e205d9fde4af186e873548672c0c4
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -111,8 +123,18 @@ public class JwtConfiguration {
                 .build(); // create the JwtConsumer instance
 
         try {
+<<<<<<< HEAD
             JwtClaims jwtClaims = jwtConsumer.processToClaims(token);
             JwtContext jwtContext = jwtConsumer.process(token);
+=======
+            //  Validate the JWT and process it to the Claims
+            JwtClaims jwtClaims = jwtConsumer.processToClaims(token);
+            JwtContext jwtContext = jwtConsumer.process(token);
+            jwtContext.getJoseObjects().stream().findFirst().ifPresent((jwt) -> {
+                String alg = jwt.getHeaders().getStringHeaderValue("alg");
+                System.out.println(alg);
+            });
+>>>>>>> 1c43ee15b94e205d9fde4af186e873548672c0c4
             return Jwt.withTokenValue(jwtClaims.toString())
                       .audience(jwtClaims.getAudience())
                       .claim("roles", jwtClaims.getClaimValue("roles"))
@@ -126,6 +148,17 @@ public class JwtConfiguration {
                       .build();
 
         } catch (InvalidJwtException e) {
+<<<<<<< HEAD
+=======
+            // InvalidJwtException will be thrown, if the JWT failed processing or validation in anyway.
+            // Hopefully with meaningful explanations(s) about what went wrong.
+            System.out.println("Invalid JWT! " + e);
+
+            // Programmatic access to (some) specific reasons for JWT invalidity is also possible
+            // should you want different error handling behavior for certain conditions.
+
+            // Whether or not the JWT has expired being one common reason for invalidity
+>>>>>>> 1c43ee15b94e205d9fde4af186e873548672c0c4
             if (e.hasExpired()) {
                 System.out.println("JWT expired at " + e.getJwtContext().getJwtClaims().getExpirationTime());
             }
