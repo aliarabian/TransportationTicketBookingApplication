@@ -9,6 +9,7 @@ import com.platform.business.model.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Set;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -23,8 +24,9 @@ public class UsersController {
     }
 
     @PostMapping(consumes = APPLICATION_JSON_VALUE)
-    public ResponseEntity<ApiResponseEntity<ResourceCreationDetails>> registerUser(@RequestBody UserDto userDto) {
+    public ResponseEntity<ApiResponseEntity<ResourceCreationDetails>> registerUser(@RequestBody @Valid UserDto userDto) {
         User user = userRegistrationService.register(userDto);
+        System.out.println(user);
         ResourceCreationDetails resourceCreationDetails = new ResourceCreationDetails("/users/" + user.getId());
         return ResponseEntity.created(resourceCreationDetails.getLocation())
                              .body(new ApiResponseEntity<>(resourceCreationDetails));
@@ -32,7 +34,7 @@ public class UsersController {
 
 
     @GetMapping("{userId}/flight-bookings")
-    public ResponseEntity<ApiResponseEntity<Set<FlightTicket>>> usersFlightBookings() {
+    public ResponseEntity<ApiResponseEntity<Set<FlightTicket>>> usersFlightBookings(@PathVariable String userId) {
         return ResponseEntity.ok(new ApiResponseEntity<>(Set.of()));
     }
 

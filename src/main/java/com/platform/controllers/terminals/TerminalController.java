@@ -13,10 +13,15 @@ import java.util.Set;
 @RestController
 @RequestMapping(value = "terminals", produces = MediaType.APPLICATION_JSON_VALUE)
 public class TerminalController {
+    private final TerminalService terminalService;
+
+    public TerminalController(TerminalService terminalService) {
+        this.terminalService = terminalService;
+    }
 
     @GetMapping
     public ResponseEntity<ApiResponseEntity<Set<Terminal>>> getTerminals() {
-        return ResponseEntity.ok()
-                             .build();
+        return ResponseEntity.ok(new ApiResponseEntity<>(terminalService.terminals()));
+
     }
 }

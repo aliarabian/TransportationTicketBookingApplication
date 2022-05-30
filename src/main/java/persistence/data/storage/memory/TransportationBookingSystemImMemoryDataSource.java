@@ -73,7 +73,7 @@ public class TransportationBookingSystemImMemoryDataSource implements Serializab
         public AirlineTransportationDataSource() {
             transportations = new HashMap<>();
             LocalDateTime localDateTime = LocalDateTime.of(2022, 6, 12, 5, 10, 0, 0);
-            ZoneId zoneId = ZoneId.of("Asia/Tehran");
+            ZoneId zoneId = ZoneId.of("UTC");
             transportations.put(1001L, new Flight(1001L,
                     getTerminals().terminal(400L),
                     getTerminals().terminal(402L),
@@ -302,6 +302,10 @@ public class TransportationBookingSystemImMemoryDataSource implements Serializab
 
         public Terminal terminal(Long id) {
             return terminals.get(id);
+        }
+
+        public Collection<Terminal> terminals() {
+            return terminals.values();
         }
     }
 

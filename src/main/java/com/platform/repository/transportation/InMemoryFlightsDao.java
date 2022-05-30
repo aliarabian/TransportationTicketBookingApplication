@@ -49,7 +49,7 @@ public class InMemoryFlightsDao implements FlightsDao {
     private boolean isMatch(String from, String to, OffsetDateTime dateTime, Flight airlineTransportation) {
         return airlineTransportation.getOffset().getCity().getName().equals(from) &&
                 airlineTransportation.getDestination().getCity().getName().equals(to) &&
-                airlineTransportation.getDeparturesAt().equals(dateTime);
+                airlineTransportation.getDeparturesAt().toLocalDate().equals(dateTime.toLocalDate());
     }
 
 }

@@ -3,10 +3,10 @@ package com.platform.controllers.booking;
 import com.platform.ApiErrorResponse;
 import com.platform.ApiResponseEntity;
 import com.platform.ResourceCreationDetails;
+import com.platform.business.exception.ApplicationException;
 import com.platform.business.service.booking.BookingService;
 import com.platform.business.service.booking.dto.FlightTicketDto;
 import com.platform.business.service.booking.dto.request.PlaneTicketBookingRequest;
-import com.platform.business.exception.ApplicationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +32,6 @@ public class FlightTicketBookingController {
         } catch (ApplicationException ex) {
             return new ApiResponseEntity<>(new ApiErrorResponse(ex.getMessage(), ex.errorCode()));
         }
-
     }
 
     @PostMapping("bookings")

@@ -1,10 +1,23 @@
 package com.platform.controllers.users;
 
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 public class UserDto {
+    @NotBlank
+    @Length(min = 3)
     private String username;
+    @NotBlank
+    @Length(min = 5)
     private String password;
+    @NotBlank
     private String firstName;
+    @NotBlank
     private String lastName;
+    @NotBlank
+    @Length(min = 11, max = 11)
     private String nationalId;
 
     public String getUsername() {
@@ -45,5 +58,16 @@ public class UserDto {
 
     public void setNationalId(String nationalId) {
         this.nationalId = nationalId;
+    }
+
+    @Override
+    public String toString() {
+        return "UserDto{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", nationalId='" + nationalId + '\'' +
+                '}';
     }
 }
