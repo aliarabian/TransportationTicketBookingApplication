@@ -12,6 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.Set;
 
@@ -26,11 +27,11 @@ public class FlightTicketBookingController {
     }
 
     @PostMapping("{flightId}/bookings")
-    public ApiResponseEntity<Set<FlightTicketDto>> bookTickets(PlaneTicketBookingRequest request, @PathVariable String flightId) {
+    public ResponseEntity<ApiResponseEntity<Set<FlightTicketDto>>> bookTickets(@Valid @RequestBody PlaneTicketBookingRequest request, @PathVariable String flightId) {
         try {
-            return new ApiResponseEntity<>(bookingService.bookTickets(request), false);
+            return ResponseEntity.ok().body(new ApiResponseEntity<>(bookingService.bookTickets(request)));
         } catch (ApplicationException ex) {
-            return new ApiResponseEntity<>(new ApiErrorResponse(ex.getMessage(), ex.errorCode()));
+            return ResponseEntity.ok().body(new ApiResponseEntity<>(new ApiErrorResponse(ex.getMessage(), ex.errorCode())));
         }
     }
 
@@ -42,7 +43,6 @@ public class FlightTicketBookingController {
 
     @GetMapping("bookings")
     public ResponseEntity<ApiResponseEntity<Set<FlightTicketDto>>> getFlightBookings() {
-        return ResponseEntity.ok()
-                             .build();
+        return ResponseEntity.ok(new ApiResponseEntity<>(bookingService.getAllBookings()));
     }
 }

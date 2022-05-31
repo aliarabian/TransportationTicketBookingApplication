@@ -33,8 +33,8 @@ public class AuthenticationController {
             AuthenticationResponse authenticationResponse = authenticationService.authenticate(request);
             ResponseCookie cookie = ResponseCookie.from("auth_token", authenticationResponse.getToken())
                                                   .httpOnly(true)
-                                                  .maxAge(Duration.ofMinutes(30))
-                                                  .secure(true)
+                                                  .maxAge(Duration.ofMinutes(10))
+//                                                  .secure(true)
                                                   .path("/")
                                                   .sameSite("strict")
                                                   .build();

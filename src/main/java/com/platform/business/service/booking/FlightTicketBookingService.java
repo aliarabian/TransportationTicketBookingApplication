@@ -20,6 +20,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Collectors;
 
 @Service
 public class FlightTicketBookingService implements BookingService {
@@ -49,6 +50,13 @@ public class FlightTicketBookingService implements BookingService {
                                        .orElseThrow(() -> new CustomerNotFoundException("Customer Doesn't Exists"));
 
         return bookTickets(req, airlineTransportation, customer);
+    }
+
+    @Override
+    public Set<FlightTicketDto> getAllBookings() {
+        return ticketDao.getAllTickets().stream()
+                        .map(ticketDtoMapper::toDto)
+                        .collect(Collectors.toSet());
     }
 
     private Set<FlightTicketDto> bookTickets(PlaneTicketBookingRequest req, Flight airlineTransportation, Customer customer) {

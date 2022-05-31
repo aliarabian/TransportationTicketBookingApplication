@@ -1,12 +1,20 @@
 package com.platform.business.service.booking.dto.request;
 
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 public class PlaneTicketBookingRequest {
+    @NotNull
     private Set<PlaneBookingPassengerDetail> passengersBookingDetails;
+
+    @NotNull
     private Long seatingSectionId;
 
+    @NotNull
     private Long customerId;
+    @NotNull
     private Long transportationId;
 
     public Set<PlaneBookingPassengerDetail> getPassengersBookingDetails() {

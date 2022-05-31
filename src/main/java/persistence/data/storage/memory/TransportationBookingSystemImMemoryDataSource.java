@@ -324,6 +324,10 @@ public class TransportationBookingSystemImMemoryDataSource implements Serializab
         public int count() {
             return tickets.size();
         }
+
+        public Collection<FlightTicket> getAllTickets() {
+            return tickets.values();
+        }
     }
 
     public static CityDataSource getCities() {
