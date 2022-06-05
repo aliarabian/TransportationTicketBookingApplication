@@ -112,23 +112,18 @@ public class JwtConfiguration {
 
         try {
             JwtClaims jwtClaims = jwtConsumer.processToClaims(token);
-            JwtContext jwtContext = jwtConsumer.process(token);
-            jwtContext.getJoseObjects().stream().findFirst().ifPresent((jwt) -> {
-                String alg = jwt.getHeaders().getStringHeaderValue("alg");
-                System.out.println(alg);
-            });
             return Jwt.withTokenValue(jwtClaims.toString())
-                      .audience(jwtClaims.getAudience())
-                      .claim("roles", jwtClaims.getClaimValue("roles"))
-                      .expiresAt(Instant.ofEpochSecond(jwtClaims.getExpirationTime().getValueInMillis()))
-                      .issuedAt(Instant.ofEpochSecond(jwtClaims.getIssuedAt().getValueInMillis()))
-                      .issuer(jwtClaims.getIssuer())
-                      .audience(jwtClaims.getAudience())
-                      .jti(jwtClaims.getJwtId())
-                      .header("alg", "RSA512")
-                      .notBefore(Instant.ofEpochSecond(jwtClaims.getNotBefore().getValueInMillis()))
-                      .build();
-
+                    .audience(jwtClaims.getAudience())
+                    .claim("roles", jwtClaims.getClaimValue("roles"))
+                    .expiresAt(Instant.ofEpochSecond(jwtClaims.getExpirationTime().getValueInMillis()))
+                    .issuedAt(Instant.ofEpochSecond(jwtClaims.getIssuedAt().getValueInMillis()))
+                    .issuer(jwtClaims.getIssuer())
+                    .audience(jwtClaims.getAudience())
+                    .jti(jwtClaims.getJwtId())
+                    .subject(jwtClaims.getSubject())
+                    .header("alg", "RSA512")
+                    .notBefore(Instant.ofEpochSecond(jwtClaims.getNotBefore().getValueInMillis()))
+                    .build();
         } catch (InvalidJwtException e) {
             if (e.hasExpired()) {
                 System.out.println("JWT expired at " + e.getJwtContext().getJwtClaims().getExpirationTime());

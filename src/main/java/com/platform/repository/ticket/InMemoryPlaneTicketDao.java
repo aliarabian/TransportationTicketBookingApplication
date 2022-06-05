@@ -8,7 +8,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Repository
-public class InMemoryPlaneTicketDao implements PlaneTicketDao {
+public class InMemoryPlaneTicketDao implements FlightTicketDao {
     @Override
     public void persist(FlightTicket ticket) {
         TransportationBookingSystemImMemoryDataSource.getTickets().addTicket(ticket);
@@ -20,5 +20,10 @@ public class InMemoryPlaneTicketDao implements PlaneTicketDao {
                                                             getAllTickets()
                                                             .stream()
                                                             .collect(Collectors.toSet());
+    }
+
+    @Override
+    public Set<FlightTicket> getUsersTicketsByUsername(String username) {
+        return TransportationBookingSystemImMemoryDataSource.getTickets().getUsersTicketsByUsername(username);
     }
 }

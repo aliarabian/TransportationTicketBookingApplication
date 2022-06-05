@@ -38,7 +38,7 @@ public class FlightTicketBookingController {
     @PostMapping("bookings")
     public ResponseEntity<ApiResponseEntity<ResourceCreationDetails>> changePassengersFlight() {
         return ResponseEntity.created(URI.create(""))
-                             .build();
+                .build();
     }
 
     @GetMapping("bookings")

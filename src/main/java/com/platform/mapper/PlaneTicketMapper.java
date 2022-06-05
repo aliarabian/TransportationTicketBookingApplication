@@ -25,7 +25,7 @@ public class PlaneTicketMapper implements Mapper<FlightTicket, FlightTicketDto> 
         planeTicketDto.setDestination(planeTicket.getTransportation().getDestination().getName());
         planeTicketDto.setPassengerName(planeTicket.getPassenger().getFirstName() + " " + planeTicket.getPassenger().getLastName());
         planeTicketDto.setDepartureDateTime(planeTicket.getTransportation().getDeparturesAt().toZonedDateTime());
-        planeTicketDto.setSeatingSectionDescription(planeTicket.getSeat().getSection().title());
+        planeTicketDto.setSectionTitle(planeTicket.getSeat().getSection().title());
         planeTicketDto.setSeatNO(planeTicket.getSeat().getSeatNO());
         planeTicketDto.setTransportationId(planeTicket.getTransportation().getId());
         planeTicketDto.setAge(planeTicket.getPassenger()

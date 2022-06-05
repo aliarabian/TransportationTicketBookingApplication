@@ -179,7 +179,7 @@ class PlaneTicketBookingServiceTest {
                 getPlaneBookingPassengerDetail(passengerNumberTwo), getPlaneBookingPassengerDetail(passengerNumberThree));
         Set<FlightTicketDto> tickets = bookingService.bookTickets(request);
         long count = tickets.stream()
-                            .map(FlightTicketDto::getSeatingSectionDescription)
+                            .map(FlightTicketDto::getSectionTitle)
                             .distinct()
                             .count();
         assertEquals(1, count);

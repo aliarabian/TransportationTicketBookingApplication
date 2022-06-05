@@ -95,8 +95,8 @@ public class TransportationBookingSystemImMemoryDataSource implements Serializab
 
         public Set<Flight> findTransportationsByDate(OffsetDateTime dateTime) {
             return transportations.values().stream()
-                                  .filter(transportation -> transportation.getDeparturesAt().equals(dateTime))
-                                  .collect(Collectors.toSet());
+                    .filter(transportation -> transportation.getDeparturesAt().equals(dateTime))
+                    .collect(Collectors.toSet());
         }
 
         public Set<Flight> findAllTransportations() {
@@ -137,6 +137,10 @@ public class TransportationBookingSystemImMemoryDataSource implements Serializab
         public Country country(String code) {
             return countries.get(code);
         }
+
+        public Collection<Country> findAll() {
+            return countries.values();
+        }
     }
 
     public static class CustomerDataSource implements Serializable {
@@ -169,8 +173,8 @@ public class TransportationBookingSystemImMemoryDataSource implements Serializab
 
         public Optional<Customer> findCustomerByUsername(String username) {
             return customers.values().stream()
-                            .filter(customer -> customer.getUsername().equals(username))
-                            .findFirst();
+                    .filter(customer -> customer.getUsername().equals(username))
+                    .findFirst();
         }
     }
 
@@ -327,6 +331,13 @@ public class TransportationBookingSystemImMemoryDataSource implements Serializab
 
         public Collection<FlightTicket> getAllTickets() {
             return tickets.values();
+        }
+
+        public Set<FlightTicket> getUsersTicketsByUsername(String username) {
+            return tickets.values().stream()
+                    .filter(ticket -> ticket.getCustomer().getUsername().equals(username))
+                    .collect(Collectors.toSet());
+
         }
     }
 

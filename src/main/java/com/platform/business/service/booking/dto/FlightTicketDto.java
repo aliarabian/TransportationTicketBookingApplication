@@ -13,7 +13,7 @@ public class FlightTicketDto {
     private String passengerName;
     private int age;
     private Long sectionId;
-    private String seatingSectionDescription;
+    private String sectionTitle;
     private String seatNO;
     private Set<String> selectedPrivileges;
 
@@ -73,12 +73,12 @@ public class FlightTicketDto {
         this.age = age;
     }
 
-    public String getSeatingSectionDescription() {
-        return seatingSectionDescription;
+    public String getSectionTitle() {
+        return sectionTitle;
     }
 
-    public void setSeatingSectionDescription(String seatingSectionDescription) {
-        this.seatingSectionDescription = seatingSectionDescription;
+    public void setSectionTitle(String sectionTitle) {
+        this.sectionTitle = sectionTitle;
     }
 
     public String getSeatNO() {
@@ -125,7 +125,7 @@ public class FlightTicketDto {
                 ", passengerName='" + passengerName + '\'' +
                 ", age=" + age +
                 ", sectionId=" + sectionId +
-                ", seatingSectionDescription='" + seatingSectionDescription + '\'' +
+                ", seatingSectionDescription='" + sectionTitle + '\'' +
                 ", seatNO='" + seatNO + '\'' +
                 ", selectedPrivileges=" + selectedPrivileges +
                 '}';
