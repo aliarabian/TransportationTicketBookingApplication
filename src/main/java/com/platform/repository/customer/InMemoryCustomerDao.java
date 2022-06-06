@@ -24,4 +24,14 @@ public class InMemoryCustomerDao implements CustomerDao {
         return TransportationBookingSystemImMemoryDataSource.getCustomers()
                                                             .findCustomerByUsername(username);
     }
+
+    @Override
+    public boolean exists(String username, String nationalId) {
+        return TransportationBookingSystemImMemoryDataSource.getCustomers().exist(username, nationalId);
+    }
+
+    @Override
+    public void insert(Customer customer) {
+        TransportationBookingSystemImMemoryDataSource.getCustomers().addCustomer(customer);
+    }
 }

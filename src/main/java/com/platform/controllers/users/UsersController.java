@@ -1,10 +1,13 @@
 package com.platform.controllers.users;
 
 
+import com.platform.ApiErrorResponse;
 import com.platform.ApiResponseEntity;
 import com.platform.ResourceCreationDetails;
+import com.platform.business.exception.ApplicationException;
 import com.platform.business.service.booking.dto.FlightTicketDto;
 import com.platform.business.service.tickets.TicketsService;
+import com.platform.business.service.users.CustomerExistsException;
 import com.platform.business.service.users.RegistrationService;
 import com.platform.business.model.User;
 import org.springframework.http.ResponseEntity;
@@ -31,11 +34,14 @@ public class UsersController {
 
     @PostMapping(consumes = APPLICATION_JSON_VALUE)
     public ResponseEntity<ApiResponseEntity<ResourceCreationDetails>> registerUser(@RequestBody @Valid UserDto userDto) {
-        User user = userRegistrationService.register(userDto);
-        System.out.println(user);
-        ResourceCreationDetails resourceCreationDetails = new ResourceCreationDetails("/users/" + user.getId());
-        return ResponseEntity.created(resourceCreationDetails.getLocation())
-                .body(new ApiResponseEntity<>(resourceCreationDetails));
+        try {
+            User user = userRegistrationService.register(userDto);
+            ResourceCreationDetails resourceCreationDetails = new ResourceCreationDetails("/users/" + user.getId());
+            return ResponseEntity.created(resourceCreationDetails.getLocation())
+                                 .body(new ApiResponseEntity<>(resourceCreationDetails));
+        } catch (CustomerExistsException exception) {
+            return ResponseEntity.status(409).body(new ApiResponseEntity<>(new ApiErrorResponse(exception.getMessage(), exception.errorCode())));
+        }
     }
 
 
