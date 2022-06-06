@@ -2,6 +2,7 @@ package com.platform.repository.ticket;
 
 import com.platform.business.model.FlightTicket;
 import org.springframework.stereotype.Repository;
+import persistence.data.storage.memory.DuplicateItemException;
 import persistence.data.storage.memory.TransportationBookingSystemImMemoryDataSource;
 
 import java.util.Set;
@@ -10,7 +11,7 @@ import java.util.stream.Collectors;
 @Repository
 public class InMemoryPlaneTicketDao implements FlightTicketDao {
     @Override
-    public void persist(FlightTicket ticket) {
+    public void persist(FlightTicket ticket) throws DuplicateItemException {
         TransportationBookingSystemImMemoryDataSource.getTickets().addTicket(ticket);
     }
 

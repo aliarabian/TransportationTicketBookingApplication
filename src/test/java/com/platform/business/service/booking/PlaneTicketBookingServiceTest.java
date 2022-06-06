@@ -5,6 +5,7 @@ import com.platform.business.service.booking.dto.FlightTicketDto;
 import com.platform.business.service.booking.dto.request.FlightPassengerDto;
 import com.platform.business.service.booking.dto.request.PlaneBookingPassengerDetail;
 import com.platform.business.service.booking.dto.request.PlaneTicketBookingRequest;
+import com.platform.business.service.booking.exception.PassengerExistsException;
 import com.platform.mapper.PassengerMapper;
 import com.platform.mapper.PlaneTicketMapper;
 import com.platform.repository.country.InMemoryCountryDao;
@@ -62,6 +63,26 @@ class PlaneTicketBookingServiceTest {
             Set<FlightTicketDto> bookedTickets = bookingService.bookTickets(request);
 
             assertEquals(2, bookedTickets.size());
+        }
+    }
+
+    @Nested
+    @DisplayName("When booking ticket for a single passenger ")
+    class SingleTicketBookingTest {
+
+        @Test
+        @DisplayName("Then it should not add a passenger twice to the same flight")
+        void shouldNotAddPassengerTwice() {
+            LocalDate localDate = LocalDate.of(1998, 4, 12);
+            FlightPassengerDto passengerNumberOneFirstInstance = generatePassengerDto("Amir", "A", "87946621",
+                    localDate, "00254976321", "IR",
+                    LocalDate.of(2023, 12, 15));
+            FlightPassengerDto passengerNumberOneSecondInstance = generatePassengerDto("Amir", "A", "87946621", localDate,
+                    "00254976321", "IR",
+                    LocalDate.of(2023, 12, 15));
+            PlaneTicketBookingRequest request = initializePlaneTicketBookingRequest(getPlaneBookingPassengerDetail(passengerNumberOneFirstInstance));
+            bookingService.bookTickets(request);
+            assertThrows(PassengerExistsException.class, () -> bookingService.bookTickets(request));
         }
     }
 

@@ -325,7 +325,12 @@ public class TransportationBookingSystemImMemoryDataSource implements Serializab
             this.tickets = new HashMap<>();
         }
 
-        public void addTicket(FlightTicket ticket) {
+        public void addTicket(FlightTicket ticket) throws DuplicateItemException {
+            boolean exists = tickets.values().stream().anyMatch(t -> t.getPassenger().getNationalId().equals(ticket.getPassenger().getNationalId()) &&
+                    t.getTransportation().getId().equals(ticket.getTransportation().getId()));
+            if(exists){
+                throw new DuplicateItemException();
+            }
             tickets.put(ticket.getId(), ticket);
         }
 
