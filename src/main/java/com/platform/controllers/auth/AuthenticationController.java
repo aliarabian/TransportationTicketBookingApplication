@@ -28,7 +28,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<ApiResponseEntity<Void>> login(@RequestBody @Valid AuthenticationRequest request) {
+    public ResponseEntity<ApiResponseEntity<AuthenticationResponse>> login(@RequestBody @Valid AuthenticationRequest request) {
         try {
             AuthenticationResponse authenticationResponse = authenticationService.authenticate(request);
             ResponseCookie cookie = ResponseCookie.from("auth_token", authenticationResponse.getToken())
@@ -40,7 +40,7 @@ public class AuthenticationController {
                                                   .build();
             return ResponseEntity.ok()
                                  .header(HttpHeaders.SET_COOKIE, cookie.toString())
-                                 .build();
+                                 .body(new ApiResponseEntity<>(authenticationResponse));
         } catch (AuthenticationException authenticationException) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(
                     new ApiResponseEntity<>(new ApiErrorResponse(authenticationException.getMessage(), 14021)));

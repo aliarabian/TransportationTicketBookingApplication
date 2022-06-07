@@ -326,9 +326,11 @@ public class TransportationBookingSystemImMemoryDataSource implements Serializab
         }
 
         public void addTicket(FlightTicket ticket) throws DuplicateItemException {
-            boolean exists = tickets.values().stream().anyMatch(t -> t.getPassenger().getNationalId().equals(ticket.getPassenger().getNationalId()) &&
-                    t.getTransportation().getId().equals(ticket.getTransportation().getId()));
-            if(exists){
+            boolean exists = tickets.values().stream().anyMatch(t ->
+                    (t.getPassenger().getNationalId().equals(ticket.getPassenger().getNationalId()) ||
+                            t.getPassenger().getPassportDetails().getPassportNO().equals(ticket.getPassenger().getPassportDetails().getPassportNO())) &&
+                            t.getTransportation().getId().equals(ticket.getTransportation().getId()));
+            if (exists) {
                 throw new DuplicateItemException();
             }
             tickets.put(ticket.getId(), ticket);

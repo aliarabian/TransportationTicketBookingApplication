@@ -1,5 +1,6 @@
 package com.platform.business.service.auth;
 
+import com.platform.business.model.Customer;
 import com.platform.repository.customer.CustomerDao;
 import com.platform.security.jwt.JwtUtil;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -10,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class CustomerAuthenticationService implements AuthenticationService {
@@ -30,9 +32,11 @@ public class CustomerAuthenticationService implements AuthenticationService {
         Authentication authenticationToken =
                 new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword());
         Authentication authenticated = authenticationManager.authenticate(authenticationToken);
+        Customer customer = customerDao.findCustomerByUsername(request.getUsername()).orElseThrow();
+
         String token = jwtUtil.creatJwtFromUserDetails((UserDetails) authenticated.getPrincipal());
 
-        return new AuthenticationResponse(token);
+        return new AuthenticationResponse(token, request.getUsername(), customer.getId());
 
     }
 
