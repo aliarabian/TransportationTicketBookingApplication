@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.OffsetDateTime;
@@ -29,6 +30,7 @@ public class FlightsController {
     }
 
     @GetMapping
+    @PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
     public ResponseEntity<ApiResponseEntity<Set<FlightDto>>> findTransportations(@RequestParam(name = "offset", required = false) String offset,
             @RequestParam(name = "destination", required = false) String destination,
             @RequestParam(name = "departureTime", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) OffsetDateTime departureTime) {
@@ -45,13 +47,8 @@ public class FlightsController {
     @GetMapping(value = "{flightId}")
     public ResponseEntity<ApiResponseEntity<FlightDto>> getTransportationById(@PathVariable("flightId") long flightId) {
         ApiResponseEntity<FlightDto> apiResponse;
-        try {
-            apiResponse = new ApiResponseEntity<>(transportationSearchService.findTransportationById(flightId), false);
-            return ResponseEntity.ok(apiResponse);
-        } catch (ApplicationException applicationException) {
-            apiResponse = new ApiResponseEntity<>(new ApiErrorResponse(applicationException.getMessage(), applicationException.errorCode()));
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(apiResponse);
-        }
+        apiResponse = new ApiResponseEntity<>(transportationSearchService.findTransportationById(flightId), false);
+        return ResponseEntity.ok(apiResponse);
     }
 
     @GetMapping("{flightId}/passengers")

@@ -46,9 +46,6 @@ public class FlightTicketBookingService implements BookingService {
     @Override
     public Set<FlightTicketDto> bookTickets(PlaneTicketBookingRequest req) {
         Objects.requireNonNull(req);
-        if (req.getPassengersBookingDetails().isEmpty()) {
-            throw new BadRequestException("No Passenger Info Provided");
-        }
         Flight airlineTransportation = airlineTransportationDao.findTransportationById(req.getTransportationId())
                                                                .orElseThrow(() -> new TransportationNotFoundException("Wrong Transportation Number"));
         Customer customer = customerDao.findCustomerById(req.getCustomerId())
@@ -77,7 +74,8 @@ public class FlightTicketBookingService implements BookingService {
                 customer.addTicket(ticket);
             } catch (BookingException e) {
                 logger.info("message: {}, errorCode:{}", e.getMessage(), e.errorCode());
-                throw new BadRequestException(e.getMessage());
+
+                throw e;
             } catch (DuplicateItemException e) {
                 logger.info("message: {}", "Passenger Has Already Booked A Ticket For This Flight!");
                 throw new PassengerExistsException("Passenger Has Already Booked A Ticket For This Flight!");

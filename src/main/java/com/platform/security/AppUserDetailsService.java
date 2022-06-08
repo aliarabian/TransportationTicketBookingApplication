@@ -27,7 +27,8 @@ public class AppUserDetailsService implements UserDetailsService {
 
         return User.builder().username(username)
                    .password(customer.getPassword())
-                   .authorities(List.of(new SimpleGrantedAuthority("USER")))
+                   .authorities(List.of(new SimpleGrantedAuthority("USER"),
+                           new SimpleGrantedAuthority("ADMIN")))
                    .disabled(false)
                    .accountLocked(false)
                    .accountExpired(false)

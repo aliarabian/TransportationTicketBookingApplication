@@ -28,11 +28,7 @@ public class FlightTicketBookingController {
 
     @PostMapping("{flightId}/bookings")
     public ResponseEntity<ApiResponseEntity<Set<FlightTicketDto>>> bookTickets(@Valid @RequestBody PlaneTicketBookingRequest request, @PathVariable String flightId) {
-        try {
             return ResponseEntity.ok().body(new ApiResponseEntity<>(bookingService.bookTickets(request)));
-        } catch (ApplicationException ex) {
-            return ResponseEntity.ok().body(new ApiResponseEntity<>(new ApiErrorResponse(ex.getMessage(), ex.errorCode())));
-        }
     }
 
     @PostMapping("bookings")

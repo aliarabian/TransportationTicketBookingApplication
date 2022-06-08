@@ -6,7 +6,6 @@ public class ApiErrorResponse {
     private final String message;
     private final int errorCode;
     private final Instant timestamp;
-
     public ApiErrorResponse(String message, int errorCode) {
         this.message = message;
         this.errorCode = errorCode;

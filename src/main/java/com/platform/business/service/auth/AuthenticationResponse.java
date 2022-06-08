@@ -1,9 +1,12 @@
 package com.platform.business.service.auth;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public final class AuthenticationResponse {
 
     private final String username;
 
+    @JsonIgnore
     private final transient String token;
     private final Long userId;
 

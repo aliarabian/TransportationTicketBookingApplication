@@ -34,14 +34,10 @@ public class UsersController {
 
     @PostMapping(consumes = APPLICATION_JSON_VALUE)
     public ResponseEntity<ApiResponseEntity<ResourceCreationDetails>> registerUser(@RequestBody @Valid UserDto userDto) {
-        try {
-            User user = userRegistrationService.register(userDto);
-            ResourceCreationDetails resourceCreationDetails = new ResourceCreationDetails("/users/" + user.getId());
-            return ResponseEntity.created(resourceCreationDetails.getLocation())
-                                 .body(new ApiResponseEntity<>(resourceCreationDetails));
-        } catch (CustomerExistsException exception) {
-            return ResponseEntity.status(409).body(new ApiResponseEntity<>(new ApiErrorResponse(exception.getMessage(), exception.errorCode())));
-        }
+        User user = userRegistrationService.register(userDto);
+        ResourceCreationDetails resourceCreationDetails = new ResourceCreationDetails("/users/" + user.getId());
+        return ResponseEntity.created(resourceCreationDetails.getLocation())
+                             .body(new ApiResponseEntity<>(resourceCreationDetails));
     }
 
 

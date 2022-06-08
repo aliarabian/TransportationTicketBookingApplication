@@ -1,12 +1,12 @@
 package com.platform.business.service.booking.dto.request;
 
-import org.hibernate.validator.constraints.Length;
-
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 public class PlaneTicketBookingRequest {
     @NotNull
+    @Size(min = 1)
     private Set<PlaneBookingPassengerDetail> passengersBookingDetails;
 
     @NotNull
