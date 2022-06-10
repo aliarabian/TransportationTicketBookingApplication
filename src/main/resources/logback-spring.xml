@@ -17,7 +17,9 @@
         <file>${LOGS}/spring-boot-logger.log</file>
         <encoder
                 class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <Pattern>%d %p %C{1.} [%t] %m%n</Pattern>
+            <Pattern>%d %p %C{1.} [%t] [ IP: %X{ipAddress}, Username: %X{username}, Requested URI: %X{requestURI} ]
+                [%file:%line] %logger{36} %m%n
+            </Pattern>
         </encoder>
 
         <rollingPolicy
@@ -31,7 +33,7 @@
         </rollingPolicy>
     </appender>
 
-    <logger name="com.platform.business.service.booking.FlightTicketBookingService">
+    <logger name="com.platform.aop.LoggingAspect">
         <appender-ref ref="RollingFile"/>
     </logger>
     <!-- LOG everything at INFO level -->

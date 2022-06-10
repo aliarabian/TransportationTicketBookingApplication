@@ -1,6 +1,5 @@
 package com.platform.business.service.booking;
 
-import com.platform.business.exception.BadRequestException;
 import com.platform.business.exception.CustomerNotFoundException;
 import com.platform.business.exception.TransportationNotFoundException;
 import com.platform.business.model.*;
@@ -44,12 +43,12 @@ public class FlightTicketBookingService implements BookingService {
     }
 
     @Override
-    public Set<FlightTicketDto> bookTickets(PlaneTicketBookingRequest req) {
+    public Set<FlightTicketDto> bookTickets(PlaneTicketBookingRequest req) throws BookingException {
         Objects.requireNonNull(req);
         Flight airlineTransportation = airlineTransportationDao.findTransportationById(req.getTransportationId())
-                                                               .orElseThrow(() -> new TransportationNotFoundException("Wrong Transportation Number"));
+                .orElseThrow(() -> new TransportationNotFoundException("Wrong Transportation Number"));
         Customer customer = customerDao.findCustomerById(req.getCustomerId())
-                                       .orElseThrow(() -> new CustomerNotFoundException("Customer Doesn't Exists"));
+                .orElseThrow(() -> new CustomerNotFoundException("Customer Doesn't Exists"));
 
         return bookTickets(req, airlineTransportation, customer);
     }
@@ -57,8 +56,8 @@ public class FlightTicketBookingService implements BookingService {
     @Override
     public Set<FlightTicketDto> getAllBookings() {
         return ticketDao.getAllTickets().stream()
-                        .map(ticketDtoMapper::toDto)
-                        .collect(Collectors.toSet());
+                .map(ticketDtoMapper::toDto)
+                .collect(Collectors.toSet());
     }
 
     private Set<FlightTicketDto> bookTickets(PlaneTicketBookingRequest req, Flight airlineTransportation, Customer customer) {
@@ -72,12 +71,7 @@ public class FlightTicketBookingService implements BookingService {
                 bookedTickets.add(ticketDtoMapper.toDto(ticket));
                 airlineTransportation.addNewBooking(ticket);
                 customer.addTicket(ticket);
-            } catch (BookingException e) {
-                logger.info("message: {}, errorCode:{}", e.getMessage(), e.errorCode());
-
-                throw e;
             } catch (DuplicateItemException e) {
-                logger.info("message: {}", "Passenger Has Already Booked A Ticket For This Flight!");
                 throw new PassengerExistsException("Passenger Has Already Booked A Ticket For This Flight!");
             }
         }

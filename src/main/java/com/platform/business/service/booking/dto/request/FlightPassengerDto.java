@@ -66,4 +66,17 @@ public class FlightPassengerDto {
     public void setBirthdate(LocalDate birthdate) {
         this.birthdate = birthdate;
     }
+
+    @Override
+    public String toString() {
+        return "FlightPassengerDto{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", nationalIdNO='" + nationalIdNO + '\'' +
+                ", passportExpirationDate=" + passportExpirationDate +
+                ", passportIssuingCountryCode='" + passportIssuingCountryCode + '\'' +
+                ", passportNO='" + passportNO + '\'' +
+                ", birthdate=" + birthdate +
+                '}';
+    }
 }

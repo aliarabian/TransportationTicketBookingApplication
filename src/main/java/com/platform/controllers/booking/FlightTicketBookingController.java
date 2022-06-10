@@ -1,9 +1,7 @@
 package com.platform.controllers.booking;
 
-import com.platform.ApiErrorResponse;
 import com.platform.ApiResponseEntity;
 import com.platform.ResourceCreationDetails;
-import com.platform.business.exception.ApplicationException;
 import com.platform.business.service.booking.BookingService;
 import com.platform.business.service.booking.dto.FlightTicketDto;
 import com.platform.business.service.booking.dto.request.PlaneTicketBookingRequest;
@@ -27,8 +25,9 @@ public class FlightTicketBookingController {
     }
 
     @PostMapping("{flightId}/bookings")
-    public ResponseEntity<ApiResponseEntity<Set<FlightTicketDto>>> bookTickets(@Valid @RequestBody PlaneTicketBookingRequest request, @PathVariable String flightId) {
-            return ResponseEntity.ok().body(new ApiResponseEntity<>(bookingService.bookTickets(request)));
+    public ResponseEntity<ApiResponseEntity<Set<FlightTicketDto>>> bookTickets(@Valid @RequestBody PlaneTicketBookingRequest request,
+                                                                               @PathVariable String flightId) {
+        return ResponseEntity.ok().body(new ApiResponseEntity<>(bookingService.bookTickets(request)));
     }
 
     @PostMapping("bookings")

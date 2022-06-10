@@ -1,15 +1,12 @@
 package com.platform.controllers.users;
 
 
-import com.platform.ApiErrorResponse;
 import com.platform.ApiResponseEntity;
 import com.platform.ResourceCreationDetails;
-import com.platform.business.exception.ApplicationException;
+import com.platform.business.model.User;
 import com.platform.business.service.booking.dto.FlightTicketDto;
 import com.platform.business.service.tickets.TicketsService;
-import com.platform.business.service.users.CustomerExistsException;
 import com.platform.business.service.users.RegistrationService;
-import com.platform.business.model.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.jwt.Jwt;
@@ -17,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Set;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
