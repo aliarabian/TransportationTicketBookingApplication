@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
 
 @Aspect
 @Component
-//@Order(1)
 public class LoggingAspect {
     private final static Logger LOGGER = LoggerFactory.getLogger(LoggingAspect.class);
 

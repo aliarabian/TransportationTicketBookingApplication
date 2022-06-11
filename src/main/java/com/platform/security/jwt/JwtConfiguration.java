@@ -4,7 +4,10 @@ import org.jose4j.jwa.AlgorithmConstraints;
 import org.jose4j.jws.AlgorithmIdentifiers;
 import org.jose4j.jwt.JwtClaims;
 import org.jose4j.jwt.MalformedClaimException;
-import org.jose4j.jwt.consumer.*;
+import org.jose4j.jwt.consumer.ErrorCodes;
+import org.jose4j.jwt.consumer.InvalidJwtException;
+import org.jose4j.jwt.consumer.JwtConsumer;
+import org.jose4j.jwt.consumer.JwtConsumerBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -89,9 +92,7 @@ public class JwtConfiguration {
     public JwtDecoder jwtDecoder(RSAPublicKey rsaPublicKey) {
         return (String token) -> {
             try {
-                Jwt jwt = jose4jJwtDecoder(token, rsaPublicKey);
-                LOGGER.info(jwt.getHeaders().toString());
-                return jwt;
+                return jose4jJwtDecoder(token, rsaPublicKey);
             } catch (MalformedClaimException e) {
                 throw new JwtException(e.getMessage(), e);
             }
@@ -113,23 +114,22 @@ public class JwtConfiguration {
         try {
             JwtClaims jwtClaims = jwtConsumer.processToClaims(token);
             return Jwt.withTokenValue(jwtClaims.toString())
-                    .audience(jwtClaims.getAudience())
-                    .claim("roles", jwtClaims.getClaimValue("roles"))
-                    .expiresAt(Instant.ofEpochSecond(jwtClaims.getExpirationTime().getValueInMillis()))
-                    .issuedAt(Instant.ofEpochSecond(jwtClaims.getIssuedAt().getValueInMillis()))
-                    .issuer(jwtClaims.getIssuer())
-                    .audience(jwtClaims.getAudience())
-                    .jti(jwtClaims.getJwtId())
-                    .subject(jwtClaims.getSubject())
-                    .header("alg", "RSA512")
-                    .notBefore(Instant.ofEpochSecond(jwtClaims.getNotBefore().getValueInMillis()))
-                    .build();
+                      .audience(jwtClaims.getAudience())
+                      .claim("roles", jwtClaims.getClaimValue("roles"))
+                      .expiresAt(Instant.ofEpochSecond(jwtClaims.getExpirationTime().getValueInMillis()))
+                      .issuedAt(Instant.ofEpochSecond(jwtClaims.getIssuedAt().getValueInMillis()))
+                      .issuer(jwtClaims.getIssuer())
+                      .audience(jwtClaims.getAudience())
+                      .jti(jwtClaims.getJwtId())
+                      .subject(jwtClaims.getSubject())
+                      .header("alg", "RSA512")
+                      .notBefore(Instant.ofEpochSecond(jwtClaims.getNotBefore().getValueInMillis()))
+                      .build();
         } catch (InvalidJwtException e) {
             if (e.hasExpired()) {
                 System.out.println("JWT expired at " + e.getJwtContext().getJwtClaims().getExpirationTime());
             }
 
-            // Or maybe the audience was invalid
             if (e.hasErrorCode(ErrorCodes.AUDIENCE_INVALID)) {
                 System.out.println("JWT had wrong audience: " + e.getJwtContext().getJwtClaims().getAudience());
             }
