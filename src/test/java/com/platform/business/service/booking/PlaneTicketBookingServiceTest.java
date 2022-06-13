@@ -7,7 +7,7 @@ import com.platform.business.service.booking.dto.request.PlaneBookingPassengerDe
 import com.platform.business.service.booking.dto.request.PlaneTicketBookingRequest;
 import com.platform.business.service.booking.exception.PassengerExistsException;
 import com.platform.mapper.PassengerMapper;
-import com.platform.mapper.PlaneTicketMapper;
+import com.platform.mapper.FlightTicketMapper;
 import com.platform.repository.country.InMemoryCountryDao;
 import com.platform.repository.customer.InMemoryCustomerDao;
 import com.platform.repository.ticket.InMemoryPlaneTicketDao;
@@ -31,7 +31,7 @@ class PlaneTicketBookingServiceTest {
     private final BookingService bookingService = new FlightTicketBookingService(
             new InMemoryFlightsDao(),
             new InMemoryPlaneTicketDao(), new InMemoryCustomerDao(),
-            new PassengerMapper(new InMemoryCountryDao()), new PlaneTicketMapper());
+            new PassengerMapper(new InMemoryCountryDao()), new FlightTicketMapper());
 
     private PlaneTicketBookingRequest planeTicketBookingRequest;
 

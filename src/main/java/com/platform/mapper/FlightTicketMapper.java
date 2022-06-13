@@ -10,7 +10,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
-public class PlaneTicketMapper implements Mapper<FlightTicket, FlightTicketDto> {
+public class FlightTicketMapper implements Mapper<FlightTicket, FlightTicketDto> {
     @Override
     public FlightTicket fromDto(FlightTicketDto planeTicketDto) {
         return null;
@@ -21,8 +21,10 @@ public class PlaneTicketMapper implements Mapper<FlightTicket, FlightTicketDto> 
 
         FlightTicketDto planeTicketDto = new FlightTicketDto();
         planeTicketDto.setPassportNO(planeTicket.getPassenger().getPassportDetails().getPassportNO());
-        planeTicketDto.setOffset(planeTicket.getTransportation().getOffset().getName());
-        planeTicketDto.setDestination(planeTicket.getTransportation().getDestination().getName());
+        planeTicketDto.setOffset(planeTicket.getTransportation().getOffset().getName() + "/" +
+                planeTicket.getTransportation().getOffset().getCity().getName());
+        planeTicketDto.setDestination(planeTicket.getTransportation().getDestination().getName() + "/" +
+                planeTicket.getTransportation().getDestination().getCity().getName());
         planeTicketDto.setPassengerName(planeTicket.getPassenger().getFirstName() + " " + planeTicket.getPassenger().getLastName());
         planeTicketDto.setDepartureDateTime(planeTicket.getTransportation().getDeparturesAt().toZonedDateTime());
         planeTicketDto.setSectionTitle(planeTicket.getSeat().getSection().title());

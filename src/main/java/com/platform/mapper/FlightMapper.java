@@ -9,10 +9,10 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
-public class AirlineTransportationMapper implements Mapper<Flight, FlightDto> {
+public class FlightMapper implements Mapper<Flight, FlightDto> {
     private SeatingSectionMapper sectionMapper;
 
-    public AirlineTransportationMapper(SeatingSectionMapper sectionMapper) {
+    public FlightMapper(SeatingSectionMapper sectionMapper) {
         this.sectionMapper = sectionMapper;
     }
 
@@ -22,15 +22,15 @@ public class AirlineTransportationMapper implements Mapper<Flight, FlightDto> {
     }
 
     @Override
-    public FlightDto toDto(Flight entity) {
-        Set<SeatingSectionDto> seatingSectionDtos = entity.getVehicle().getSeatingSections().stream()
+    public FlightDto toDto(Flight flight) {
+        Set<SeatingSectionDto> seatingSectionDtos = flight.getVehicle().getSeatingSections().stream()
                                                           .map(seatingSection -> sectionMapper.toDto(seatingSection))
                                                           .collect(Collectors.toSet());
-        return new FlightDto(entity.getId(), entity.getVehicle().getModelName(),
-                getAirportAndCityNames(entity.getOffset().getName(), entity.getOffset().getCity().getName()),
-                getAirportAndCityNames(entity.getDestination().getName(), entity.getDestination().getCity().getName()),
-                entity.getDeparturesAt().toZonedDateTime(),
-                entity.availableSeats(),
+        return new FlightDto(flight.getId(), flight.getVehicle().getModelName(),
+                getAirportAndCityNames(flight.getOffset().getName(), flight.getOffset().getCity().getName()),
+                getAirportAndCityNames(flight.getDestination().getName(), flight.getDestination().getCity().getName()),
+                flight.getDeparturesAt().toZonedDateTime(),
+                flight.availableSeats(),
                 seatingSectionDtos);
     }
 

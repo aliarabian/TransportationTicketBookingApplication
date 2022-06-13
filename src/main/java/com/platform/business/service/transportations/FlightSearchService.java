@@ -2,7 +2,7 @@ package com.platform.business.service.transportations;
 
 import com.platform.business.exception.TransportationNotFoundException;
 import com.platform.business.service.transportations.dto.FlightDto;
-import com.platform.mapper.AirlineTransportationMapper;
+import com.platform.mapper.FlightMapper;
 import com.platform.business.model.Flight;
 import com.platform.repository.transportation.FlightsDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +15,10 @@ import java.util.stream.Collectors;
 @Service
 public class FlightSearchService implements TransportationSearchService {
     private final FlightsDao transportationDao;
-    private final AirlineTransportationMapper transportationMapper;
+    private final FlightMapper transportationMapper;
 
     @Autowired
-    public FlightSearchService(FlightsDao transportationDao, AirlineTransportationMapper transportationMapper) {
+    public FlightSearchService(FlightsDao transportationDao, FlightMapper transportationMapper) {
         this.transportationDao = transportationDao;
         this.transportationMapper = transportationMapper;
     }
