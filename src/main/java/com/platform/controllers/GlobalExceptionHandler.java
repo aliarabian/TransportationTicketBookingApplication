@@ -6,8 +6,7 @@ import com.platform.business.exception.ApplicationException;
 import com.platform.business.exception.BadRequestException;
 import com.platform.business.exception.ResourceNotFoundException;
 import com.platform.business.service.auth.exception.AuthenticationFailedException;
-import com.platform.business.service.booking.exception.PassengerExistsException;
-import com.platform.business.service.booking.exception.SeatNotAvailableException;
+import com.platform.business.service.booking.exception.BookingException;
 import com.platform.business.service.users.CustomerExistsException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -46,7 +45,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 badRequestException.getMessage(), 400)));
     }
 
-    @ExceptionHandler({CustomerExistsException.class, PassengerExistsException.class, SeatNotAvailableException.class})
+    @ExceptionHandler({CustomerExistsException.class, BookingException.class})
     @ResponseStatus(HttpStatus.CONFLICT)
     public ResponseEntity<ApiResponseEntity<Object>> handleCustomerExistsException(ApplicationException applicationException) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(new ApiResponseEntity<>(new ApiErrorResponse(applicationException.getMessage(), applicationException.errorCode())));

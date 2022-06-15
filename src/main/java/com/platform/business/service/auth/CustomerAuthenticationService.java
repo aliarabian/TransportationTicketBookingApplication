@@ -11,7 +11,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
-import java.util.Optional;
 
 @Service
 public class CustomerAuthenticationService implements AuthenticationService {

@@ -1,8 +1,8 @@
 package com.platform.business.service.users;
 
 import com.platform.business.model.Customer;
-import com.platform.controllers.users.UserDto;
 import com.platform.business.model.User;
+import com.platform.controllers.users.UserDto;
 import com.platform.repository.customer.CustomerDao;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
