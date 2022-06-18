@@ -12,10 +12,7 @@ import com.platform.repository.country.InMemoryCountryDao;
 import com.platform.repository.customer.InMemoryCustomerDao;
 import com.platform.repository.ticket.InMemoryPlaneTicketDao;
 import com.platform.repository.transportation.InMemoryFlightsDao;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import persistence.data.storage.memory.TransportationBookingSystemImMemoryDataSource;
 
 import java.time.LocalDate;
@@ -26,6 +23,7 @@ import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@Disabled
 @DisplayName("Given there is a flight available ")
 class PlaneTicketBookingServiceTest {
     private final BookingService bookingService = new FlightTicketBookingService(

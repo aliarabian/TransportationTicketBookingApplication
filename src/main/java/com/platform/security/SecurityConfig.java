@@ -15,13 +15,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.util.WebUtils;
 
 import javax.servlet.http.Cookie;
-import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
@@ -43,7 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
             .and()
             .authorizeRequests()
-            .antMatchers("/auth/login", "/users", "/swagger-ui/**", "/v2/api-docs",
+            .antMatchers("/", "/**.css", "/**.woff2", "/**.woff", "/**.js", "/**.ico", "/auth/login", "/users", "/swagger-ui/**", "/v2/api-docs",
                     "/configuration/ui",
                     "/swagger-resources/**",
                     "/configuration/security",
@@ -75,21 +71,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(11);
-    }
-
-    @Bean
-    CorsConfigurationSource corsConfigurationSource() {
-
-        CorsConfiguration config = new CorsConfiguration();
-        config.setAllowCredentials(true);
-        config.addAllowedOrigin("http://localhost:4200");
-        config.addAllowedHeader("*");
-        config.addExposedHeader("xsrf-token");
-        config.setMaxAge(360000000L);
-        config.setAllowedMethods(Arrays.asList("GET", "HEAD", "POST", "PUT", "DELETE", "OPTIONS"));
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", config);
-        return source;
     }
 
     @Bean

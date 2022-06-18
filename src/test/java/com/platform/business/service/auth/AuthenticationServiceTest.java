@@ -1,11 +1,9 @@
 package com.platform.business.service.auth;
 
 import com.platform.business.service.auth.exception.AuthenticationFailedException;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
+@Disabled
 @DisplayName("Given There is a user")
 class AuthenticationServiceTest {
 

@@ -69,6 +69,7 @@
         </dependency>
     </dependencies>
     <build>
+        <finalName>tbs</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
