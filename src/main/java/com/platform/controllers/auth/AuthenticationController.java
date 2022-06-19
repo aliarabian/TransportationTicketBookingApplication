@@ -9,10 +9,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.time.Duration;
@@ -31,16 +28,30 @@ public class AuthenticationController {
     @PostMapping("/login")
     public ResponseEntity<ApiResponseEntity<AuthenticationResponse>> login(@RequestBody @Valid AuthenticationRequest request) {
         AuthenticationResponse authenticationResponse = authenticationService.authenticate(request);
-        ResponseCookie cookie = ResponseCookie.from("auth_token", authenticationResponse.getToken())
-                                              .httpOnly(true)
-                                              .maxAge(Duration.ofMinutes(10))
-//                                                  .secure(true)
-                                              .path("/")
-                                              .sameSite("strict")
-                                              .build();
+        ResponseCookie cookie = createAuthTokenCookie(authenticationResponse.getToken(), 10);
         return ResponseEntity.ok()
                              .header(HttpHeaders.SET_COOKIE, cookie.toString())
                              .body(new ApiResponseEntity<>(authenticationResponse));
 
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<ApiResponseEntity<Void>> logout() {
+        // TODO Implement Add token to blacklist
+        ResponseCookie cookie = createAuthTokenCookie("", 0);
+        return ResponseEntity.noContent()
+                             .header(HttpHeaders.SET_COOKIE, cookie.toString())
+                             .build();
+
+    }
+
+    private ResponseCookie createAuthTokenCookie(String value, int maxAge) {
+        return ResponseCookie.from("auth_token", value)
+                             .httpOnly(true)
+                             .maxAge(maxAge)
+//                                                  .secure(true)
+                             .path("/")
+                             .sameSite("strict")
+                             .build();
     }
 }
