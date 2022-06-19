@@ -1,5 +1,6 @@
 package com.platform.security.jwt;
 
+import com.platform.security.JwtBlackListService;
 import org.jose4j.jwa.AlgorithmConstraints;
 import org.jose4j.jws.AlgorithmIdentifiers;
 import org.jose4j.jwt.JwtClaims;
@@ -16,6 +17,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.JwtException;
+import org.springframework.web.context.annotation.ApplicationScope;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -97,6 +99,12 @@ public class JwtConfiguration {
                 throw new JwtException(e.getMessage(), e);
             }
         };
+    }
+
+    @Bean
+    @ApplicationScope
+    public JwtBlackListService getJwtBlackListService() {
+        return new JwtBlackListService();
     }
 
     private Jwt jose4jJwtDecoder(String token, RSAPublicKey rsaPublicKey) throws MalformedClaimException {

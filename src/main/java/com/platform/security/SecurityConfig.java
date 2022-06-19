@@ -14,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
+import org.springframework.security.oauth2.server.resource.web.BearerTokenAuthenticationFilter;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.web.util.WebUtils;
 
@@ -25,9 +26,11 @@ import javax.servlet.http.Cookie;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserDetailsService userDetailsService;
     public static final String AUTHORITIES_CLAIM_NAME = "roles";
+    private final JwtBlackListService jwtBlackListService;
 
-    public SecurityConfig(UserDetailsService userDetailsService) {
+    public SecurityConfig(UserDetailsService userDetailsService, JwtBlackListService jwtBlackListService) {
         this.userDetailsService = userDetailsService;
+        this.jwtBlackListService = jwtBlackListService;
     }
 
 
@@ -54,7 +57,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .and().oauth2ResourceServer().jwt().and().bearerTokenResolver(request -> {
                 Cookie cookie = WebUtils.getCookie(request, "auth_token");
                 return cookie != null ? cookie.getValue() : null;
-            });
+            })
+            .and()
+            .addFilterBefore(new JwtBlackListFilter(jwtBlackListService), BearerTokenAuthenticationFilter.class);
     }
 
     @Override
