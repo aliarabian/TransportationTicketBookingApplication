@@ -22,7 +22,11 @@ public class JwtBlackListFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-
+        if (request.getRequestURI().equals("/auth/login") || request.getRequestURI().equals("/") || request.getRequestURI().endsWith(".woff2") || request.getRequestURI().endsWith(".woff")
+                || request.getRequestURI().endsWith(".js") || request.getRequestURI().endsWith(".ico") || request.getRequestURI().endsWith(".css")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
         Cookie auth_token = WebUtils.getCookie(request, "auth_token");
         if (auth_token != null && blackListService.contains(auth_token.getValue()))
             throw new CredentialsExpiredException("Token Expired");

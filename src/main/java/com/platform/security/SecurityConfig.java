@@ -59,7 +59,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 return cookie != null ? cookie.getValue() : null;
             })
             .and()
-            .addFilterBefore(new JwtBlackListFilter(jwtBlackListService), BearerTokenAuthenticationFilter.class);
+            .addFilterAfter(new JwtBlackListFilter(jwtBlackListService), BearerTokenAuthenticationFilter.class);
     }
 
     @Override
