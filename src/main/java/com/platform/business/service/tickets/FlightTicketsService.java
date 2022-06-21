@@ -1,8 +1,8 @@
 package com.platform.business.service.tickets;
 
+import com.platform.business.mapper.Mapper;
 import com.platform.business.model.FlightTicket;
 import com.platform.business.service.booking.dto.FlightTicketDto;
-import com.platform.business.mapper.Mapper;
 import com.platform.repository.ticket.FlightTicketDao;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +26,7 @@ public class FlightTicketsService implements TicketsService {
         Objects.requireNonNull(username);
         Set<FlightTicket> userTickets = ticketDao.getUsersTicketsByUsername(username);
         return userTickets.stream().map(mapper::toDto)
-                .collect(Collectors.toList());
+                          .collect(Collectors.toList());
 
     }
 }

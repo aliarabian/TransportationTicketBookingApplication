@@ -12,10 +12,6 @@ public class PlaneTicketBookingRequest {
     @NotNull
     private Long seatingSectionId;
 
-    @NotNull
-    private Long customerId;
-    @NotNull
-    private Long transportationId;
 
     public Set<PlaneBookingPassengerDetail> getPassengersBookingDetails() {
         return passengersBookingDetails;
@@ -23,22 +19,6 @@ public class PlaneTicketBookingRequest {
 
     public void setPassengersBookingDetails(Set<PlaneBookingPassengerDetail> passengersBookingDetails) {
         this.passengersBookingDetails = passengersBookingDetails;
-    }
-
-    public Long getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(Long customerId) {
-        this.customerId = customerId;
-    }
-
-    public Long getTransportationId() {
-        return transportationId;
-    }
-
-    public void setTransportationId(Long transportationId) {
-        this.transportationId = transportationId;
     }
 
     public Long getSeatingSectionId() {
@@ -54,8 +34,6 @@ public class PlaneTicketBookingRequest {
         return "PlaneTicketBookingRequest{" +
                 "passengersBookingDetails=" + passengersBookingDetails +
                 ", seatingSectionId=" + seatingSectionId +
-                ", customerId=" + customerId +
-                ", transportationId=" + transportationId +
                 '}';
     }
 }

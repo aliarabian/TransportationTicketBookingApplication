@@ -1,6 +1,6 @@
 package com.platform.business.exception;
 
-public class TransportationNotFoundException extends ResourceNotFoundException{
+public class TransportationNotFoundException extends ResourceNotFoundException {
 
     public TransportationNotFoundException(String message) {
         super(message);

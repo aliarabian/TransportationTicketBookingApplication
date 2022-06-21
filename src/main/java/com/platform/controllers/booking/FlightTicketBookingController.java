@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.Set;
@@ -26,14 +27,15 @@ public class FlightTicketBookingController {
 
     @PostMapping("{flightId}/bookings")
     public ResponseEntity<ApiResponseEntity<Set<FlightTicketDto>>> bookTickets(@Valid @RequestBody PlaneTicketBookingRequest request,
-                                                                               @PathVariable String flightId) {
-        return ResponseEntity.ok().body(new ApiResponseEntity<>(bookingService.bookTickets(request)));
+            @PathVariable @Valid Long flightId, HttpServletRequest httpServletRequest) {
+        String username = httpServletRequest.getRemoteUser();
+        return ResponseEntity.ok().body(new ApiResponseEntity<>(bookingService.bookTickets(request, username, flightId)));
     }
 
     @PostMapping("bookings")
     public ResponseEntity<ApiResponseEntity<ResourceCreationDetails>> changePassengersFlight() {
         return ResponseEntity.created(URI.create(""))
-                .build();
+                             .build();
     }
 
     @GetMapping("bookings")

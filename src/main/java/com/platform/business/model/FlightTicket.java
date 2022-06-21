@@ -2,7 +2,7 @@ package com.platform.business.model;
 
 import java.util.Set;
 
-public class FlightTicket extends Ticket<Flight, FlightPassenger, PlaneSeat>  {
+public class FlightTicket extends Ticket<Flight, FlightPassenger, PlaneSeat> {
 
     private Set<SeatingSectionPrivilege> selectedPrivileges;
 

@@ -1,13 +1,12 @@
 package com.platform.business.service.booking;
 
+import com.platform.business.mapper.FlightTicketMapper;
 import com.platform.business.model.*;
 import com.platform.business.service.booking.dto.FlightTicketDto;
 import com.platform.business.service.booking.dto.request.FlightPassengerDto;
 import com.platform.business.service.booking.dto.request.PlaneBookingPassengerDetail;
 import com.platform.business.service.booking.dto.request.PlaneTicketBookingRequest;
 import com.platform.business.service.booking.exception.PassengerExistsException;
-import com.platform.business.mapper.FlightTicketMapper;
-import com.platform.business.mapper.PassengerMapper;
 import com.platform.repository.country.InMemoryCountryDao;
 import com.platform.repository.customer.InMemoryCustomerDao;
 import com.platform.repository.ticket.InMemoryPlaneTicketDao;
@@ -29,7 +28,7 @@ class PlaneTicketBookingServiceTest {
     private final BookingService bookingService = new FlightTicketBookingService(
             new InMemoryFlightsDao(),
             new InMemoryPlaneTicketDao(), new InMemoryCountryDao(), new InMemoryCustomerDao(),
-            new PassengerMapper(), new FlightTicketMapper());
+            new FlightTicketMapper());
 
     private PlaneTicketBookingRequest planeTicketBookingRequest;
 
@@ -58,7 +57,7 @@ class PlaneTicketBookingServiceTest {
                     getPlaneBookingPassengerDetail(passengerNumberOneSecondInstance),
                     getPlaneBookingPassengerDetail(passengerNumberOneThirdInstance),
                     getPlaneBookingPassengerDetail(passengerNumberTwo));
-            Set<FlightTicketDto> bookedTickets = bookingService.bookTickets(request);
+            Set<FlightTicketDto> bookedTickets = bookingService.bookTickets(request, "ali.arabian@gmail.com", 1002L);
 
             assertEquals(2, bookedTickets.size());
         }
@@ -76,8 +75,8 @@ class PlaneTicketBookingServiceTest {
                     localDate, "00254976321",
                     LocalDate.of(2023, 12, 15));
             PlaneTicketBookingRequest request = initializePlaneTicketBookingRequest(getPlaneBookingPassengerDetail(passengerNumberOneFirstInstance));
-            bookingService.bookTickets(request);
-            assertThrows(PassengerExistsException.class, () -> bookingService.bookTickets(request));
+            bookingService.bookTickets(request, "ali.arabian@gmail.com", 1002L);
+            assertThrows(PassengerExistsException.class, () -> bookingService.bookTickets(request, "ali.arabian@gmail.com", 1002L));
         }
     }
 
@@ -92,7 +91,7 @@ class PlaneTicketBookingServiceTest {
 
     @Test
     void shouldBookOneTicket() {
-        Set<FlightTicketDto> planeTickets = bookingService.bookTickets(planeTicketBookingRequest);
+        Set<FlightTicketDto> planeTickets = bookingService.bookTickets(planeTicketBookingRequest, "ali.arabian@gmail.com", 1002L);
         assertEquals(1, planeTickets.size());
     }
 
@@ -109,7 +108,7 @@ class PlaneTicketBookingServiceTest {
                 LocalDate.of(2023, 12, 15));
         PlaneTicketBookingRequest request = initializePlaneTicketBookingRequest(getPlaneBookingPassengerDetail(passengerNumberOne),
                 getPlaneBookingPassengerDetail(passengerNumberTwo), getPlaneBookingPassengerDetail(passengerNumberThree));
-        Set<FlightTicketDto> planeTickets = bookingService.bookTickets(request);
+        Set<FlightTicketDto> planeTickets = bookingService.bookTickets(request, "ali.arabian@gmail.com", 1002L);
         int numberOfRequestedTickets = request.getPassengersBookingDetails().size();
 
         assertEquals(numberOfRequestedTickets, planeTickets.size());
@@ -119,18 +118,16 @@ class PlaneTicketBookingServiceTest {
     void shouldThrowRuntimeException() {
 
         PlaneTicketBookingRequest request = new PlaneTicketBookingRequest();
-        request.setCustomerId(924427L);
-        request.setTransportationId(1002L);
         request.setSeatingSectionId(710L);
         request.setPassengersBookingDetails(Set.of());
-        assertThrows(RuntimeException.class, () -> bookingService.bookTickets(request));
+        assertThrows(RuntimeException.class, () -> bookingService.bookTickets(request, "ali.arabian@gmail.com", 1002L));
     }
 
     @Test
     void shouldAddBookedTicketToCustomersBookedTicketsSet() {
-        Set<FlightTicketDto> planeTickets = bookingService.bookTickets(planeTicketBookingRequest);
+        Set<FlightTicketDto> planeTickets = bookingService.bookTickets(planeTicketBookingRequest, "ali.arabian@gmail.com", 1002L);
         List<Long> ticketIds = getTicketIds(planeTickets);
-        Customer customer = TransportationBookingSystemImMemoryDataSource.getCustomers().customer(planeTicketBookingRequest.getCustomerId());
+        Customer customer = TransportationBookingSystemImMemoryDataSource.getCustomers().customer(9224427L);
         List<Long> customersBookedTicketsIds = customer.getBookedTickets().stream()
                                                        .map(Ticket::getId)
                                                        .collect(Collectors.toList());
@@ -140,8 +137,8 @@ class PlaneTicketBookingServiceTest {
     @Test
     void shouldAddBookedTicketsToTransportationsBookedTicketsSet() {
 
-        Set<FlightTicketDto> planeTickets = bookingService.bookTickets(planeTicketBookingRequest);
-        Flight transportation = TransportationBookingSystemImMemoryDataSource.getAirlineTransportations().transportation(planeTicketBookingRequest.getTransportationId());
+        Set<FlightTicketDto> planeTickets = bookingService.bookTickets(planeTicketBookingRequest, "ali.arabin@gmail.com", 1002L);
+        Flight transportation = TransportationBookingSystemImMemoryDataSource.getAirlineTransportations().transportation(1002L);
         List<Long> ticketIds = getTicketIds(planeTickets);
         List<Long> transportationBookedTicketsId = transportation.getBookedTickets().stream()
                                                                  .map(Ticket::getId)
@@ -164,7 +161,7 @@ class PlaneTicketBookingServiceTest {
                 LocalDate.of(2023, 12, 15));
 
         PlaneTicketBookingRequest request = initializePlaneTicketBookingRequest(getPlaneBookingPassengerDetail(passengerDto));
-        Set<FlightTicketDto> planeTickets = bookingService.bookTickets(request);
+        Set<FlightTicketDto> planeTickets = bookingService.bookTickets(request, "ali.arabian@gmail.com", 1002L);
         FlightTicketDto planeTicketDto = planeTickets.stream().findFirst().get();
         SeatingSection seatingSection = TransportationBookingSystemImMemoryDataSource.getSeatingSections().seatingSection(planeTicketDto.getSectionId());
         Set<String> sectionPrivileges = seatingSection.getSectionPrivileges().stream()
@@ -192,7 +189,7 @@ class PlaneTicketBookingServiceTest {
                 LocalDate.of(2023, 12, 15));
         PlaneTicketBookingRequest request = initializePlaneTicketBookingRequest(getPlaneBookingPassengerDetail(passengerNumberOne),
                 getPlaneBookingPassengerDetail(passengerNumberTwo), getPlaneBookingPassengerDetail(passengerNumberThree));
-        Set<FlightTicketDto> tickets = bookingService.bookTickets(request);
+        Set<FlightTicketDto> tickets = bookingService.bookTickets(request, "ali.arabian@gmail.com", 1002L);
         long count = tickets.stream()
                             .map(FlightTicketDto::getSectionTitle)
                             .distinct()
@@ -213,17 +210,15 @@ class PlaneTicketBookingServiceTest {
                 LocalDate.of(2023, 12, 15));
         PlaneTicketBookingRequest request = initializePlaneTicketBookingRequest(getPlaneBookingPassengerDetail(passengerNumberOne),
                 getPlaneBookingPassengerDetail(passengerNumberTwo), getPlaneBookingPassengerDetail(passengerNumberThree));
-        Flight transportation = TransportationBookingSystemImMemoryDataSource.getAirlineTransportations().transportation(request.getTransportationId());
-        int oldAvailableSeats = transportation.availableSeats();
-        bookingService.bookTickets(request);
-        assertEquals(oldAvailableSeats - request.getPassengersBookingDetails().size(), transportation.availableSeats());
+        Flight flight = TransportationBookingSystemImMemoryDataSource.getAirlineTransportations().transportation(1002L);
+        int oldAvailableSeats = flight.availableSeats();
+        bookingService.bookTickets(request, "ali.arabian@gmail.com", 1002L);
+        assertEquals(oldAvailableSeats - request.getPassengersBookingDetails().size(), flight.availableSeats());
     }
 
 
     private PlaneTicketBookingRequest initializePlaneTicketBookingRequest(PlaneBookingPassengerDetail... passengersDetails) {
         PlaneTicketBookingRequest request = new PlaneTicketBookingRequest();
-        request.setCustomerId(924427L);
-        request.setTransportationId(1002L);
         request.setSeatingSectionId(710L);
         request.setPassengersBookingDetails(Set.of(passengersDetails));
         return request;

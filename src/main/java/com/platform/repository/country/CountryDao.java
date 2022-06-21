@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CountryDao {
-    Optional<Country>  findByCountryCode(String code);
+    Optional<Country> findByCountryCode(String code);
 
     List<Country> findAll();
 }

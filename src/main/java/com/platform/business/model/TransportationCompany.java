@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-public class TransportationCompany<T extends Transportation<?,?>, U extends TransportationVehicle<?>> implements Serializable {
+public class TransportationCompany<T extends Transportation<?, ?>, U extends TransportationVehicle<?>> implements Serializable {
     private Long id;
     private String name;
     private City city;
