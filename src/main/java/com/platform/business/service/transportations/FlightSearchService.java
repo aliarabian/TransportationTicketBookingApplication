@@ -3,7 +3,7 @@ package com.platform.business.service.transportations;
 import com.platform.business.exception.TransportationNotFoundException;
 import com.platform.business.model.Flight;
 import com.platform.business.service.transportations.dto.FlightDto;
-import com.platform.mapper.FlightMapper;
+import com.platform.business.mapper.FlightMapper;
 import com.platform.repository.transportation.FlightsDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -10,7 +10,8 @@ import com.platform.business.service.booking.dto.request.PlaneTicketBookingReque
 import com.platform.business.service.booking.exception.BookingException;
 import com.platform.business.service.booking.exception.PassengerExistsException;
 import com.platform.business.service.booking.exception.TransportationHappenedBeforeException;
-import com.platform.mapper.Mapper;
+import com.platform.business.mapper.Mapper;
+import com.platform.repository.country.CountryDao;
 import com.platform.repository.customer.CustomerDao;
 import com.platform.repository.ticket.FlightTicketDao;
 import com.platform.repository.transportation.FlightsDao;
@@ -21,21 +22,22 @@ import persistence.data.storage.memory.DuplicateItemException;
 
 import java.time.OffsetDateTime;
 import java.util.*;
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
 @Service
 public class FlightTicketBookingService implements BookingService {
     private final FlightsDao flightsDao;
     private final FlightTicketDao ticketDao;
+    private final CountryDao countryDao;
     private final CustomerDao customerDao;
     private final Mapper<FlightPassenger, FlightPassengerDto> passengerMapper;
     private final Mapper<FlightTicket, FlightTicketDto> ticketDtoMapper;
     private final Logger logger = LoggerFactory.getLogger(FlightTicketBookingService.class);
 
-    public FlightTicketBookingService(FlightsDao flightsDao, FlightTicketDao ticketDao, CustomerDao customerDao, Mapper<FlightPassenger, FlightPassengerDto> passengerMapper, Mapper<FlightTicket, FlightTicketDto> ticketDtoMapper) {
+    public FlightTicketBookingService(FlightsDao flightsDao, FlightTicketDao ticketDao, CountryDao countryDao, CustomerDao customerDao, Mapper<FlightPassenger, FlightPassengerDto> passengerMapper, Mapper<FlightTicket, FlightTicketDto> ticketDtoMapper) {
         this.flightsDao = flightsDao;
         this.ticketDao = ticketDao;
+        this.countryDao = countryDao;
         this.customerDao = customerDao;
         this.passengerMapper = passengerMapper;
         this.ticketDtoMapper = ticketDtoMapper;
@@ -84,8 +86,15 @@ public class FlightTicketBookingService implements BookingService {
     private FlightTicket createPlaneTicket(Flight flight, Customer customer, PlaneBookingPassengerDetail bookingDetail, PlaneSeat seat) {
         Set<SeatingSectionPrivilege> privileges = seat.getSection().retrievePrivilegesById(bookingDetail.getSeatingSectionPrivilegeIds());
         return new FlightTicket(
-                flight, privileges, passengerMapper.fromDto(bookingDetail.getPassenger()),
+                flight, privileges, toPassenger(bookingDetail.getPassenger()),
                 seat, customer);
     }
 
+    private FlightPassenger toPassenger(FlightPassengerDto passengerDto) {
+        Country country = countryDao.findByCountryCode(passengerDto.getPassportIssuingCountryCode())
+                                    .orElseThrow();
+        Passport passport = new Passport(Long.valueOf(passengerDto.getPassportNO()), passengerDto.getPassportNO(), passengerDto.getPassportExpirationDate(), country);
+        return new FlightPassenger(Long.valueOf(passengerDto.getNationalIdNO()), passengerDto.getFirstName(), passengerDto.getLastName()
+                , passengerDto.getNationalIdNO(), passengerDto.getBirthdate(), passport);
+    }
 }

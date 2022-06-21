@@ -1,4 +1,4 @@
-package com.platform.mapper;
+package com.platform.business.mapper;
 
 import com.platform.business.model.SeatingSection;
 import com.platform.business.service.transportations.dto.SeatingSectionDto;
@@ -10,10 +10,6 @@ import java.util.stream.Collectors;
 
 @Component
 public class SeatingSectionMapper implements Mapper<SeatingSection, SeatingSectionDto> {
-    @Override
-    public SeatingSection fromDto(SeatingSectionDto dto) {
-        return null;
-    }
 
     @Override
     public SeatingSectionDto toDto(SeatingSection entity) {

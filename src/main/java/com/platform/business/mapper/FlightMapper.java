@@ -1,4 +1,4 @@
-package com.platform.mapper;
+package com.platform.business.mapper;
 
 import com.platform.business.model.Flight;
 import com.platform.business.service.transportations.dto.FlightDto;
@@ -16,10 +16,6 @@ public class FlightMapper implements Mapper<Flight, FlightDto> {
         this.sectionMapper = sectionMapper;
     }
 
-    @Override
-    public Flight fromDto(FlightDto dto) {
-        return null;
-    }
 
     @Override
     public FlightDto toDto(Flight flight) {

@@ -1,4 +1,4 @@
-package com.platform.mapper;
+package com.platform.business.mapper;
 
 import com.platform.business.model.FlightTicket;
 import com.platform.business.model.SeatingSectionPrivilege;
@@ -11,10 +11,6 @@ import java.util.stream.Collectors;
 
 @Component
 public class FlightTicketMapper implements Mapper<FlightTicket, FlightTicketDto> {
-    @Override
-    public FlightTicket fromDto(FlightTicketDto planeTicketDto) {
-        return null;
-    }
 
     @Override
     public FlightTicketDto toDto(FlightTicket planeTicket) {

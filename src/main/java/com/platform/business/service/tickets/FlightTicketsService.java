@@ -2,7 +2,7 @@ package com.platform.business.service.tickets;
 
 import com.platform.business.model.FlightTicket;
 import com.platform.business.service.booking.dto.FlightTicketDto;
-import com.platform.mapper.Mapper;
+import com.platform.business.mapper.Mapper;
 import com.platform.repository.ticket.FlightTicketDao;
 import org.springframework.stereotype.Service;
 
