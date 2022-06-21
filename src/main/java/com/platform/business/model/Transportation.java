@@ -70,4 +70,8 @@ public abstract class Transportation<T extends TransportationVehicle<?>, U exten
                 '}';
     }
 
+    public void addNewBookings(Set<U> tickets) {
+        Objects.requireNonNull(tickets);
+        this.bookedTickets.addAll(tickets);
+    }
 }

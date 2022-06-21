@@ -9,6 +9,8 @@ public interface FlightTicketDao {
 
     void persist(FlightTicket ticket) throws DuplicateItemException;
 
+    void persist(Set<FlightTicket> tickets) throws DuplicateItemException;
+
     Set<FlightTicket> getAllTickets();
 
     Set<FlightTicket> getUsersTicketsByUsername(String username);

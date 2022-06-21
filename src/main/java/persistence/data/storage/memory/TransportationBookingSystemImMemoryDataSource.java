@@ -350,6 +350,12 @@ public class TransportationBookingSystemImMemoryDataSource implements Serializab
                           .collect(Collectors.toSet());
 
         }
+
+        public void addTickets(Set<FlightTicket> tickets) throws DuplicateItemException {
+            for (FlightTicket ticket : tickets) {
+                addTicket(ticket);
+            }
+        }
     }
 
     public static CityDataSource getCities() {

@@ -51,4 +51,9 @@ public class Customer extends User {
     public Set<FlightTicket> getBookedTickets() {
         return Collections.unmodifiableSet(bookedTickets);
     }
+
+    public void addTickets(Set<FlightTicket> tickets) {
+        Objects.requireNonNull(tickets);
+        this.bookedTickets.addAll(tickets);
+    }
 }

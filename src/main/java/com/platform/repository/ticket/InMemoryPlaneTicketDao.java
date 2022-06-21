@@ -16,6 +16,11 @@ public class InMemoryPlaneTicketDao implements FlightTicketDao {
     }
 
     @Override
+    public void persist(Set<FlightTicket> tickets) throws DuplicateItemException {
+       TransportationBookingSystemImMemoryDataSource.getTickets().addTickets(tickets);
+    }
+
+    @Override
     public Set<FlightTicket> getAllTickets() {
         return TransportationBookingSystemImMemoryDataSource.getTickets().
                                                             getAllTickets()
