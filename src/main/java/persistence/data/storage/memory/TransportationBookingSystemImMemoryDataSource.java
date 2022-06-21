@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
 public class TransportationBookingSystemImMemoryDataSource implements Serializable {
@@ -333,6 +334,7 @@ public class TransportationBookingSystemImMemoryDataSource implements Serializab
             if (exists) {
                 throw new DuplicateItemException();
             }
+            ticket.setId(ThreadLocalRandom.current().nextLong(500, 900_000_000));
             tickets.put(ticket.getId(), ticket);
         }
 

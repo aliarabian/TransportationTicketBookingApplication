@@ -21,6 +21,13 @@ public abstract class Ticket<T extends Transportation, U extends Passenger, S ex
         this.seat = seat;
     }
 
+    public Ticket(T transportation, U passenger, S seat, Customer customer) {
+        this.transportation = transportation;
+        this.customer = customer;
+        this.passenger = passenger;
+        this.seat = seat;
+    }
+
     public Long getId() {
         return id;
     }
@@ -69,5 +76,9 @@ public abstract class Ticket<T extends Transportation, U extends Passenger, S ex
     @Override
     public int hashCode() {
         return Objects.hash(id, transportation, passenger);
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

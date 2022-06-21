@@ -83,7 +83,7 @@ public class FlightTicketBookingService implements BookingService {
 
     private FlightTicket createPlaneTicket(Flight flight, Customer customer, PlaneBookingPassengerDetail bookingDetail, PlaneSeat seat) {
         Set<SeatingSectionPrivilege> privileges = seat.getSection().retrievePrivilegesById(bookingDetail.getSeatingSectionPrivilegeIds());
-        return new FlightTicket(ThreadLocalRandom.current().nextLong(500, 900_000_000),
+        return new FlightTicket(
                 flight, privileges, passengerMapper.fromDto(bookingDetail.getPassenger()),
                 seat, customer);
     }
