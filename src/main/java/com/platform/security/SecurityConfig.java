@@ -33,7 +33,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         this.jwtBlackListService = jwtBlackListService;
     }
 
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors()
@@ -41,17 +40,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .csrf()
             .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
             .and()
-            .authorizeRequests()
-            .antMatchers("/", "/**.css", "/**.woff2", "/**.woff", "/**.js", "/**.ico", "/auth/login", "/users", "/swagger-ui/**", "/v2/api-docs",
-                    "/configuration/ui",
-                    "/swagger-resources/**",
-                    "/configuration/security",
-                    "/swagger-ui.html",
-                    "/webjars/**")
-            .permitAll()
-            .anyRequest()
-            .authenticated()
-            .and()
+            .authorizeHttpRequests((authorization) -> authorization.antMatchers("/", "/**.css", "/**.woff2", "/**.woff", "/**.js", "/**.ico", "/auth/login", "/users", "/swagger-ui/**", "/v2/api-docs",
+                                                                           "/configuration/ui",
+                                                                           "/swagger-resources/**",
+                                                                           "/configuration/security",
+                                                                           "/swagger-ui.html",
+                                                                           "/webjars/**",
+                                                                           "/actuator/**").permitAll()
+                                                                   .anyRequest()
+                                                                   .authenticated())
             .sessionManagement()
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and().oauth2ResourceServer().jwt().and().bearerTokenResolver(request -> {

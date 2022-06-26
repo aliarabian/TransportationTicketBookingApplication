@@ -13,6 +13,6 @@ public class AirportService implements TerminalService {
     public Set<Terminal> terminals() {
         return TransportationBookingSystemImMemoryDataSource.getTerminals().terminals()
                                                             .stream()
-                                                            .collect(Collectors.toSet());
+                                                            .collect(Collectors.toUnmodifiableSet());
     }
 }
