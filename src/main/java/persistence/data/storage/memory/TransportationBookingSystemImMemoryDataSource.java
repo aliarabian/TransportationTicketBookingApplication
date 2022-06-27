@@ -73,7 +73,7 @@ public class TransportationBookingSystemImMemoryDataSource implements Serializab
 
         public AirlineTransportationDataSource() {
             transportations = new HashMap<>();
-            LocalDateTime localDateTime = LocalDateTime.of(2022, 6, 12, 5, 10, 0, 0);
+            LocalDateTime localDateTime = LocalDateTime.of(2022, 7, 12, 5, 10, 0, 0);
             ZoneId zoneId = ZoneId.of("UTC");
             transportations.put(1001L, new Flight(1001L,
                     getTerminals().terminal(400L),
@@ -81,7 +81,7 @@ public class TransportationBookingSystemImMemoryDataSource implements Serializab
                     OffsetDateTime.of(localDateTime, zoneId.getRules().getOffset(localDateTime))
                     , getPlanes().plane(600L))
             );
-            localDateTime = LocalDateTime.of(2022, 6, 27, 6, 45, 0, 0);
+            localDateTime = LocalDateTime.of(2022, 7, 27, 6, 45, 0, 0);
             transportations.put(1002L, new Flight(1002L,
                     getTerminals().terminal(401L),
                     getTerminals().terminal(402L),

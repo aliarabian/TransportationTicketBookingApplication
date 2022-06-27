@@ -3,6 +3,7 @@ package com.platform.business.service.countries;
 import com.platform.business.model.Country;
 import com.platform.repository.country.CountryDao;
 import org.springframework.stereotype.Service;
+import springfox.documentation.annotations.Cacheable;
 
 import java.util.List;
 
@@ -16,6 +17,7 @@ public class CountyService {
     }
 
 
+    @Cacheable("countries")
     public List<Country> getAllCountries() {
         return countryDao.findAll();
     }

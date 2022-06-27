@@ -1,15 +1,15 @@
 package com.platform.aop;
 
+import com.platform.business.service.booking.dto.FlightTicketDto;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
-import org.aspectj.lang.annotation.AfterThrowing;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+
+import java.util.Set;
 
 @Aspect
 @Component
@@ -32,6 +32,11 @@ public class LoggingAspect {
         }
         sb.append("]");
         LOGGER.info("Booking Method {}", sb);
+    }
+
+    @AfterReturning(value = "bookingServicePointcut()", returning = "tickets")
+    public void logBookedTickets(Set<FlightTicketDto> tickets) {
+        LOGGER.info("Booked Tickets: [ {} ]", tickets);
     }
 
     @AfterThrowing(value = "bookingServicePointcut() || execution(* com.platform.controllers.*.*(..))", throwing = "failureException")

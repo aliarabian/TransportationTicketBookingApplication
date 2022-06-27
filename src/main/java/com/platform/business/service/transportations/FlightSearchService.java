@@ -6,6 +6,8 @@ import com.platform.business.model.Flight;
 import com.platform.business.service.transportations.dto.FlightDto;
 import com.platform.repository.transportation.FlightsDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.time.OffsetDateTime;
@@ -40,7 +42,9 @@ public class FlightSearchService implements TransportationSearchService {
     }
 
     @Override
+    @Cacheable(value = "flights")
     public Set<FlightDto> findAllTransportations() {
+        System.out.println("ASDAdasdasds");
         Set<Flight> transportations = transportationDao.findAllTransportations();
         return transportations.stream()
                               .map(transportationMapper::toDto)

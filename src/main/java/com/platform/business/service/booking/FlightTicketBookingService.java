@@ -15,6 +15,7 @@ import com.platform.repository.country.CountryDao;
 import com.platform.repository.customer.CustomerDao;
 import com.platform.repository.ticket.FlightTicketDao;
 import com.platform.repository.transportation.FlightsDao;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import persistence.data.storage.memory.DuplicateItemException;
 

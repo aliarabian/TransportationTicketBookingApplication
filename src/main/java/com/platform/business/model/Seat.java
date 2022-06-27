@@ -5,12 +5,12 @@ import java.io.Serializable;
 public abstract class Seat implements Serializable {
     private Long id;
     private String seatNO;
-    private boolean booked;
+    private SeatState state;
 
     public Seat(Long id, String seatNO) {
         this.id = id;
         this.seatNO = seatNO;
-        this.booked = false;
+        this.state = new FreeSeat();
     }
 
     public Long getId() {
@@ -21,13 +21,28 @@ public abstract class Seat implements Serializable {
         return seatNO;
     }
 
-    public boolean isBooked() {
-        return this.booked;
+    public boolean isAvailable() {
+        return this.state.isAvailable();
     }
 
     public void bookSeat() {
-        this.booked = true;
+        this.state = this.state.book();
     }
 
+    public void holdSeat() {
+        this.state = this.state.hold();
+    }
 
+    public void free() {
+        this.state = this.state.free();
+    }
+
+    @Override
+    public String toString() {
+        return "Seat{" +
+                "id=" + id +
+                ", seatNO='" + seatNO + '\'' +
+                ", state=" + state +
+                '}';
+    }
 }

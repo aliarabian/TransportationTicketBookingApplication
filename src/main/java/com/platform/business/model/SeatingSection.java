@@ -47,7 +47,7 @@ public abstract class SeatingSection implements Serializable {
 
     public Optional<PlaneSeat> bookSeat() {
         for (PlaneSeat seat : seats) {
-            if (!seat.isBooked()) {
+            if (seat.isAvailable()) {
                 seat.bookSeat();
                 this.availableSeats--;
                 return Optional.of(seat);
