@@ -1,5 +1,7 @@
 package com.platform.business.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
@@ -10,6 +12,7 @@ public class TransportationCompany<T extends Transportation<?, ?>, U extends Tra
     private String name;
     private City city;
     private Set<T> transportations;
+    @JsonIgnore
     private Set<U> vehicles;
 
     public TransportationCompany(Long id, String name, City city) {

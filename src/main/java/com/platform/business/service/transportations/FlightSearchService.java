@@ -6,7 +6,6 @@ import com.platform.business.model.Flight;
 import com.platform.business.service.transportations.dto.FlightDto;
 import com.platform.repository.transportation.FlightsDao;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 

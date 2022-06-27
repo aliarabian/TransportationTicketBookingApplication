@@ -12,6 +12,7 @@ public class PlaneTicketBookingRequest {
     @NotNull
     private Long seatingSectionId;
 
+    private Set<Long> seatIds;
 
     public Set<PlaneBookingPassengerDetail> getPassengersBookingDetails() {
         return passengersBookingDetails;
@@ -29,6 +30,13 @@ public class PlaneTicketBookingRequest {
         this.seatingSectionId = seatingSectionId;
     }
 
+    public Set<Long> getSeatIds() {
+        return seatIds;
+    }
+
+    public void setSeatIds(Set<Long> seatIds) {
+        this.seatIds = seatIds;
+    }
     @Override
     public String toString() {
         return "PlaneTicketBookingRequest{" +
@@ -36,4 +44,5 @@ public class PlaneTicketBookingRequest {
                 ", seatingSectionId=" + seatingSectionId +
                 '}';
     }
+
 }

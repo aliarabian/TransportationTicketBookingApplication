@@ -1,5 +1,7 @@
 package com.platform.business.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
@@ -10,6 +12,7 @@ import java.util.stream.Collectors;
 public abstract class SeatingSection implements Serializable {
     private Long id;
     private Set<SeatingSectionPrivilege> sectionPrivileges;
+    @JsonIgnore
     private Set<PlaneSeat> seats;
     private Plane plane;
     private int capacity;
@@ -49,6 +52,17 @@ public abstract class SeatingSection implements Serializable {
         for (PlaneSeat seat : seats) {
             if (seat.isAvailable()) {
                 seat.bookSeat();
+                this.availableSeats--;
+                return Optional.of(seat);
+            }
+        }
+        return Optional.empty();
+    }
+
+    public Optional<PlaneSeat> bookSeat(Long seatId) {
+        for (PlaneSeat seat : seats) {
+            if (seat.isAvailable()) {
+                seat.holdSeat();
                 this.availableSeats--;
                 return Optional.of(seat);
             }
@@ -96,4 +110,5 @@ public abstract class SeatingSection implements Serializable {
                 ", seats=" + seats +
                 '}';
     }
+
 }

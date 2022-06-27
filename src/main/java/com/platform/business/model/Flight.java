@@ -5,6 +5,9 @@ import com.platform.business.service.booking.exception.SeatNotAvailableException
 import com.platform.business.service.booking.exception.SectionNotExistsException;
 
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 public class Flight extends Transportation<Plane, FlightTicket> {
 
@@ -16,7 +19,7 @@ public class Flight extends Transportation<Plane, FlightTicket> {
         for (SeatingSection section : getVehicle().getSeatingSections()) {
             if (section.getId().equals(sectionClassId)) {
                 return section.bookSeat()
-                              .orElseThrow(() -> new SeatNotAvailableException("Seat Not Available"));
+                        .orElseThrow(() -> new SeatNotAvailableException("Seat Not Available"));
             }
         }
         throw new SectionNotExistsException("Wrong Section Number");
@@ -27,5 +30,19 @@ public class Flight extends Transportation<Plane, FlightTicket> {
         return this.getVehicle().availableSeats();
     }
 
+    public List<PlaneSeat> bookSeats(Long seatingSectionId, Set<Long> seatIds) {
+        List<PlaneSeat> seats = new ArrayList<>();
+        for (SeatingSection section : getVehicle().getSeatingSections()) {
+            if (section.getId().equals(seatingSectionId)) {
+                for (Long seatId : seatIds) {
+                    PlaneSeat seat = section.bookSeat(seatId)
+                            .orElseThrow(() -> new SeatNotAvailableException("Seat Not Available"));
+                    seats.add(seat);
+                }
+                return seats;
+            }
+        }
+        throw new SectionNotExistsException("Wrong Section Number");
+    }
 }
 

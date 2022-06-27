@@ -1,10 +1,13 @@
 package com.platform.business.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 public class Plane extends TransportationVehicle<TransportationCompany<Flight, Plane>> {
+    @JsonIgnore
     private Set<SeatingSection> seatingSections;
 
     public Plane(Long id, int capacity, String modelName, TransportationCompany<Flight, Plane> transportationCompany) {
