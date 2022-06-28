@@ -1,6 +1,7 @@
-package com.platform.business.model;
+package com.platform.business.model.transportation;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.platform.business.model.City;
 
 import java.io.Serializable;
 import java.util.HashSet;

@@ -1,4 +1,8 @@
-package com.platform.business.model;
+package com.platform.business.model.transportation;
+
+import com.platform.business.model.transportation.Plane;
+import com.platform.business.model.transportation.PlaneSectionTitle;
+import com.platform.business.model.transportation.SeatingSection;
 
 public class BusinessClassSeatingSection extends SeatingSection {
 

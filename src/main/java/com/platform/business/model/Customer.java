@@ -1,5 +1,7 @@
 package com.platform.business.model;
 
+import com.platform.business.model.booking.FlightTicket;
+
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;

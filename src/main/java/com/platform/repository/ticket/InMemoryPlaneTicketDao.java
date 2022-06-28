@@ -1,6 +1,6 @@
 package com.platform.repository.ticket;
 
-import com.platform.business.model.FlightTicket;
+import com.platform.business.model.booking.FlightTicket;
 import org.springframework.stereotype.Repository;
 import persistence.data.storage.memory.DuplicateItemException;
 import persistence.data.storage.memory.TransportationBookingSystemImMemoryDataSource;

@@ -1,4 +1,8 @@
-package com.platform.business.model;
+package com.platform.business.model.booking;
+
+import com.platform.business.model.Customer;
+import com.platform.business.model.transportation.Seat;
+import com.platform.business.model.transportation.Transportation;
 
 import java.io.Serializable;
 import java.time.OffsetDateTime;

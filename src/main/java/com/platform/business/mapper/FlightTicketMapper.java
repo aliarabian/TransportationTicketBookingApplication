@@ -1,7 +1,7 @@
 package com.platform.business.mapper;
 
-import com.platform.business.model.FlightTicket;
-import com.platform.business.model.SeatingSectionPrivilege;
+import com.platform.business.model.booking.FlightTicket;
+import com.platform.business.model.transportation.SeatingSectionPrivilege;
 import com.platform.business.service.booking.dto.FlightTicketDto;
 import org.springframework.stereotype.Component;
 

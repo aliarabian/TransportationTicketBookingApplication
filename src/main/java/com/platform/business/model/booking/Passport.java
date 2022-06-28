@@ -1,4 +1,6 @@
-package com.platform.business.model;
+package com.platform.business.model.booking;
+
+import com.platform.business.model.Country;
 
 import java.io.Serializable;
 import java.time.LocalDate;

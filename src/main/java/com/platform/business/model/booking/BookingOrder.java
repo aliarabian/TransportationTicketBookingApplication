@@ -1,6 +1,7 @@
-package com.platform.business.model;
+package com.platform.business.model.booking;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.platform.business.model.Customer;
 
 import java.time.LocalDateTime;
 import java.util.Collections;

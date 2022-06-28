@@ -1,4 +1,4 @@
-package com.platform.business.model;
+package com.platform.business.model.transportation;
 
 public enum PlaneSectionTitle {
     ECONOMY_CLASS("Economy Class"), BUSINESS_CLASS("Business Class"), FIRST_CLASS("First Class");

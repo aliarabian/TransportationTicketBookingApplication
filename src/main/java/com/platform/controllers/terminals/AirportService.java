@@ -1,6 +1,6 @@
 package com.platform.controllers.terminals;
 
-import com.platform.business.model.Terminal;
+import com.platform.business.model.transportation.Terminal;
 import org.springframework.stereotype.Service;
 import persistence.data.storage.memory.TransportationBookingSystemImMemoryDataSource;
 import springfox.documentation.annotations.Cacheable;

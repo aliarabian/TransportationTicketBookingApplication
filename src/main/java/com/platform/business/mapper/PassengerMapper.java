@@ -1,6 +1,6 @@
 package com.platform.business.mapper;
 
-import com.platform.business.model.FlightPassenger;
+import com.platform.business.model.transportation.FlightPassenger;
 import com.platform.business.service.booking.dto.request.FlightPassengerDto;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;

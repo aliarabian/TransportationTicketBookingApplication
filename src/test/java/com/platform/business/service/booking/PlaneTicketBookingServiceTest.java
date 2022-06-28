@@ -2,6 +2,10 @@ package com.platform.business.service.booking;
 
 import com.platform.business.mapper.FlightTicketMapper;
 import com.platform.business.model.*;
+import com.platform.business.model.booking.Ticket;
+import com.platform.business.model.transportation.Flight;
+import com.platform.business.model.transportation.SeatingSection;
+import com.platform.business.model.transportation.SeatingSectionPrivilege;
 import com.platform.business.service.booking.dto.FlightTicketDto;
 import com.platform.business.service.booking.dto.request.FlightPassengerDto;
 import com.platform.business.service.booking.dto.request.PlaneBookingPassengerDetail;

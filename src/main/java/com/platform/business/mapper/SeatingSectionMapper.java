@@ -1,6 +1,6 @@
 package com.platform.business.mapper;
 
-import com.platform.business.model.SeatingSection;
+import com.platform.business.model.transportation.SeatingSection;
 import com.platform.business.service.transportations.dto.SeatingSectionDto;
 import com.platform.business.service.transportations.dto.SectionPrivilegeDto;
 import org.springframework.stereotype.Component;

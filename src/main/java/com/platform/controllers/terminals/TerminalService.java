@@ -1,6 +1,6 @@
 package com.platform.controllers.terminals;
 
-import com.platform.business.model.Terminal;
+import com.platform.business.model.transportation.Terminal;
 
 import java.util.Set;
 

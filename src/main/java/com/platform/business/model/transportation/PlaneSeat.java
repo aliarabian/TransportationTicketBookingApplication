@@ -1,4 +1,4 @@
-package com.platform.business.model;
+package com.platform.business.model.transportation;
 
 public class PlaneSeat extends Seat {
     private SeatingSection section;

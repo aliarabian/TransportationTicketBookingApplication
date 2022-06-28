@@ -1,4 +1,10 @@
-package com.platform.business.model;
+package com.platform.business.model.booking;
+
+import com.platform.business.model.*;
+import com.platform.business.model.transportation.Flight;
+import com.platform.business.model.transportation.FlightPassenger;
+import com.platform.business.model.transportation.PlaneSeat;
+import com.platform.business.model.transportation.SeatingSectionPrivilege;
 
 import java.util.Set;
 

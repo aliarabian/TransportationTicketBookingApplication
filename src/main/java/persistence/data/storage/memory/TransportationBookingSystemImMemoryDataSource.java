@@ -1,6 +1,8 @@
 package persistence.data.storage.memory;
 
 import com.platform.business.model.*;
+import com.platform.business.model.booking.FlightTicket;
+import com.platform.business.model.transportation.*;
 
 import java.io.*;
 import java.nio.file.Files;

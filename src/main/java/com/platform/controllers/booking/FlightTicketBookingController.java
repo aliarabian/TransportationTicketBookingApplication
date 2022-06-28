@@ -2,11 +2,10 @@ package com.platform.controllers.booking;
 
 import com.platform.ApiResponseEntity;
 import com.platform.ResourceCreationDetails;
-import com.platform.business.model.BookingOrder;
+import com.platform.business.model.booking.BookingOrder;
 import com.platform.business.service.booking.BookingService;
 import com.platform.business.service.booking.dto.FlightTicketDto;
 import com.platform.business.service.booking.dto.request.PlaneTicketBookingRequest;
-import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
