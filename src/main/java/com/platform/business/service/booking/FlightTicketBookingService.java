@@ -4,7 +4,8 @@ import com.platform.business.exception.BadRequestException;
 import com.platform.business.exception.CustomerNotFoundException;
 import com.platform.business.exception.TransportationNotFoundException;
 import com.platform.business.mapper.Mapper;
-import com.platform.business.model.*;
+import com.platform.business.model.Country;
+import com.platform.business.model.Customer;
 import com.platform.business.model.booking.BookingOrder;
 import com.platform.business.model.booking.FlightTicket;
 import com.platform.business.model.booking.Passport;
@@ -21,6 +22,7 @@ import com.platform.business.service.booking.exception.PassengerExistsException;
 import com.platform.business.service.booking.exception.TransportationHappenedBeforeException;
 import com.platform.repository.country.CountryDao;
 import com.platform.repository.customer.CustomerDao;
+import com.platform.repository.ticket.FlightBookingOrderDao;
 import com.platform.repository.ticket.FlightTicketDao;
 import com.platform.repository.transportation.FlightsDao;
 import org.springframework.stereotype.Service;
@@ -35,16 +37,18 @@ import java.util.stream.Collectors;
 public class FlightTicketBookingService implements BookingService {
     private final FlightsDao flightsDao;
     private final FlightTicketDao ticketDao;
+    private final FlightBookingOrderDao bookingOrderDao;
     private final CountryDao countryDao;
     private final CustomerDao customerDao;
     private final Mapper<FlightTicket, FlightTicketDto> ticketDtoMapper;
 
     public FlightTicketBookingService(FlightsDao flightsDao, FlightTicketDao ticketDao,
-                                      CountryDao countryDao, CustomerDao customerDao,
-                                      Mapper<FlightTicket, FlightTicketDto> ticketDtoMapper) {
+            FlightBookingOrderDao bookingOrderDao, CountryDao countryDao, CustomerDao customerDao,
+            Mapper<FlightTicket, FlightTicketDto> ticketDtoMapper) {
 
         this.flightsDao = flightsDao;
         this.ticketDao = ticketDao;
+        this.bookingOrderDao = bookingOrderDao;
         this.countryDao = countryDao;
         this.customerDao = customerDao;
         this.ticketDtoMapper = ticketDtoMapper;
@@ -69,19 +73,38 @@ public class FlightTicketBookingService implements BookingService {
             throw new TransportationHappenedBeforeException("Flight Time has passed.");
         }
         Customer customer = getCustomer(username);
+        List<PlaneSeat> planeSeats = new ArrayList<>();
+        BookingOrder bookingOrder;
+        try {
 
+            planeSeats = flight.bookSeats(request.getSeatingSectionId(), request.getSeatIds());
+            List<PlaneBookingPassengerDetail> passengersBookingDetails = new ArrayList<>(request.getPassengersBookingDetails());
+            Set<FlightTicket> tickets = new HashSet<>();
+            for (int i = 0; i < planeSeats.size(); i++) {
+                PlaneSeat seat = planeSeats.get(i);
+                PlaneBookingPassengerDetail planeBookingPassengerDetail = passengersBookingDetails.get(i);
+                FlightTicket flightTicket = createFlightTicket(flight, customer, planeBookingPassengerDetail, seat);
+                tickets.add(flightTicket);
+            }
+            bookingOrder = new BookingOrder(ThreadLocalRandom.current().nextLong(2000L, 999_999_999),
+                    tickets, customer);
+            bookingOrderDao.persist(bookingOrder);
+            customer.addOrder(bookingOrder);
 
-        List<PlaneSeat> planeSeats = flight.bookSeats(request.getSeatingSectionId(), request.getSeatIds());
-        List<PlaneBookingPassengerDetail> passengersBookingDetails = new ArrayList<>(request.getPassengersBookingDetails());
-        Set<FlightTicket> tickets = new HashSet<>();
-        for (int i = 0; i < planeSeats.size(); i++) {
-            PlaneSeat seat = planeSeats.get(i);
-            PlaneBookingPassengerDetail planeBookingPassengerDetail = passengersBookingDetails.get(i);
-            FlightTicket flightTicket = createFlightTicket(flight, customer, planeBookingPassengerDetail, seat);
-            tickets.add(flightTicket);
+        } catch (BookingException ex) {
+            rollback(planeSeats);
+            throw new BookingException(ex.getMessage());
+        } catch (DuplicateItemException e) {
+            rollback(planeSeats);
+            throw new PassengerExistsException("Passenger Has Already Booked A Ticket For This Flight!");
         }
-        return new BookingOrder(ThreadLocalRandom.current().nextLong(2000L, 999_999_999),
-                tickets, customer);
+        return bookingOrder;
+    }
+
+    private void rollback(List<PlaneSeat> planeSeats) {
+        for (PlaneSeat planeSeat : planeSeats) {
+            planeSeat.free();
+        }
     }
 
 

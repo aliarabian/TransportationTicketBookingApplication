@@ -1,6 +1,9 @@
 package persistence.data.storage.memory;
 
-import com.platform.business.model.*;
+import com.platform.business.model.City;
+import com.platform.business.model.Country;
+import com.platform.business.model.Customer;
+import com.platform.business.model.booking.BookingOrder;
 import com.platform.business.model.booking.FlightTicket;
 import com.platform.business.model.transportation.*;
 
@@ -28,6 +31,7 @@ public class TransportationBookingSystemImMemoryDataSource implements Serializab
     private static SeatingSectionPrivilegeDataSource seatingSectionPrivileges;
     private static TerminalDataSource terminals;
     private static PlaneTicketDataSource tickets;
+    private static BookingOrderDataSource orders;
 
     static {
         if (Files.exists(Paths.get("app.data"))) {
@@ -50,6 +54,11 @@ public class TransportationBookingSystemImMemoryDataSource implements Serializab
         seatingSectionPrivileges = new SeatingSectionPrivilegeDataSource();
         customers = new CustomerDataSource();
         tickets = new PlaneTicketDataSource();
+        orders = new BookingOrderDataSource();
+    }
+
+    public static BookingOrderDataSource getOrders() {
+        return orders;
     }
 
 
@@ -318,6 +327,45 @@ public class TransportationBookingSystemImMemoryDataSource implements Serializab
         public Collection<Terminal> terminals() {
             return terminals.values();
         }
+    }
+
+    public static class BookingOrderDataSource implements Serializable {
+
+        private final Map<Long, BookingOrder> orders;
+
+        public BookingOrderDataSource() {
+            this.orders = new HashMap<>();
+        }
+
+        public void addOrder(BookingOrder bookingOrder) throws DuplicateItemException {
+            Long flightId = bookingOrder.getFlight().getId();
+            System.out.println(bookingOrder.getTickets());
+            boolean exists = orders.values().stream()
+                                   .filter(order -> order.getFlight().getId().equals(flightId))
+                                   .map(BookingOrder::getTickets)
+                                   .flatMap(Collection::stream)
+                                   .anyMatch(flightTicket -> bookingOrder.getTickets().contains(flightTicket));
+            if (exists) {
+                throw new DuplicateItemException();
+            }
+            orders.put(bookingOrder.getId(), bookingOrder);
+        }
+
+        public int count() {
+            return orders.size();
+        }
+
+        public Collection<BookingOrder> getAllTickets() {
+            return Collections.unmodifiableCollection(orders.values());
+        }
+
+        public Set<BookingOrder> getUsersBookingOrdersByUsername(String username) {
+            return orders.values().stream()
+                         .filter(ticket -> ticket.getCustomer().getUsername().equals(username))
+                         .collect(Collectors.toSet());
+
+        }
+
     }
 
     public static class PlaneTicketDataSource implements Serializable {

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import persistence.data.storage.memory.DuplicateItemException;
 import persistence.data.storage.memory.TransportationBookingSystemImMemoryDataSource;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -22,10 +23,8 @@ public class InMemoryPlaneTicketDao implements FlightTicketDao {
 
     @Override
     public Set<FlightTicket> getAllTickets() {
-        return TransportationBookingSystemImMemoryDataSource.getTickets().
-                                                            getAllTickets()
-                                                            .stream()
-                                                            .collect(Collectors.toSet());
+        return new HashSet<>(TransportationBookingSystemImMemoryDataSource.getTickets().
+                                                                          getAllTickets());
     }
 
     @Override

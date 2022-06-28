@@ -1,5 +1,6 @@
 package com.platform.business.model.booking;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.platform.business.model.Customer;
 import com.platform.business.model.transportation.Seat;
 import com.platform.business.model.transportation.Transportation;
@@ -11,7 +12,9 @@ import java.util.Objects;
 public abstract class Ticket<T extends Transportation, U extends Passenger, S extends Seat> implements Serializable {
     private Long id;
     private OffsetDateTime timestamp;
+    @JsonIgnore
     private T transportation;
+    @JsonIgnore
     private U passenger;
     private S seat;
     private Customer customer;
@@ -71,15 +74,14 @@ public abstract class Ticket<T extends Transportation, U extends Passenger, S ex
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Ticket)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         Ticket<?, ?, ?> ticket = (Ticket<?, ?, ?>) o;
-        return id.equals(ticket.id) && transportation.getId().equals(ticket.transportation.getId())
-                && passenger.getNationalId().equals(ticket.passenger.getNationalId());
+        return transportation.getId().equals(ticket.transportation.getId()) && passenger.getNationalId().equals(ticket.passenger.getNationalId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, transportation, passenger);
+        return Objects.hash(transportation.getId(), passenger.getNationalId());
     }
 
     public void setId(Long id) {

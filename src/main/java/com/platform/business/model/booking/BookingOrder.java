@@ -2,6 +2,7 @@ package com.platform.business.model.booking;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.platform.business.model.Customer;
+import com.platform.business.model.transportation.Flight;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
@@ -10,25 +11,32 @@ import java.util.Set;
 
 public class BookingOrder {
     private final Long id;
+//    @JsonIgnore
     private final Set<FlightTicket> tickets;
-    @JsonIgnore
     private final Customer customer;
-    private final LocalDateTime timestamp;
-    private OrderStatus status;
+    private final LocalDateTime createdAt;
+    private final LocalDateTime updatedAt;
+    private final OrderStatus status;
 
     public BookingOrder(Long id, Set<FlightTicket> tickets, Customer customer) {
+        Objects.requireNonNull(tickets);
+        if (tickets.size() == 0) {
+            throw new IllegalArgumentException("Tickets set must have at least one item.");
+        }
         this.id = id;
         this.tickets = tickets;
         this.customer = customer;
-        this.timestamp = LocalDateTime.now();
+        this.createdAt = LocalDateTime.now();
         this.status = OrderStatus.PENDING_PAYMENT;
+        this.updatedAt = this.createdAt;
     }
 
-    public BookingOrder(Long id, Set<FlightTicket> tickets, Customer customer, LocalDateTime timestamp, OrderStatus status) {
+    private BookingOrder(Long id, Set<FlightTicket> tickets, Customer customer, LocalDateTime timestamp, LocalDateTime updatedAt, OrderStatus status) {
         this.id = id;
         this.tickets = tickets;
         this.customer = customer;
-        this.timestamp = timestamp;
+        this.createdAt = timestamp;
+        this.updatedAt = updatedAt;
         this.status = status;
     }
 
@@ -45,7 +53,7 @@ public class BookingOrder {
     }
 
     public LocalDateTime getTimestamp() {
-        return timestamp;
+        return createdAt;
     }
 
     public OrderStatus getStatus() {
@@ -53,7 +61,11 @@ public class BookingOrder {
     }
 
     public BookingOrder updateStatus(OrderStatus status) {
-        return new BookingOrder(id, Collections.unmodifiableSet(this.tickets), customer, timestamp, status);
+        return new BookingOrder(id, Collections.unmodifiableSet(this.tickets), customer, createdAt, LocalDateTime.now(), status);
+    }
+
+    public Flight getFlight() {
+        return this.tickets.stream().findFirst().get().getTransportation();
     }
 
     @Override
@@ -69,4 +81,7 @@ public class BookingOrder {
         return Objects.hash(id, customer);
     }
 
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
 }

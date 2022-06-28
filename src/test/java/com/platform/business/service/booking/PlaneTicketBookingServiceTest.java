@@ -13,6 +13,7 @@ import com.platform.business.service.booking.dto.request.PlaneTicketBookingReque
 import com.platform.business.service.booking.exception.PassengerExistsException;
 import com.platform.repository.country.InMemoryCountryDao;
 import com.platform.repository.customer.InMemoryCustomerDao;
+import com.platform.repository.ticket.FlightBookingOrderDao;
 import com.platform.repository.ticket.InMemoryPlaneTicketDao;
 import com.platform.repository.transportation.InMemoryFlightsDao;
 import org.junit.jupiter.api.*;
@@ -31,7 +32,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class PlaneTicketBookingServiceTest {
     private final BookingService bookingService = new FlightTicketBookingService(
             new InMemoryFlightsDao(),
-            new InMemoryPlaneTicketDao(), new InMemoryCountryDao(), new InMemoryCustomerDao(),
+            new InMemoryPlaneTicketDao(), new FlightBookingOrderDao(), new InMemoryCountryDao(), new InMemoryCustomerDao(),
             new FlightTicketMapper());
 
     private PlaneTicketBookingRequest planeTicketBookingRequest;

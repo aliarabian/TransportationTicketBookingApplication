@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 
 public abstract class SeatingSection implements Serializable {
     private Long id;
+    @JsonIgnore
     private Set<SeatingSectionPrivilege> sectionPrivileges;
     @JsonIgnore
     private Set<PlaneSeat> seats;
@@ -61,7 +62,7 @@ public abstract class SeatingSection implements Serializable {
 
     public Optional<PlaneSeat> bookSeat(Long seatId) {
         for (PlaneSeat seat : seats) {
-            if (seat.isAvailable()) {
+            if (seat.getId().equals(seatId) && seat.isAvailable()) {
                 seat.holdSeat();
                 this.availableSeats--;
                 return Optional.of(seat);

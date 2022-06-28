@@ -1,5 +1,7 @@
 package com.platform.business.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.platform.business.model.booking.BookingOrder;
 import com.platform.business.model.booking.FlightTicket;
 
 import java.util.Collections;
@@ -9,7 +11,10 @@ import java.util.Set;
 
 public class Customer extends User {
     private String nationalId;
-    private Set<FlightTicket> bookedTickets;
+    @JsonIgnore
+    private final Set<FlightTicket> bookedTickets;
+    @JsonIgnore
+    private final Set<BookingOrder> bookingOrders;
 
     public Customer(Long id, String username, String password, String firstName, String lastName, String nationalId) {
         super(id, username, password, firstName, lastName);
@@ -19,6 +24,7 @@ public class Customer extends User {
         }
         this.nationalId = nationalId;
         this.bookedTickets = new HashSet<>();
+        this.bookingOrders = new HashSet<>();
     }
 
     public String getNationalId() {
@@ -57,5 +63,14 @@ public class Customer extends User {
     public void addTickets(Set<FlightTicket> tickets) {
         Objects.requireNonNull(tickets);
         this.bookedTickets.addAll(tickets);
+    }
+
+    public Set<BookingOrder> getBookingOrders() {
+        return Collections.unmodifiableSet(bookingOrders);
+    }
+
+    public void addOrder(BookingOrder order) {
+        Objects.requireNonNull(order);
+        this.bookingOrders.add(order);
     }
 }
