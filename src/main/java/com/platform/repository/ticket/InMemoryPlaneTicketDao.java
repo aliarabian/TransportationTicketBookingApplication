@@ -1,13 +1,12 @@
 package com.platform.repository.ticket;
 
-import com.platform.business.model.booking.FlightTicket;
+import com.platform.business.booking.entity.FlightTicket;
 import org.springframework.stereotype.Repository;
 import persistence.data.storage.memory.DuplicateItemException;
 import persistence.data.storage.memory.TransportationBookingSystemImMemoryDataSource;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Repository
 public class InMemoryPlaneTicketDao implements FlightTicketDao {

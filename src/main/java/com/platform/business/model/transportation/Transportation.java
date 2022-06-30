@@ -1,6 +1,6 @@
 package com.platform.business.model.transportation;
 
-import com.platform.business.model.booking.Ticket;
+import com.platform.business.booking.entity.Ticket;
 
 import java.io.Serializable;
 import java.time.OffsetDateTime;

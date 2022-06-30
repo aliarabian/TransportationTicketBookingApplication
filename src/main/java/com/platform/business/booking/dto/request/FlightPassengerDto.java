@@ -1,4 +1,4 @@
-package com.platform.business.service.booking.dto.request;
+package com.platform.business.booking.dto.request;
 
 import java.time.LocalDate;
 

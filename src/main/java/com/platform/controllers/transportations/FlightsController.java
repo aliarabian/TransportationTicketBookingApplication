@@ -1,7 +1,7 @@
 package com.platform.controllers.transportations;
 
 import com.platform.ApiResponseEntity;
-import com.platform.business.service.booking.dto.request.FlightPassengerDto;
+import com.platform.business.booking.dto.request.FlightPassengerDto;
 import com.platform.business.service.transportations.TransportationSearchService;
 import com.platform.business.service.transportations.dto.FlightDto;
 import org.springframework.beans.factory.annotation.Autowired;

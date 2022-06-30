@@ -1,8 +1,8 @@
 package com.platform.business.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.platform.business.model.booking.BookingOrder;
-import com.platform.business.model.booking.FlightTicket;
+import com.platform.business.booking.entity.BookingOrder;
+import com.platform.business.booking.entity.FlightTicket;
 
 import java.util.Collections;
 import java.util.HashSet;

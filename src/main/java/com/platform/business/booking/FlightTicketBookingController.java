@@ -1,11 +1,11 @@
-package com.platform.controllers.booking;
+package com.platform.business.booking;
 
 import com.platform.ApiResponseEntity;
 import com.platform.ResourceCreationDetails;
-import com.platform.business.model.booking.BookingOrder;
-import com.platform.business.service.booking.BookingService;
-import com.platform.business.service.booking.dto.FlightTicketDto;
-import com.platform.business.service.booking.dto.request.PlaneTicketBookingRequest;
+import com.platform.business.booking.dto.BookingOrderDto;
+import com.platform.business.booking.dto.CheckoutRequest;
+import com.platform.business.booking.dto.FlightTicketDto;
+import com.platform.business.booking.dto.request.PlaneTicketBookingRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -34,11 +34,19 @@ public class FlightTicketBookingController {
     }
 
     @PostMapping("{flightId}/seat-bookings")
-    public ResponseEntity<ApiResponseEntity<BookingOrder>> bookRequestedSeats(@Valid @RequestBody PlaneTicketBookingRequest request
+    public ResponseEntity<ApiResponseEntity<BookingOrderDto>> bookRequestedSeats(@Valid @RequestBody PlaneTicketBookingRequest request
             , @PathVariable @Valid Long flightId, HttpServletRequest httpServletRequest) {
 
         String username = httpServletRequest.getRemoteUser();
         return ResponseEntity.ok().body(new ApiResponseEntity<>(bookingService.bookTicketsWithRequestedSeats(request, username, flightId)));
+    }
+
+    @PutMapping("{flightId}/seat-bookings")
+    public ResponseEntity<ApiResponseEntity<BookingOrderDto>> checkout(@Valid @RequestBody CheckoutRequest request
+            , @PathVariable @Valid Long flightId, HttpServletRequest httpServletRequest) {
+
+        String username = httpServletRequest.getRemoteUser();
+        return ResponseEntity.ok().body(new ApiResponseEntity<>(bookingService.checkout(request, username)));
     }
 
     @PostMapping("bookings")

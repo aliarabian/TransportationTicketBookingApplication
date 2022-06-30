@@ -1,4 +1,4 @@
-package com.platform.business.service.booking.exception;
+package com.platform.business.booking.exception;
 
 public class SectionNotExistsException extends BookingException {
     public SectionNotExistsException(String message) {

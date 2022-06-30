@@ -1,7 +1,7 @@
 package com.platform.business.model.transportation;
 
-import com.platform.business.model.booking.Passenger;
-import com.platform.business.model.booking.Passport;
+import com.platform.business.booking.entity.Passenger;
+import com.platform.business.booking.entity.Passport;
 
 import java.time.LocalDate;
 

@@ -1,28 +1,30 @@
-package com.platform.business.service.booking;
+package com.platform.business.booking;
 
+import com.platform.business.booking.dto.BookingOrderDto;
+import com.platform.business.booking.dto.CheckoutRequest;
+import com.platform.business.booking.entity.BookingOrder;
 import com.platform.business.exception.BadRequestException;
 import com.platform.business.exception.CustomerNotFoundException;
 import com.platform.business.exception.TransportationNotFoundException;
 import com.platform.business.mapper.Mapper;
 import com.platform.business.model.Country;
 import com.platform.business.model.Customer;
-import com.platform.business.model.booking.BookingOrder;
-import com.platform.business.model.booking.FlightTicket;
-import com.platform.business.model.booking.Passport;
+import com.platform.business.booking.entity.FlightTicket;
+import com.platform.business.booking.entity.OrderStatus;
+import com.platform.business.booking.entity.Passport;
 import com.platform.business.model.transportation.Flight;
 import com.platform.business.model.transportation.FlightPassenger;
 import com.platform.business.model.transportation.PlaneSeat;
 import com.platform.business.model.transportation.SeatingSectionPrivilege;
-import com.platform.business.service.booking.dto.FlightTicketDto;
-import com.platform.business.service.booking.dto.request.FlightPassengerDto;
-import com.platform.business.service.booking.dto.request.PlaneBookingPassengerDetail;
-import com.platform.business.service.booking.dto.request.PlaneTicketBookingRequest;
-import com.platform.business.service.booking.exception.BookingException;
-import com.platform.business.service.booking.exception.PassengerExistsException;
-import com.platform.business.service.booking.exception.TransportationHappenedBeforeException;
+import com.platform.business.booking.dto.FlightTicketDto;
+import com.platform.business.booking.dto.request.FlightPassengerDto;
+import com.platform.business.booking.dto.request.PlaneBookingPassengerDetail;
+import com.platform.business.booking.dto.request.PlaneTicketBookingRequest;
+import com.platform.business.booking.exception.BookingException;
+import com.platform.business.booking.exception.PassengerExistsException;
+import com.platform.business.booking.exception.TransportationHappenedBeforeException;
 import com.platform.repository.country.CountryDao;
 import com.platform.repository.customer.CustomerDao;
-import com.platform.repository.ticket.FlightBookingOrderDao;
 import com.platform.repository.ticket.FlightTicketDao;
 import com.platform.repository.transportation.FlightsDao;
 import org.springframework.stereotype.Service;
@@ -41,10 +43,11 @@ public class FlightTicketBookingService implements BookingService {
     private final CountryDao countryDao;
     private final CustomerDao customerDao;
     private final Mapper<FlightTicket, FlightTicketDto> ticketDtoMapper;
+    private final Mapper<BookingOrder, BookingOrderDto> orderDtoMapper;
 
     public FlightTicketBookingService(FlightsDao flightsDao, FlightTicketDao ticketDao,
-            FlightBookingOrderDao bookingOrderDao, CountryDao countryDao, CustomerDao customerDao,
-            Mapper<FlightTicket, FlightTicketDto> ticketDtoMapper) {
+                                      FlightBookingOrderDao bookingOrderDao, CountryDao countryDao, CustomerDao customerDao,
+                                      Mapper<FlightTicket, FlightTicketDto> ticketDtoMapper, Mapper<BookingOrder, BookingOrderDto> orderDtoMapper) {
 
         this.flightsDao = flightsDao;
         this.ticketDao = ticketDao;
@@ -52,6 +55,7 @@ public class FlightTicketBookingService implements BookingService {
         this.countryDao = countryDao;
         this.customerDao = customerDao;
         this.ticketDtoMapper = ticketDtoMapper;
+        this.orderDtoMapper = orderDtoMapper;
     }
 
 
@@ -63,7 +67,7 @@ public class FlightTicketBookingService implements BookingService {
     }
 
     @Override
-    public BookingOrder bookTicketsWithRequestedSeats(PlaneTicketBookingRequest request, String username, Long flightId) throws BookingException, NullPointerException {
+    public BookingOrderDto bookTicketsWithRequestedSeats(PlaneTicketBookingRequest request, String username, Long flightId) throws BookingException, NullPointerException {
         nullCheck(request, username, flightId);
         if (request.getSeatIds().size() != request.getPassengersBookingDetails().size()) {
             throw new BadRequestException("Number of seats and passengers doesn't match.");
@@ -98,7 +102,23 @@ public class FlightTicketBookingService implements BookingService {
             rollback(planeSeats);
             throw new PassengerExistsException("Passenger Has Already Booked A Ticket For This Flight!");
         }
-        return bookingOrder;
+        return orderDtoMapper.toDto(bookingOrder);
+    }
+
+    @Override
+    public BookingOrderDto checkout(CheckoutRequest request, String username) {
+        Objects.requireNonNull(request);
+        Objects.requireNonNull(username);
+        BookingOrder order = bookingOrderDao.getOrderByIdAndUsername(request.getOrderId(), username);
+        BookingOrder fulfilledOrder = order.updateStatus(OrderStatus.FULFILLED);
+        try {
+            for (FlightTicket flightTicket : order.getTickets()) {
+                ticketDao.persist(flightTicket);
+            }
+        } catch (DuplicateItemException ex) {
+            throw new BookingException("Already Checked Out");
+        }
+        return orderDtoMapper.toDto(fulfilledOrder);
     }
 
     private void rollback(List<PlaneSeat> planeSeats) {

@@ -1,21 +1,16 @@
 package com.platform.business.service.booking;
 
-import com.platform.business.mapper.FlightTicketMapper;
-import com.platform.business.model.*;
-import com.platform.business.model.booking.Ticket;
+import com.platform.business.booking.BookingService;
+import com.platform.business.booking.dto.FlightTicketDto;
+import com.platform.business.booking.dto.request.FlightPassengerDto;
+import com.platform.business.booking.dto.request.PlaneBookingPassengerDetail;
+import com.platform.business.booking.dto.request.PlaneTicketBookingRequest;
+import com.platform.business.booking.entity.Ticket;
+import com.platform.business.booking.exception.PassengerExistsException;
+import com.platform.business.model.Customer;
 import com.platform.business.model.transportation.Flight;
 import com.platform.business.model.transportation.SeatingSection;
 import com.platform.business.model.transportation.SeatingSectionPrivilege;
-import com.platform.business.service.booking.dto.FlightTicketDto;
-import com.platform.business.service.booking.dto.request.FlightPassengerDto;
-import com.platform.business.service.booking.dto.request.PlaneBookingPassengerDetail;
-import com.platform.business.service.booking.dto.request.PlaneTicketBookingRequest;
-import com.platform.business.service.booking.exception.PassengerExistsException;
-import com.platform.repository.country.InMemoryCountryDao;
-import com.platform.repository.customer.InMemoryCustomerDao;
-import com.platform.repository.ticket.FlightBookingOrderDao;
-import com.platform.repository.ticket.InMemoryPlaneTicketDao;
-import com.platform.repository.transportation.InMemoryFlightsDao;
 import org.junit.jupiter.api.*;
 import persistence.data.storage.memory.TransportationBookingSystemImMemoryDataSource;
 
@@ -30,12 +25,13 @@ import static org.junit.jupiter.api.Assertions.*;
 @Disabled
 @DisplayName("Given there is a flight available ")
 class PlaneTicketBookingServiceTest {
-    private final BookingService bookingService = new FlightTicketBookingService(
-            new InMemoryFlightsDao(),
-            new InMemoryPlaneTicketDao(), new FlightBookingOrderDao(), new InMemoryCountryDao(), new InMemoryCustomerDao(),
-            new FlightTicketMapper());
+    private final BookingService bookingService;
 
     private PlaneTicketBookingRequest planeTicketBookingRequest;
+
+    PlaneTicketBookingServiceTest(BookingService bookingService) {
+        this.bookingService = bookingService;
+    }
 
     @Nested
     @DisplayName("When booking ticket for multiple passengers ")
@@ -237,7 +233,7 @@ class PlaneTicketBookingServiceTest {
     }
 
     private FlightPassengerDto generatePassengerDto(String firstName, String lastName, String nationalId, LocalDate birthdate,
-            String passportNO, LocalDate passportExpirationDate) {
+                                                    String passportNO, LocalDate passportExpirationDate) {
         FlightPassengerDto passengerDto = new FlightPassengerDto();
         passengerDto.setFirstName(firstName);
         passengerDto.setLastName(lastName);

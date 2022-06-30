@@ -1,4 +1,4 @@
-package com.platform.business.service.booking.exception;
+package com.platform.business.booking.exception;
 
 public class PassengerExistsException extends BookingException {
     public PassengerExistsException(String message) {

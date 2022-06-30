@@ -43,7 +43,6 @@ public class FlightSearchService implements TransportationSearchService {
     @Override
     @Cacheable(value = "flights")
     public Set<FlightDto> findAllTransportations() {
-        System.out.println("ASDAdasdasds");
         Set<Flight> transportations = transportationDao.findAllTransportations();
         return transportations.stream()
                               .map(transportationMapper::toDto)

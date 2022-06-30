@@ -1,4 +1,4 @@
-package com.platform.business.model.booking;
+package com.platform.business.booking.entity;
 
 import java.io.Serializable;
 

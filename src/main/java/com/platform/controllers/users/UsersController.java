@@ -4,7 +4,7 @@ package com.platform.controllers.users;
 import com.platform.ApiResponseEntity;
 import com.platform.ResourceCreationDetails;
 import com.platform.business.model.User;
-import com.platform.business.service.booking.dto.FlightTicketDto;
+import com.platform.business.booking.dto.FlightTicketDto;
 import com.platform.business.service.tickets.TicketsService;
 import com.platform.business.service.users.RegistrationService;
 import org.springframework.http.ResponseEntity;

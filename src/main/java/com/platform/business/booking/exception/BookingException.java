@@ -1,4 +1,4 @@
-package com.platform.business.service.booking.exception;
+package com.platform.business.booking.exception;
 
 import com.platform.business.exception.ApplicationException;
 

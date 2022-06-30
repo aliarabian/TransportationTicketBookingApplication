@@ -3,8 +3,8 @@ package persistence.data.storage.memory;
 import com.platform.business.model.City;
 import com.platform.business.model.Country;
 import com.platform.business.model.Customer;
-import com.platform.business.model.booking.BookingOrder;
-import com.platform.business.model.booking.FlightTicket;
+import com.platform.business.booking.entity.BookingOrder;
+import com.platform.business.booking.entity.FlightTicket;
 import com.platform.business.model.transportation.*;
 
 import java.io.*;
@@ -366,6 +366,14 @@ public class TransportationBookingSystemImMemoryDataSource implements Serializab
 
         }
 
+        public Optional<BookingOrder> getOrderByIdAndUsername(Long orderId, String username) {
+            BookingOrder order = orders.get(orderId);
+            boolean orderedByCustomer = order.getCustomer().getUsername().equals(username);
+            if (orderedByCustomer) {
+                return Optional.of(order);
+            }
+            return Optional.empty();
+        }
     }
 
     public static class PlaneTicketDataSource implements Serializable {

@@ -1,6 +1,6 @@
-package com.platform.repository.ticket;
+package com.platform.business.booking;
 
-import com.platform.business.model.booking.BookingOrder;
+import com.platform.business.booking.entity.BookingOrder;
 import persistence.data.storage.memory.DuplicateItemException;
 
 import java.util.Set;

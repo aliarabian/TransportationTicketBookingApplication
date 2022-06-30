@@ -1,6 +1,5 @@
-package com.platform.business.model.booking;
+package com.platform.business.booking.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.platform.business.model.Customer;
 import com.platform.business.model.transportation.Flight;
 

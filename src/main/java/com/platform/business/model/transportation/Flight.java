@@ -1,9 +1,9 @@
 package com.platform.business.model.transportation;
 
-import com.platform.business.model.booking.FlightTicket;
-import com.platform.business.service.booking.exception.BookingException;
-import com.platform.business.service.booking.exception.SeatNotAvailableException;
-import com.platform.business.service.booking.exception.SectionNotExistsException;
+import com.platform.business.booking.entity.FlightTicket;
+import com.platform.business.booking.exception.BookingException;
+import com.platform.business.booking.exception.SeatNotAvailableException;
+import com.platform.business.booking.exception.SectionNotExistsException;
 
 import java.time.OffsetDateTime;
 import java.util.ArrayList;

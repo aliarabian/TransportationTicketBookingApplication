@@ -1,6 +1,6 @@
 package com.platform.business.service.tickets;
 
-import com.platform.business.service.booking.dto.FlightTicketDto;
+import com.platform.business.booking.dto.FlightTicketDto;
 
 import java.util.List;
 

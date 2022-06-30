@@ -1,4 +1,4 @@
-package com.platform.business.service.booking.exception;
+package com.platform.business.booking.exception;
 
 public class TransportationHappenedBeforeException extends BookingException {
     public TransportationHappenedBeforeException(String message) {

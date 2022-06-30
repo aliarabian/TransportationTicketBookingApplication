@@ -1,4 +1,4 @@
-package com.platform.business.service.booking.dto;
+package com.platform.business.booking.dto;
 
 import java.time.ZonedDateTime;
 import java.util.Set;

@@ -1,6 +1,6 @@
 package com.platform.aop;
 
-import com.platform.business.service.booking.dto.FlightTicketDto;
+import com.platform.business.booking.dto.FlightTicketDto;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.*;
