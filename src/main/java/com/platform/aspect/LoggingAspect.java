@@ -1,4 +1,4 @@
-package com.platform.aop;
+package com.platform.aspect;
 
 import com.platform.business.booking.dto.FlightTicketDto;
 import org.aspectj.lang.JoinPoint;
@@ -16,7 +16,7 @@ import java.util.Set;
 public class LoggingAspect {
     private final static Logger LOGGER = LoggerFactory.getLogger(LoggingAspect.class);
 
-    @Pointcut("execution(* com.platform.business.service.booking.*Service.*(..))")
+    @Pointcut("execution(* com.platform.business.booking.*Service.*(..))")
     private void bookingServicePointcut() {
     }
 
@@ -39,7 +39,7 @@ public class LoggingAspect {
         LOGGER.info("Booked Tickets: [ {} ]", tickets);
     }
 
-    @AfterThrowing(value = "bookingServicePointcut() || execution(* com.platform.controllers.*.*(..))", throwing = "failureException")
+    @AfterThrowing(value = "bookingServicePointcut() || execution(* com.platform.controllers.*.*(..)) || execution(* com.platform.business.booking.FlightTicketBookingController.*(..))", throwing = "failureException")
     public void logBookingFailureExceptionAdvice(JoinPoint joinPoint, Throwable failureException) {
         Signature signature = joinPoint.getSignature();
         StringBuilder sb = new StringBuilder();

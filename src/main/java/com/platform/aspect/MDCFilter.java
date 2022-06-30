@@ -1,4 +1,4 @@
-package com.platform.aop;
+package com.platform.aspect;
 
 import org.slf4j.MDC;
 import org.springframework.stereotype.Component;
@@ -17,6 +17,7 @@ public class MDCFilter extends OncePerRequestFilter {
         MDC.put("ipAddress", request.getRemoteAddr());
         MDC.put("requestURI", request.getRequestURI());
         MDC.put("username", request.getRemoteUser());
+        MDC.put("method", request.getMethod());
         try {
             filterChain.doFilter(request, response);
         } finally {

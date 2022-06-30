@@ -1,6 +1,9 @@
 package com.platform.business.model.transportation;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class PlaneSeat extends Seat {
+    @JsonIgnore
     private SeatingSection section;
 
 

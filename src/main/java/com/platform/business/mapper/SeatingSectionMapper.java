@@ -12,9 +12,9 @@ import java.util.stream.Collectors;
 public class SeatingSectionMapper implements Mapper<SeatingSection, SeatingSectionDto> {
 
     @Override
-    public SeatingSectionDto toDto(SeatingSection entity) {
-        Set<SectionPrivilegeDto> privileges = getSectionPrivilegeDtos(entity);
-        return new SeatingSectionDto(entity.getId(), entity.title(), entity.getAvailableSeats(), privileges);
+    public SeatingSectionDto toDto(SeatingSection seatingSection) {
+        Set<SectionPrivilegeDto> privileges = getSectionPrivilegeDtos(seatingSection);
+        return new SeatingSectionDto(seatingSection.getId(), seatingSection.title(), seatingSection.getAvailableSeats(), seatingSection.getSeats(), privileges);
     }
 
     private Set<SectionPrivilegeDto> getSectionPrivilegeDtos(SeatingSection entity) {
