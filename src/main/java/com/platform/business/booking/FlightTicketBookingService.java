@@ -28,6 +28,7 @@ import com.platform.repository.country.CountryDao;
 import com.platform.repository.customer.CustomerDao;
 import com.platform.repository.ticket.FlightTicketDao;
 import com.platform.repository.transportation.FlightsDao;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import persistence.data.storage.memory.DuplicateItemException;
 
@@ -46,10 +47,11 @@ public class FlightTicketBookingService implements BookingService {
     private final Mapper<FlightTicket, FlightTicketDto> ticketDtoMapper;
     private final Mapper<BookingOrder, BookingOrderDto> orderDtoMapper;
     private final ResetSeatStateService resetSeatStateService;
+    private final ApplicationEventPublisher eventPublisher;
 
     public FlightTicketBookingService(FlightsDao flightsDao, FlightTicketDao ticketDao,
                                       FlightBookingOrderDao bookingOrderDao, CountryDao countryDao, CustomerDao customerDao,
-                                      Mapper<FlightTicket, FlightTicketDto> ticketDtoMapper, Mapper<BookingOrder, BookingOrderDto> orderDtoMapper, ResetSeatStateService resetSeatStateService) {
+                                      Mapper<FlightTicket, FlightTicketDto> ticketDtoMapper, Mapper<BookingOrder, BookingOrderDto> orderDtoMapper, ResetSeatStateService resetSeatStateService, ApplicationEventPublisher eventPublisher) {
 
         this.flightsDao = flightsDao;
         this.ticketDao = ticketDao;
@@ -59,6 +61,7 @@ public class FlightTicketBookingService implements BookingService {
         this.ticketDtoMapper = ticketDtoMapper;
         this.orderDtoMapper = orderDtoMapper;
         this.resetSeatStateService = resetSeatStateService;
+        this.eventPublisher = eventPublisher;
     }
 
 
@@ -83,7 +86,6 @@ public class FlightTicketBookingService implements BookingService {
         List<PlaneSeat> planeSeats = new ArrayList<>();
         BookingOrder bookingOrder;
         try {
-
             planeSeats = flight.bookSeats(request.getSeatingSectionId(), request.getSeatIds());
             List<PlaneBookingPassengerDetail> passengersBookingDetails = new ArrayList<>(request.getPassengersBookingDetails());
             Set<FlightTicket> tickets = new HashSet<>();
@@ -97,7 +99,9 @@ public class FlightTicketBookingService implements BookingService {
                     tickets, customer);
             bookingOrderDao.persist(bookingOrder);
             customer.addOrder(bookingOrder);
-
+            eventPublisher.publishEvent(new SeatStateChangedEvent(planeSeats.stream().findFirst().get().getSection()));
+            resetSeatStateService.scheduleResetOnTimeout(bookingOrder);
+            return orderDtoMapper.toDto(bookingOrder);
         } catch (BookingException ex) {
             rollback(planeSeats);
             throw new BookingException(ex.getMessage());
@@ -105,8 +109,6 @@ public class FlightTicketBookingService implements BookingService {
             rollback(planeSeats);
             throw new PassengerExistsException("Passenger Has Already Booked A Ticket For This Flight!");
         }
-        resetSeatStateService.scheduleResetOnTimeout(bookingOrder);
-        return orderDtoMapper.toDto(bookingOrder);
     }
 
     @Override
