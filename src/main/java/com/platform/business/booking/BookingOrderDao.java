@@ -10,5 +10,10 @@ public interface BookingOrderDao {
 
 
     Set<BookingOrder> getAllOrders();
+
     Set<BookingOrder> getUsersBookingOrdersByUsername(String username);
+
+    BookingOrder getOrderByIdAndUsername(Long orderId, String username);
+
+    void cancel(BookingOrder order);
 }

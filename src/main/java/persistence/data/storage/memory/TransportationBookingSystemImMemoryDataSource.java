@@ -1,10 +1,10 @@
 package persistence.data.storage.memory;
 
+import com.platform.business.booking.entity.BookingOrder;
+import com.platform.business.booking.entity.FlightTicket;
 import com.platform.business.model.City;
 import com.platform.business.model.Country;
 import com.platform.business.model.Customer;
-import com.platform.business.booking.entity.BookingOrder;
-import com.platform.business.booking.entity.FlightTicket;
 import com.platform.business.model.transportation.*;
 
 import java.io.*;
@@ -339,7 +339,6 @@ public class TransportationBookingSystemImMemoryDataSource implements Serializab
 
         public void addOrder(BookingOrder bookingOrder) throws DuplicateItemException {
             Long flightId = bookingOrder.getFlight().getId();
-            System.out.println(bookingOrder.getTickets());
             boolean exists = orders.values().stream()
                                    .filter(order -> order.getFlight().getId().equals(flightId))
                                    .map(BookingOrder::getTickets)
@@ -373,6 +372,10 @@ public class TransportationBookingSystemImMemoryDataSource implements Serializab
                 return Optional.of(order);
             }
             return Optional.empty();
+        }
+
+        public void updateOrder(BookingOrder order) {
+            orders.replace(order.getId(), order);
         }
     }
 

@@ -1,5 +1,7 @@
 package com.platform.business.mapper;
 
+import com.platform.business.model.transportation.PlaneSeat;
+import com.platform.business.model.transportation.Seat;
 import com.platform.business.model.transportation.SeatingSection;
 import com.platform.business.service.transportations.dto.SeatingSectionDto;
 import com.platform.business.service.transportations.dto.SectionPrivilegeDto;
@@ -14,7 +16,11 @@ public class SeatingSectionMapper implements Mapper<SeatingSection, SeatingSecti
     @Override
     public SeatingSectionDto toDto(SeatingSection seatingSection) {
         Set<SectionPrivilegeDto> privileges = getSectionPrivilegeDtos(seatingSection);
-        return new SeatingSectionDto(seatingSection.getId(), seatingSection.title(), seatingSection.getAvailableSeats(), seatingSection.getSeats(), privileges);
+        Set<PlaneSeat> availableSeats = seatingSection.getSeats()
+                                                      .stream()
+                                                      .filter(Seat::isAvailable)
+                                                      .collect(Collectors.toUnmodifiableSet());
+        return new SeatingSectionDto(seatingSection.getId(), seatingSection.title(), seatingSection.getAvailableSeats(), availableSeats, privileges);
     }
 
     private Set<SectionPrivilegeDto> getSectionPrivilegeDtos(SeatingSection entity) {

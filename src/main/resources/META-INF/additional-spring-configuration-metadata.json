@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "seat.hold.timeout",
+      "type": "java.lang.String",
+      "description": "Description for seat.hold.timeout."
+  }
+] }

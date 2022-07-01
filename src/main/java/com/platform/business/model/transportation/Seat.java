@@ -5,7 +5,7 @@ import java.io.Serializable;
 public abstract class Seat implements Serializable {
     private Long id;
     private String seatNO;
-    private SeatState state;
+    protected SeatState state;
 
     public Seat(Long id, String seatNO) {
         this.id = id;

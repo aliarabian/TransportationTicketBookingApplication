@@ -1,28 +1,29 @@
 package com.platform.business.booking;
 
+import com.platform.business.ResetSeatStateService;
 import com.platform.business.booking.dto.BookingOrderDto;
 import com.platform.business.booking.dto.CheckoutRequest;
+import com.platform.business.booking.dto.FlightTicketDto;
+import com.platform.business.booking.dto.request.FlightPassengerDto;
+import com.platform.business.booking.dto.request.PlaneBookingPassengerDetail;
+import com.platform.business.booking.dto.request.PlaneTicketBookingRequest;
 import com.platform.business.booking.entity.BookingOrder;
+import com.platform.business.booking.entity.FlightTicket;
+import com.platform.business.booking.entity.OrderStatus;
+import com.platform.business.booking.entity.Passport;
+import com.platform.business.booking.exception.BookingException;
+import com.platform.business.booking.exception.PassengerExistsException;
+import com.platform.business.booking.exception.TransportationHappenedBeforeException;
 import com.platform.business.exception.BadRequestException;
 import com.platform.business.exception.CustomerNotFoundException;
 import com.platform.business.exception.TransportationNotFoundException;
 import com.platform.business.mapper.Mapper;
 import com.platform.business.model.Country;
 import com.platform.business.model.Customer;
-import com.platform.business.booking.entity.FlightTicket;
-import com.platform.business.booking.entity.OrderStatus;
-import com.platform.business.booking.entity.Passport;
 import com.platform.business.model.transportation.Flight;
 import com.platform.business.model.transportation.FlightPassenger;
 import com.platform.business.model.transportation.PlaneSeat;
 import com.platform.business.model.transportation.SeatingSectionPrivilege;
-import com.platform.business.booking.dto.FlightTicketDto;
-import com.platform.business.booking.dto.request.FlightPassengerDto;
-import com.platform.business.booking.dto.request.PlaneBookingPassengerDetail;
-import com.platform.business.booking.dto.request.PlaneTicketBookingRequest;
-import com.platform.business.booking.exception.BookingException;
-import com.platform.business.booking.exception.PassengerExistsException;
-import com.platform.business.booking.exception.TransportationHappenedBeforeException;
 import com.platform.repository.country.CountryDao;
 import com.platform.repository.customer.CustomerDao;
 import com.platform.repository.ticket.FlightTicketDao;
@@ -44,10 +45,11 @@ public class FlightTicketBookingService implements BookingService {
     private final CustomerDao customerDao;
     private final Mapper<FlightTicket, FlightTicketDto> ticketDtoMapper;
     private final Mapper<BookingOrder, BookingOrderDto> orderDtoMapper;
+    private final ResetSeatStateService resetSeatStateService;
 
     public FlightTicketBookingService(FlightsDao flightsDao, FlightTicketDao ticketDao,
                                       FlightBookingOrderDao bookingOrderDao, CountryDao countryDao, CustomerDao customerDao,
-                                      Mapper<FlightTicket, FlightTicketDto> ticketDtoMapper, Mapper<BookingOrder, BookingOrderDto> orderDtoMapper) {
+                                      Mapper<FlightTicket, FlightTicketDto> ticketDtoMapper, Mapper<BookingOrder, BookingOrderDto> orderDtoMapper, ResetSeatStateService resetSeatStateService) {
 
         this.flightsDao = flightsDao;
         this.ticketDao = ticketDao;
@@ -56,6 +58,7 @@ public class FlightTicketBookingService implements BookingService {
         this.customerDao = customerDao;
         this.ticketDtoMapper = ticketDtoMapper;
         this.orderDtoMapper = orderDtoMapper;
+        this.resetSeatStateService = resetSeatStateService;
     }
 
 
@@ -102,15 +105,19 @@ public class FlightTicketBookingService implements BookingService {
             rollback(planeSeats);
             throw new PassengerExistsException("Passenger Has Already Booked A Ticket For This Flight!");
         }
+        resetSeatStateService.scheduleResetOnTimeout(bookingOrder);
         return orderDtoMapper.toDto(bookingOrder);
     }
 
     @Override
-    public BookingOrderDto checkout(CheckoutRequest request, String username) {
+    public BookingOrderDto checkout(CheckoutRequest request, String username) throws BookingException {
         Objects.requireNonNull(request);
         Objects.requireNonNull(username);
         BookingOrder order = bookingOrderDao.getOrderByIdAndUsername(request.getOrderId(), username);
-        BookingOrder fulfilledOrder = order.updateStatus(OrderStatus.FULFILLED);
+        if (order.getStatus().equals(OrderStatus.CANCELLED)) {
+            throw new BookingException("Order reached Timout.");
+        }
+        BookingOrder fulfilledOrder = order.updateStatus(OrderStatus.FULFILLED); // TODO stored entity
         try {
             for (FlightTicket flightTicket : order.getTickets()) {
                 ticketDao.persist(flightTicket);
@@ -124,6 +131,7 @@ public class FlightTicketBookingService implements BookingService {
     private void rollback(List<PlaneSeat> planeSeats) {
         for (PlaneSeat planeSeat : planeSeats) {
             planeSeat.free();
+            planeSeat.getSection().incrementAvailableSeats();
         }
     }
 

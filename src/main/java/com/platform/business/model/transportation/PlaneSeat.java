@@ -10,6 +10,7 @@ public class PlaneSeat extends Seat {
     public PlaneSeat(Long id, String seatNO, SeatingSection section) {
         super(id, seatNO);
         this.section = section;
+        this.state = new FreeSeat();
     }
 
 

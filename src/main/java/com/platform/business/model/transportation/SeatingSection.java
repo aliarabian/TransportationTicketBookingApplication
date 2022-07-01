@@ -112,4 +112,7 @@ public abstract class SeatingSection implements Serializable {
                 '}';
     }
 
+    public void incrementAvailableSeats() {
+        ++availableSeats;
+    }
 }
