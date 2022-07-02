@@ -3,8 +3,8 @@ package com.platform.business.model.transportation;
 import java.io.Serializable;
 
 public abstract class Seat implements Serializable {
-    private Long id;
-    private String seatNO;
+    private final Long id;
+    private final String seatNO;
     protected SeatState state;
 
     public Seat(Long id, String seatNO) {

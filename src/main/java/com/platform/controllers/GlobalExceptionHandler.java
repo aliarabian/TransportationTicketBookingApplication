@@ -2,11 +2,11 @@ package com.platform.controllers;
 
 import com.platform.ApiErrorResponse;
 import com.platform.ApiResponseEntity;
+import com.platform.business.booking.exception.BookingException;
 import com.platform.business.exception.ApplicationException;
 import com.platform.business.exception.BadRequestException;
 import com.platform.business.exception.ResourceNotFoundException;
 import com.platform.business.service.auth.exception.AuthenticationFailedException;
-import com.platform.business.booking.exception.BookingException;
 import com.platform.business.service.users.CustomerExistsException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

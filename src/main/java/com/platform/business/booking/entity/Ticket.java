@@ -13,11 +13,11 @@ public abstract class Ticket<T extends Transportation, U extends Passenger, S ex
     private Long id;
     private OffsetDateTime timestamp;
     @JsonIgnore
-    private T transportation;
+    private final T transportation;
     @JsonIgnore
-    private U passenger;
-    private S seat;
-    private Customer customer;
+    private final U passenger;
+    private final S seat;
+    private final Customer customer;
 
     public Ticket(Long id, T transportation, U passenger, S seat, Customer customer) {
         this.id = id;

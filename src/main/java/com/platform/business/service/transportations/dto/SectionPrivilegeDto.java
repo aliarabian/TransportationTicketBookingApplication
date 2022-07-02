@@ -2,8 +2,8 @@ package com.platform.business.service.transportations.dto;
 
 public class SectionPrivilegeDto {
 
-    private Long id;
-    private String description;
+    private final Long id;
+    private final String description;
 
     public SectionPrivilegeDto(Long id, String description) {
         this.id = id;

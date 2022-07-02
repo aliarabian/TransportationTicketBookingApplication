@@ -37,6 +37,7 @@ public class PlaneTicketBookingRequest {
     public void setSeatIds(Set<Long> seatIds) {
         this.seatIds = seatIds;
     }
+
     @Override
     public String toString() {
         return "PlaneTicketBookingRequest{" +

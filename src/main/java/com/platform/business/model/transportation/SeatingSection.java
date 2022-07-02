@@ -10,13 +10,13 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public abstract class SeatingSection implements Serializable {
-    private Long id;
+    private final Long id;
     @JsonIgnore
-    private Set<SeatingSectionPrivilege> sectionPrivileges;
+    private final Set<SeatingSectionPrivilege> sectionPrivileges;
     @JsonIgnore
-    private Set<PlaneSeat> seats;
-    private Plane plane;
-    private int capacity;
+    private final Set<PlaneSeat> seats;
+    private final Plane plane;
+    private final int capacity;
     private int availableSeats;
 
 

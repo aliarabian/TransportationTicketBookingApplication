@@ -2,7 +2,6 @@ package com.platform.business.booking;
 
 import com.platform.business.mapper.SeatingSectionMapper;
 import org.springframework.context.event.EventListener;
-import org.springframework.http.MediaType;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.ApplicationScope;
@@ -16,7 +15,7 @@ import java.util.concurrent.ConcurrentLinkedDeque;
 @Component
 @ApplicationScope
 public class SeatStateChangeListener {
-    private ConcurrentHashMap<Long, ConcurrentLinkedDeque<SseEmitter>> subscribersMap = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<Long, ConcurrentLinkedDeque<SseEmitter>> subscribersMap = new ConcurrentHashMap<>();
     private final SeatingSectionMapper seatingSectionMapper;
 
     public SeatStateChangeListener(SeatingSectionMapper seatingSectionMapper) {

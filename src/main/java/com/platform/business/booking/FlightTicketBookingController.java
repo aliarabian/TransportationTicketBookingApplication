@@ -28,7 +28,7 @@ public class FlightTicketBookingController {
 
     @PostMapping("{flightId}/bookings")
     public ResponseEntity<ApiResponseEntity<Set<FlightTicketDto>>> bookTickets(@Valid @RequestBody PlaneTicketBookingRequest request,
-                                                                               @PathVariable @Valid Long flightId, HttpServletRequest httpServletRequest) {
+            @PathVariable @Valid Long flightId, HttpServletRequest httpServletRequest) {
         String username = httpServletRequest.getRemoteUser();
         return ResponseEntity.ok().body(new ApiResponseEntity<>(bookingService.bookTickets(request, username, flightId)));
     }

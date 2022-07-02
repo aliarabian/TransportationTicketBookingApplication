@@ -3,9 +3,9 @@ package com.platform.business.model.transportation;
 import java.io.Serializable;
 
 public abstract class TransportationVehicle<T extends TransportationCompany<?, ?>> implements Serializable {
-    private Long id;
-    private int capacity;
-    private String modelName;
+    private final Long id;
+    private final int capacity;
+    private final String modelName;
     private final T transportationCompany;
 
     public TransportationVehicle(Long id, int capacity, String modelName, T transportationCompany) {

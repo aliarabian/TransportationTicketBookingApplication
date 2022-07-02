@@ -1,8 +1,8 @@
 package com.platform.business.mapper;
 
+import com.platform.business.booking.dto.FlightTicketDto;
 import com.platform.business.booking.entity.FlightTicket;
 import com.platform.business.model.transportation.SeatingSectionPrivilege;
-import com.platform.business.booking.dto.FlightTicketDto;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;

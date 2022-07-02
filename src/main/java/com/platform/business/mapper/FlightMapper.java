@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 @Component
 public class FlightMapper implements Mapper<Flight, FlightDto> {
-    private SeatingSectionMapper sectionMapper;
+    private final SeatingSectionMapper sectionMapper;
 
     public FlightMapper(SeatingSectionMapper sectionMapper) {
         this.sectionMapper = sectionMapper;

@@ -8,7 +8,7 @@ import java.util.Set;
 
 public class Plane extends TransportationVehicle<TransportationCompany<Flight, Plane>> {
     @JsonIgnore
-    private Set<SeatingSection> seatingSections;
+    private final Set<SeatingSection> seatingSections;
 
     public Plane(Long id, int capacity, String modelName, TransportationCompany<Flight, Plane> transportationCompany) {
         super(id, capacity, modelName, transportationCompany);

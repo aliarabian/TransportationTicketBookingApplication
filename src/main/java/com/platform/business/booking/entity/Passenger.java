@@ -3,11 +3,11 @@ package com.platform.business.booking.entity;
 import java.io.Serializable;
 
 public abstract class Passenger implements Serializable {
-    private Long id;
-    private String firstName;
-    private String lastName;
+    private final Long id;
+    private final String firstName;
+    private final String lastName;
     // Natural ID - Unique
-    private String nationalId;
+    private final String nationalId;
 
     protected Passenger(Long id, String firstName, String lastName, String nationalId) {
         this.id = id;

@@ -6,8 +6,8 @@ import com.platform.business.booking.entity.Passport;
 import java.time.LocalDate;
 
 public class FlightPassenger extends Passenger {
-    private Passport passportDetails;
-    private LocalDate birthdate;
+    private final Passport passportDetails;
+    private final LocalDate birthdate;
 
 
     public FlightPassenger(Long id, String firstName, String lastName, String nationalId, LocalDate birthdate, Passport passportDetails) {

@@ -1,8 +1,8 @@
 package com.platform.business.service.tickets;
 
-import com.platform.business.mapper.Mapper;
-import com.platform.business.booking.entity.FlightTicket;
 import com.platform.business.booking.dto.FlightTicketDto;
+import com.platform.business.booking.entity.FlightTicket;
+import com.platform.business.mapper.Mapper;
 import com.platform.repository.ticket.FlightTicketDao;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,5 @@
 package com.platform.business.booking;
 
-import com.platform.business.ResetSeatStateService;
 import com.platform.business.booking.dto.BookingOrderDto;
 import com.platform.business.booking.dto.CheckoutRequest;
 import com.platform.business.booking.dto.FlightTicketDto;
@@ -50,8 +49,8 @@ public class FlightTicketBookingService implements BookingService {
     private final ApplicationEventPublisher eventPublisher;
 
     public FlightTicketBookingService(FlightsDao flightsDao, FlightTicketDao ticketDao,
-                                      FlightBookingOrderDao bookingOrderDao, CountryDao countryDao, CustomerDao customerDao,
-                                      Mapper<FlightTicket, FlightTicketDto> ticketDtoMapper, Mapper<BookingOrder, BookingOrderDto> orderDtoMapper, ResetSeatStateService resetSeatStateService, ApplicationEventPublisher eventPublisher) {
+            FlightBookingOrderDao bookingOrderDao, CountryDao countryDao, CustomerDao customerDao,
+            Mapper<FlightTicket, FlightTicketDto> ticketDtoMapper, Mapper<BookingOrder, BookingOrderDto> orderDtoMapper, ResetSeatStateService resetSeatStateService, ApplicationEventPublisher eventPublisher) {
 
         this.flightsDao = flightsDao;
         this.ticketDao = ticketDao;

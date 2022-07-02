@@ -9,12 +9,12 @@ import java.util.Objects;
 import java.util.Set;
 
 public class TransportationCompany<T extends Transportation<?, ?>, U extends TransportationVehicle<?>> implements Serializable {
-    private Long id;
-    private String name;
-    private City city;
-    private Set<T> transportations;
+    private final Long id;
+    private final String name;
+    private final City city;
+    private final Set<T> transportations;
     @JsonIgnore
-    private Set<U> vehicles;
+    private final Set<U> vehicles;
 
     public TransportationCompany(Long id, String name, City city) {
         this.id = id;

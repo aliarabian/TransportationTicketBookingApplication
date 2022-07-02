@@ -3,12 +3,12 @@ package com.platform.business.model;
 import java.io.Serializable;
 
 public abstract class User implements Serializable {
-    private Long id;
+    private final Long id;
     // Unique
-    private String username;
-    private String password;
-    private String firstName;
-    private String lastName;
+    private final String username;
+    private final String password;
+    private final String firstName;
+    private final String lastName;
 
     public User(Long id, String username, String password, String firstName, String lastName) {
         this.id = id;

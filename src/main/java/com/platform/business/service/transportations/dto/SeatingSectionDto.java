@@ -6,11 +6,11 @@ import java.util.Collections;
 import java.util.Set;
 
 public class SeatingSectionDto {
-    private Long id;
-    private String title;
-    private int availableSeats;
-    private Set<PlaneSeat> seats;
-    private Set<SectionPrivilegeDto> privileges;
+    private final Long id;
+    private final String title;
+    private final int availableSeats;
+    private final Set<PlaneSeat> seats;
+    private final Set<SectionPrivilegeDto> privileges;
 
 
     public SeatingSectionDto(Long id, String title, int availableSeats, Set<PlaneSeat> seats, Set<SectionPrivilegeDto> privileges) {

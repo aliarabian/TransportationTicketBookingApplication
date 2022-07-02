@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class PlaneSeat extends Seat {
     @JsonIgnore
-    private SeatingSection section;
+    private final SeatingSection section;
 
 
     public PlaneSeat(Long id, String seatNO, SeatingSection section) {

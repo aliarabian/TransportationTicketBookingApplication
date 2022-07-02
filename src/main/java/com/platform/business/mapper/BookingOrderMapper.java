@@ -1,7 +1,7 @@
 package com.platform.business.mapper;
 
-import com.platform.business.booking.dto.FlightTicketDto;
 import com.platform.business.booking.dto.BookingOrderDto;
+import com.platform.business.booking.dto.FlightTicketDto;
 import com.platform.business.booking.entity.BookingOrder;
 import org.springframework.stereotype.Component;
 

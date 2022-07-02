@@ -6,11 +6,11 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 public class Passport implements Serializable {
-    private Long id;
+    private final Long id;
     // Natural ID
-    private String passportNO;
-    private LocalDate expiresAt;
-    private Country issuedIn;
+    private final String passportNO;
+    private final LocalDate expiresAt;
+    private final Country issuedIn;
 
     public Passport(Long id, String passportNO, LocalDate expiresAt, Country issuedIn) {
         this.id = id;

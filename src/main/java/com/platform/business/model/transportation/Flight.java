@@ -20,7 +20,7 @@ public class Flight extends Transportation<Plane, FlightTicket> {
         for (SeatingSection section : getVehicle().getSeatingSections()) {
             if (section.getId().equals(sectionClassId)) {
                 return section.bookSeat()
-                        .orElseThrow(() -> new SeatNotAvailableException("Seat Not Available"));
+                              .orElseThrow(() -> new SeatNotAvailableException("Seat Not Available"));
             }
         }
         throw new SectionNotExistsException("Wrong Section Number");
@@ -37,7 +37,7 @@ public class Flight extends Transportation<Plane, FlightTicket> {
             if (section.getId().equals(seatingSectionId)) {
                 for (Long seatId : seatIds) {
                     PlaneSeat seat = section.bookSeat(seatId)
-                            .orElseThrow(() -> new SeatNotAvailableException("Seat Not Available"));
+                                            .orElseThrow(() -> new SeatNotAvailableException("Seat Not Available"));
                     seats.add(seat);
                 }
                 return seats;

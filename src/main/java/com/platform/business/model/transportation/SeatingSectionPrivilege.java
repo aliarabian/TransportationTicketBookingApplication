@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class SeatingSectionPrivilege implements Serializable {
-    private Long id;
-    private String serviceDescription;
-    private SeatingSection section;
+    private final Long id;
+    private final String serviceDescription;
+    private final SeatingSection section;
 
     public SeatingSectionPrivilege(Long id, String serviceDescription, SeatingSection section) {
         Objects.requireNonNull(section);

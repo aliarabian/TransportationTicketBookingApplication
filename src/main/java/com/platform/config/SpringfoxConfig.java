@@ -28,6 +28,7 @@ public class SpringfoxConfig {
                 .paths(PathSelectors.any())
                 .build();
     }
+
     @Bean
     public static BeanPostProcessor springfoxHandlerProviderBeanPostProcessor() {
         return new BeanPostProcessor() {

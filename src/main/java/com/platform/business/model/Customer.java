@@ -10,7 +10,7 @@ import java.util.Objects;
 import java.util.Set;
 
 public class Customer extends User {
-    private String nationalId;
+    private final String nationalId;
     @JsonIgnore
     private final Set<FlightTicket> bookedTickets;
     @JsonIgnore

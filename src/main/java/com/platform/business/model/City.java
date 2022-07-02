@@ -3,9 +3,9 @@ package com.platform.business.model;
 import java.io.Serializable;
 
 public class City implements Serializable {
-    private Long id;
-    private Country country;
-    private String name;
+    private final Long id;
+    private final Country country;
+    private final String name;
 
     public City(Long id, String name, Country country) {
         this.id = id;
