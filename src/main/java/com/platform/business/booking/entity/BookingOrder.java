@@ -14,8 +14,8 @@ public class BookingOrder {
     private final Set<FlightTicket> tickets;
     private final Customer customer;
     private final LocalDateTime createdAt;
-    private final LocalDateTime updatedAt;
-    private final OrderStatus status;
+    private LocalDateTime updatedAt;
+    private OrderStatus status;
 
     public BookingOrder(Long id, Set<FlightTicket> tickets, Customer customer) {
         Objects.requireNonNull(tickets);
@@ -59,8 +59,10 @@ public class BookingOrder {
         return status;
     }
 
-    public BookingOrder updateStatus(OrderStatus status) {
-        return new BookingOrder(id, Collections.unmodifiableSet(this.tickets), customer, createdAt, LocalDateTime.now(), status);
+    public void updateStatus(OrderStatus status) {
+        this.status = status;
+        this.updatedAt = LocalDateTime.now();
+//        return new BookingOrder(id, Collections.unmodifiableSet(this.tickets), customer, createdAt, LocalDateTime.now(), status);
     }
 
     public Flight getFlight() {

@@ -3,6 +3,7 @@ package com.platform.business.mapper;
 import com.platform.business.booking.dto.BookingOrderDto;
 import com.platform.business.booking.dto.FlightTicketDto;
 import com.platform.business.booking.entity.BookingOrder;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.Set;
@@ -11,6 +12,9 @@ import java.util.stream.Collectors;
 @Component
 public class BookingOrderMapper implements Mapper<BookingOrder, BookingOrderDto> {
     private final FlightTicketMapper ticketMapper;
+
+    @Value("${seat.hold.timeout}")
+    private long countdown;
 
     public BookingOrderMapper(FlightTicketMapper ticketMapper) {
         this.ticketMapper = ticketMapper;
@@ -30,6 +34,7 @@ public class BookingOrderMapper implements Mapper<BookingOrder, BookingOrderDto>
                                             .stream()
                                             .map(ticketMapper::toDto).collect(Collectors.toUnmodifiableSet());
         orderDto.setTickets(tickets);
+        orderDto.setOrderCheckoutTimeLimit(countdown);
         return orderDto;
     }
 }

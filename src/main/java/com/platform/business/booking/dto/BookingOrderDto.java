@@ -1,6 +1,7 @@
 package com.platform.business.booking.dto;
 
 import com.platform.business.booking.entity.OrderStatus;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.time.LocalDateTime;
 import java.util.Set;
@@ -14,6 +15,7 @@ public class BookingOrderDto {
     private String lastName;
     private LocalDateTime updatedAt;
     private OrderStatus status;
+    private long orderCheckoutTimeLimit;
 
     public long getId() {
         return id;
@@ -77,5 +79,13 @@ public class BookingOrderDto {
 
     public void setStatus(OrderStatus status) {
         this.status = status;
+    }
+
+    public long getOrderCheckoutTimeLimit() {
+        return orderCheckoutTimeLimit;
+    }
+
+    public void setOrderCheckoutTimeLimit(long orderCheckoutTimeLimit) {
+        this.orderCheckoutTimeLimit = orderCheckoutTimeLimit;
     }
 }

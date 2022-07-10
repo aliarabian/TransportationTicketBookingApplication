@@ -28,14 +28,15 @@ public class ResetSeatStateService {
 
     public void scheduleResetOnTimeout(BookingOrder order) {
         Runnable resetTask = () -> {
-            if (order.getStatus().equals(OrderStatus.FULFILLED)) {
+            BookingOrder orderEntity = orderDao.getOrderByIdAndUsername(order.getId(), order.getCustomer().getUsername());
+            if (orderEntity.getStatus().equals(OrderStatus.FULFILLED)) {
                 return;
             }
-            BookingOrder orderEntity = orderDao.getOrderByIdAndUsername(order.getId(), order.getCustomer().getUsername());
             for (FlightTicket ticket : orderEntity.getTickets()) {
                 ticket.getSeat().free();
                 ticket.getSeat().getSection().incrementAvailableSeats();
             }
+            order.updateStatus(OrderStatus.CANCELLED);
             orderDao.cancel(order);
             eventPublisher.publishEvent(new SeatStateChangedEvent(order.getTickets()
                                                                        .stream()

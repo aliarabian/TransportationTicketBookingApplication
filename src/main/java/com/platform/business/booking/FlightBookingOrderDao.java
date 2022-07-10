@@ -30,7 +30,7 @@ public class FlightBookingOrderDao implements BookingOrderDao {
 
     @Override
     public void cancel(BookingOrder order) {
-        TransportationBookingSystemImMemoryDataSource.getOrders().updateOrder(order.updateStatus(OrderStatus.CANCELLED));
+        TransportationBookingSystemImMemoryDataSource.getOrders().updateOrder(order);
     }
 
     @Override

@@ -2,6 +2,7 @@ package persistence.data.storage.memory;
 
 import com.platform.business.booking.entity.BookingOrder;
 import com.platform.business.booking.entity.FlightTicket;
+import com.platform.business.booking.entity.OrderStatus;
 import com.platform.business.model.City;
 import com.platform.business.model.Country;
 import com.platform.business.model.Customer;
@@ -340,7 +341,7 @@ public class TransportationBookingSystemImMemoryDataSource implements Serializab
         public void addOrder(BookingOrder bookingOrder) throws DuplicateItemException {
             Long flightId = bookingOrder.getFlight().getId();
             boolean exists = orders.values().stream()
-                                   .filter(order -> order.getFlight().getId().equals(flightId))
+                                   .filter(order -> order.getFlight().getId().equals(flightId) && !order.getStatus().equals(OrderStatus.CANCELLED))
                                    .map(BookingOrder::getTickets)
                                    .flatMap(Collection::stream)
                                    .anyMatch(flightTicket -> bookingOrder.getTickets().contains(flightTicket));

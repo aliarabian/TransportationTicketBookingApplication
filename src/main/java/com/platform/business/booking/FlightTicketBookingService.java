@@ -49,8 +49,8 @@ public class FlightTicketBookingService implements BookingService {
     private final ApplicationEventPublisher eventPublisher;
 
     public FlightTicketBookingService(FlightsDao flightsDao, FlightTicketDao ticketDao,
-            FlightBookingOrderDao bookingOrderDao, CountryDao countryDao, CustomerDao customerDao,
-            Mapper<FlightTicket, FlightTicketDto> ticketDtoMapper, Mapper<BookingOrder, BookingOrderDto> orderDtoMapper, ResetSeatStateService resetSeatStateService, ApplicationEventPublisher eventPublisher) {
+                                      FlightBookingOrderDao bookingOrderDao, CountryDao countryDao, CustomerDao customerDao,
+                                      Mapper<FlightTicket, FlightTicketDto> ticketDtoMapper, Mapper<BookingOrder, BookingOrderDto> orderDtoMapper, ResetSeatStateService resetSeatStateService, ApplicationEventPublisher eventPublisher) {
 
         this.flightsDao = flightsDao;
         this.ticketDao = ticketDao;
@@ -118,7 +118,7 @@ public class FlightTicketBookingService implements BookingService {
         if (order.getStatus().equals(OrderStatus.CANCELLED)) {
             throw new BookingException("Order reached Timout.");
         }
-        BookingOrder fulfilledOrder = order.updateStatus(OrderStatus.FULFILLED); // TODO stored entity
+        order.updateStatus(OrderStatus.FULFILLED); // TODO stored entity
         try {
             for (FlightTicket flightTicket : order.getTickets()) {
                 ticketDao.persist(flightTicket);
@@ -126,7 +126,7 @@ public class FlightTicketBookingService implements BookingService {
         } catch (DuplicateItemException ex) {
             throw new BookingException("Already Checked Out");
         }
-        return orderDtoMapper.toDto(fulfilledOrder);
+        return orderDtoMapper.toDto(order);
     }
 
     private void rollback(List<PlaneSeat> planeSeats) {
